@@ -1,0 +1,5 @@
+package io.inugami.api.functionnals;
+@FunctionalInterface
+public interface ConsumerWithException<T> {
+    void process(T value) throws Exception;
+}

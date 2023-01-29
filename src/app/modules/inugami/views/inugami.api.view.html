@@ -1,0 +1,232 @@
+<inugai-aside-menu></inugai-aside-menu>
+
+<section class="page-section documentation">
+    <header>
+        <h1>inugami_api</h1>
+        <hr/>
+    </header>
+
+    
+    <!--****************************************************************************************
+    ** INTRO
+    ****************************************************************************************-->
+    <article>
+        <div class="content">
+            <pre>
+                <code [languages]="['xml']" [highlight]="gav">                      
+                </code>
+            </pre>
+            Inugami_api module contains all basic java objects using by Inugami project. 
+            It's contains also some fundamental tools and models.
+            This module have less dependencies as possible. We can found as dependencies :
+
+            <ul>
+            
+                <li>org.slf4j:slf4j-api</li>
+                <li>org.projectlombok:lombok</li>
+                <li>com.fasterxml.jackson.core:jackson-annotations</li>
+                <li>com.thoughtworks.xstream:xstream (xstream annotation isn't in seperated
+                    artifact, so we need to import all xstream dependency in this module)
+                </li>
+            </ul>
+
+        </div>
+    </article>
+
+    <!--****************************************************************************************
+    ** Functionals interfaces
+    ****************************************************************************************-->
+    <article>
+        <header>
+            <a href="inugami/inugami_api#functionals_interfaces" class="anchor"><h2>Functionals interfaces</h2></a>
+        </header>
+        <div class="content">
+
+            <doc-item title="Functionals" [level]="3" href="inugami/inugami_api#functionals">
+
+                <doc-item title="Builder" [level]="4" href="inugami/inugami_api#functionals_builder">
+                    This functional interface allows for the design of basic builder.
+                    <pre>
+                        <code [languages]="['java']" [highlight]="builder">                      
+                        </code>
+                    </pre>
+                </doc-item>
+
+                <doc-item title="ConsumerWithException" [level]="4" href="inugami/inugami_api#functionals_ConsumerWithException">
+                    When a consumer uses data, exception can occur. To manage this use case, the ConsumerWithException has been designed.
+                    <pre>
+                        <code [languages]="['java']" [highlight]="consumerWithException">                      
+                        </code>
+                    </pre>
+                </doc-item>
+
+                <doc-item title="ErrorCodeResolver" [level]="4" href="inugami/inugami_api#functionals_ErrorCodeResolver">
+                    <strong>ErrorCodeResolver</strong> is used to resolve an error code from exception. This interface is designed to be used as strategy pattern,
+                    <pre>
+                        <code [languages]="['java']" [highlight]="errorCodeResolver">                      
+                        </code>
+                    </pre>
+                </doc-item>
+            </doc-item>
+
+        </div>
+    </article>
+        
+
+    <!--****************************************************************************************
+    ** Loggers
+    ****************************************************************************************-->
+    <article>
+        <header>
+            <a href="inugami/inugami_api#loggers"  class="anchor"><h2>Loggers</h2></a>
+        </header>
+        <div class="content">
+
+
+
+
+
+
+        </div>
+    </article>
+        
+
+    <!--****************************************************************************************
+    ** Exception management
+    ****************************************************************************************-->
+    <article>
+        <header>
+            <a href="inugami/inugami_api#exception_management" class="anchor"><h2>Exception management</h2></a>
+        </header>
+        <div class="content">
+
+
+
+
+
+
+        </div>
+    </article>
+        
+
+    <!--****************************************************************************************
+    ** Warning management
+    ****************************************************************************************-->
+    <article>
+        <header>
+            <a href="inugami/inugami_api#warning_management" class="anchor"><h2>Warning management</h2></a>
+        </header>
+        <div class="content">
+
+
+
+
+
+
+        </div>
+    </article>
+        
+
+    <!--****************************************************************************************
+    ** SPI
+    ****************************************************************************************-->
+    <article>
+        <header>
+            <a href="inugami/inugami_api#spi" class="anchor"><h2>SPI</h2></a>
+        </header>
+        <div class="content">
+
+
+
+
+
+
+        </div>
+    </article>
+        
+
+    <!--****************************************************************************************
+    ** TOOLS
+    ****************************************************************************************-->
+    <article>
+        <header>
+            <a href="inugami/inugami_api#tools" class="anchor"><h2>Tools</h2></a>
+        </header>
+        <div class="content">
+
+
+
+
+
+
+        </div>
+    </article>
+</section>
+
+
+<!--####################################################################################
+## TOOLS
+####################################################################################-->
+<aside class="toc">
+    <ul>
+        <li>
+            <a href="inugami/inugami_api#functionals_interfaces">Functionals interfaces</a>
+            <ul>
+                <li>
+                    <a href="inugami/inugami_api#functionals">Functionals</a>
+                </li>
+                <li>
+                    <a href="inugami/inugami_api#utility_interfaces">Utility intefaces</a>
+                </li>
+                <li>
+                    <a href="inugami/inugami_api#generic_interface">Generic interface</a>
+                </li>
+                <li>
+                    <a href="inugami/inugami_api#concurrency_intefaces">Concurrency intefaces</a>
+                </li>
+                <li>
+                    <a href="inugami/inugami_api#inugami_event_processing">Inugami event processing</a>
+                </li>
+                <li>
+                    <a href="inugami/inugami_api#inugami_monitoring">Inugami monitoring</a>
+                </li>
+            </ul>
+        </li>
+    
+        <li>
+            <a href="inugami/inugami_api#loggers">Loggers</a>
+            <ul>
+                <li></li>
+            </ul>
+        </li>
+    
+        <li>
+            <a href="inugami/inugami_api#warning_management">Exception management</a>
+            <ul>
+                <li></li>
+            </ul>
+        </li>
+    
+        <li>
+            <a href="inugami/inugami_api#warning_management">Warning management</a>
+            <ul>
+                <li></li>
+            </ul>
+        </li>
+    
+        <li>
+            <a href="inugami/inugami_api#spi">SPI</a>
+            <ul>
+                <li></li>
+            </ul>
+        </li>
+    
+        <li>
+            <a href="inugami/inugami_api#tools">Tools</a>
+            <ul>
+                <li></li>
+            </ul>
+        </li>
+    </ul>
+</aside>
+<div class="clear"></div>

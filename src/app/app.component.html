@@ -1,0 +1,30 @@
+<menu class="main-menu">
+    <ul class="website-links">
+        <li>
+            <a class="inugami-icon" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                Home
+            </a>
+        </li>
+        <li>
+            <a  routerLink="inugami"  routerLinkActive="active">
+                Inugami
+            </a>
+        </li>
+        <li>
+            <a  routerLink="inugami-project-analysis-maven-plugin" routerLinkActive="active">
+                inugami-project-analysis-maven-plugin
+            </a>
+        </li>
+    </ul>
+
+    <ul class="right-menu">
+        <li class="github">
+            <a target="_blank" href="https://github.com/inugamiio">GitHub</a>
+        </li>
+    </ul>
+    <div class="clear"></div>
+</menu>
+<div class="page-content">
+    <router-outlet></router-outlet>
+</div>
+
