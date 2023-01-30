@@ -7,6 +7,7 @@ import { Component, Inject, OnInit ,Input } from '@angular/core';
 })
 export class DocItem implements  OnInit {
   
+    @Input()  id : string="";
     @Input()  href : string="";
     @Input()  level : number=0;
     @Input()  title : string="";
