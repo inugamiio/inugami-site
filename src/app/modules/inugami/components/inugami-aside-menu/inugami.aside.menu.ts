@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'inugai-aside-menu',
+  selector: 'inugami-aside-menu',
   templateUrl: './inugami.aside.menu.html',
   providers: []
 })

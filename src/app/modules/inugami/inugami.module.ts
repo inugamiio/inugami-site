@@ -35,7 +35,8 @@ import { InugamiApiToc } from './components/inugami-aside-menu/inugami.api.toc';
     exports: [
         InugamiView,
         InugamiAsideMenu,
-        InugamiApiView
+        InugamiApiView,
+        InugamiApiToc
     ]
 })
 export class InugamiModule { }
