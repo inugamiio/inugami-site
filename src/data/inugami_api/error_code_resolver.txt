@@ -1,5 +1,0 @@
-package io.inugami.api.exceptions;
-@FunctionalInterface
-public interface ErrorCodeResolver {
-    ErrorCode resolve(Throwable exception);
-}

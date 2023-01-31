@@ -1,0 +1,1805 @@
+//===========================================
+<dependency>
+  <groupId>io.inugami</groupId>
+  <artifactId>inugami_api</artifactId>
+  <version>2.1.0</version>
+</dependency>
+
+
+//===========================================
+package io.inugami.api.models;
+@FunctionalInterface
+public interface Builder<T> {
+    T build();
+}
+
+
+//===========================================
+package io.inugami.api.functionnals;
+@FunctionalInterface
+public interface ConsumerWithException<T> {
+    void process(T value) throws Exception;
+}
+
+
+//===========================================
+package io.inugami.api.exceptions;
+@FunctionalInterface
+public interface ErrorCodeResolver {
+    ErrorCode resolve(Throwable exception);
+}
+
+
+
+//===========================================
+package io.inugami.api.functionnals;
+@FunctionalInterface
+public interface FilterFunction<T> {
+    boolean accept(T input);
+}
+
+
+
+//===========================================
+package io.inugami.api.functionnals;
+@FunctionalInterface
+public interface FunctionWithException<I, O, E extends Throwable> {
+    O process(I input) throws E;
+}
+
+
+//===========================================
+package io.inugami.api.mapping;
+@FunctionalInterface
+public interface JsonUnmarshalling {
+    <T> T process(String value);
+}
+
+//===========================================
+package io.inugami.api.mapping;
+@FunctionalInterface
+public interface Mapper<OUT, IN> {
+    OUT mapping(IN data);
+}
+
+
+//===========================================
+package io.inugami.api.mapping;
+@FunctionalInterface
+public interface PostProcessing<T> {
+    void postProcessing(T context) throws TechnicalException;
+}
+
+
+//===========================================
+package io.inugami.api.listeners;
+@FunctionalInterface
+public interface TaskFinishListener {
+    void onFinish(long time,
+                  long delais,
+                  String name,
+                  Object result,
+                  Exception error);
+}
+
+
+
+//===========================================
+package io.inugami.api.listeners;
+@FunctionalInterface
+public interface TaskStartListener {
+    void onStart(long time, String name);
+}
+
+
+//===========================================
+package io.inugami.api.functionnals;
+@FunctionalInterface
+public interface TriConsumer<F, S, T> {
+    void accept(F firstValue, S secondValue, T thirdValue);
+}
+
+
+//===========================================
+package io.inugami.api.functionnals;
+@FunctionalInterface
+public interface ValidatorFunction<T, E extends Exception> {
+    void validate(T input) throws E;
+}
+
+
+//===========================================
+package io.inugami.api.functionnals;
+@FunctionalInterface
+public interface VoidFunction {
+    void process();
+}
+
+
+//===========================================
+package io.inugami.api.functionnals;
+@FunctionalInterface
+public interface VoidFunctionWithException {
+    void process() throws Exception;
+}
+
+
+//===========================================
+package io.inugami.api.tools;
+@FunctionalInterface
+public interface StringDataCleaner {
+    
+    default boolean accept(String data) {
+        return true;
+    }
+    
+    String clean(String data);
+    
+    default String replaceAll(Pattern regex, String data, String replacement) {
+        return StringTools.replaceAll(regex, data, replacement);
+    }
+}
+
+
+//===========================================
+package io.inugami.api.functionnals;
+import java.util.function.Consumer;
+
+public interface ApplyIfNotNull {
+    default <T> void applyIfNotNull(T data, Consumer<T> consumer) {
+        if (data != null) {
+            consumer.accept(data);
+        }
+    }
+    
+    default <T> void applyIfNotNull(T data,
+                                    T defaultValue,
+                                    Consumer<T> consumer) {
+        consumer.accept(data == null ? defaultValue : data);
+    }
+}
+
+
+//===========================================
+package io.inugami.api.functionnals;
+public interface ApplyIfNotNullAndSameType {
+    default <T, R> void ifNotNullAndSameType(T data, 
+                                             Function<? super T, ? extends R> mapper,
+                                             Consumer<R> consumer) {
+        // ...
+    }
+    
+    default Function<Object, String> buildStringMapper() {
+        return v -> v instanceof String ? (String) v : null;
+    }
+}
+
+
+//===========================================
+package io.inugami.api.functionnals;
+public interface ApplyIfNull {
+    default <T> T applyIfNull(T data, Supplier<T> supplier) {
+        // ...
+    }
+}
+
+
+//===========================================
+package io.inugami.api.functionnals;
+
+public interface FunctionMustThrow {
+    default void mustThrow(VoidFunctionWithException function) throws TechnicalException {
+        // ..
+    }
+}
+
+
+//===========================================
+package io.inugami.api.exceptions;
+
+public interface ExceptionWithErrorCode {
+    ErrorCode getErrorCode();
+}
+
+
+//===========================================
+package io.inugami.api.models.data.basic;
+public interface JsonObject extends JsonObjectToJson, ClonableObject<JsonObject> {
+    
+    default <T extends JsonObject> T convertToObject(byte[] data, Charset encoding) {
+        // ...
+    }
+    
+    @Override
+    default JsonObject cloneObj() {
+       // ...
+    }
+    
+}
+
+//===========================================
+package io.inugami.api.tools;
+public interface NamedComponent {
+    default String getName() {
+        return this.getClass().getSimpleName();
+    }
+}
+
+//===========================================
+package io.inugami.api.models.tools;
+public interface Strategy<IN, OUT> {
+    boolean accept(IN inputData);
+    
+    OUT process(IN inputData) throws StrategyException;
+}
+
+//===========================================
+package io.inugami.api.models.tools;
+@AllArgsConstructor
+@Builder
+public class DefaultStrategy<IN, OUT> implements Strategy<IN, OUT> {
+
+    private final Function<IN, Boolean> accept;
+    private final Function<IN, OUT>     process;
+
+    @Override
+    public boolean accept(final IN inputData) {
+        return accept == null ? true : accept.apply(inputData);
+    }
+
+    @Override
+    public OUT process(final IN inputData) throws StrategyException {
+        return process == null ? null : process.apply(inputData);
+    }
+}
+
+//===========================================
+package io.inugami.api.dao;
+public interface Dao extends Serializable {
+    //@formatter:off
+    
+    /**
+     * Allow to get a entity from uid .
+     *
+     * @param <E> Entity type
+     * @param <PK> Entity UID type
+     * @param type entity type class
+     * @param uid entity uid
+     * @return the entity
+     * @throws DaoEntityNotFoundException if entity isn't found in datasource
+     * @throws DaoException if exception is occur.
+     */
+     <E extends Identifiable<PK>, PK extends Serializable> 
+     E getByUid(final Class<? extends E> type,final PK uid) throws DaoEntityNotFoundException, DaoException;
+    
+     /**
+      * Allow to get entities by uid
+      * @param type Entities type
+      * @param uids  entities uids
+      * @return empty or list of entities
+      * @throws DaoEntityNotFoundException
+      * @throws DaoException
+      */
+     <E extends Identifiable<PK>, PK extends Serializable> 
+     List<E> getByUids(final Class<? extends E> type,final List<PK> uids) throws DaoEntityNotFoundException, DaoException;
+     
+    /**
+     * Allow to get a entity.
+     *
+     * @param <E> Entity type
+     * @param entity reference
+     * @return the entity
+     * @throws DaoEntityNotFoundException if entity isn't found in datasource
+     * @throws DaoException if exception is occur.
+     */
+    <E extends Identifiable<PK>, PK extends Serializable> 
+    E get(final E entity) throws DaoEntityNotFoundException,DaoException;
+    
+    // =====================================================================
+    // REFRESH
+    // =====================================================================
+    /**
+     * Refresh.
+     * 
+     * @param <E> the element type
+     * @param entity the entity
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    void refresh(final E entity) throws DaoEntityNotFoundException,DaoException;
+    
+    // =====================================================================
+    // SAVE
+    // =====================================================================
+    /**
+     * Save.
+     * 
+     * @param <E> the element type
+     * @param entity the entity
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    void save(final E entity, final Class<? extends E> type) throws DaoException;
+    
+    /**
+     * Save.
+     * 
+     * @param <E> the element type
+     * @param listEntity the list entity
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    void save(final List<E> listEntity,final Class<? extends E> type) throws DaoException;
+    
+    // =====================================================================
+    // MERGE
+    // =====================================================================
+    
+    /**
+     * Merge.
+     * 
+     * @param <E> the element type
+     * @param entity the entity
+     * @return the e
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable> 
+    E merge(final E entity, final Class<? extends E> type) throws DaoException;
+    
+    /**
+     * Merge.
+     * 
+     * @param <E> the element type
+     * @param listEntity the list entity
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    void merge(final List<E> listEntity, final Class<? extends E> type) throws DaoException;
+    
+    
+    // =====================================================================
+    // REGISTER
+    // =====================================================================
+    /**
+     * Allow to register and save non existing entities or merge existing. 
+     * @param entities  all entities to register
+     * @param type entity class type
+     * @throws DaoException if excpetion is occur
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    SaveEntitiesResult<E> register(final List<E> entities, final Class<? extends E> type) throws DaoException;
+    
+    
+    // =====================================================================
+    // FIND
+    // =====================================================================
+    
+    /**
+     * Find all.
+     * 
+     * @param <E> the element type
+     * @param type the type
+     * @return the list
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable> List<E> 
+    findAll(Class<? extends E> type) throws DaoException;
+    
+    /**
+     * Find.
+     * 
+     * @param <E> the element type
+     * @param type the type
+     * @param first the first
+     * @param pageSize the page size
+     * @param field the field
+     * @param sortOrder the sort order
+     * @param filters the filters
+     * @return the list
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    List<E> find(Class<? extends E> type, final int first, final int pageSize, final String field,final String sortOrder,Map<String, String> filters) throws DaoException;
+    
+    // =====================================================================
+    // COUNT
+    // =====================================================================
+    /**
+     * Count.
+     * 
+     * @param type the type
+     * @return the int
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable> 
+    int count(final Class<? extends E> type) throws DaoException;
+    
+    /**
+     * Count.
+     * 
+     * @param filters the filters
+     * @param type the type
+     * @return the int
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    int count(final Map<String, String> filters, final Class<? extends E> type) throws DaoException;
+    
+    // =====================================================================
+    // DELETE
+    // =====================================================================
+    /**
+     * Delete.
+     * 
+     * @param <E> the element type
+     * @param <PK> the generic type
+     * @param entity the entity
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    void delete(E entity, final Class<? extends E> type) throws DaoEntityNotFoundException, DaoException;
+    
+    /**
+     * Delete.
+     * 
+     * @param <E> the element type
+     * @param <PK> the generic type
+     * @param uid the uid
+     * @param type the type
+     * @throws DaoException the dao exception
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    void delete(final PK uid,final Class<? extends E> type) throws DaoEntityNotFoundException,DaoException;
+    
+    /**
+     * Allow to delete entities
+     * 
+     * @param entity
+     * @param type
+     * @throws DaoEntityNotFoundException
+     * @throws DaoException
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    void delete(final List<E> entity, final Class<? extends E> type) throws DaoEntityNotFoundException,DaoException;
+    
+    /**
+     * Allow to delete entities by uids
+     * 
+     * @param uids
+     * @param type
+     * @throws DaoEntityNotFoundException
+     * @throws DaoException
+     */
+    <E extends Identifiable<PK>, PK extends Serializable>
+    void deleteByIds(final List<PK> uids, final Class<? extends E> type) throws DaoEntityNotFoundException,DaoException;
+    
+    //@formatter:on
+}
+
+//===========================================
+package io.inugami.api.providers.concurrent;
+public interface FutureData<T> {
+    String getChannel();
+    Future<T> getFuture();
+    T getData();
+    GenericEvent getEvent();
+    long getTimeout();
+    TimeUnit getTimeUnit();
+    List<OnDoneFunction<T>> onDone();
+    List<OnErrorFunction<T>> onError();   
+    ProviderTask getTask();
+}
+
+//===========================================
+package io.inugami.api.providers.concurrent;
+public interface LifecycleBootstrap {
+    void start();
+    void shutdown();
+}
+
+//===========================================
+package io.inugami.api.providers.concurrent;
+@FunctionalInterface
+public interface OnDoneFunction<T> {
+    T onDone(T resultData,
+             GenericEvent currentEvent,
+             String channel);
+}
+
+//===========================================
+package io.inugami.api.providers.concurrent;
+public interface OnErrorFunction<T> {
+    T onError(GenericEvent event,
+              String channel,
+              Callable<ProviderFutureResult> task,
+              Exception error);
+}
+
+//===========================================
+package io.inugami.api.providers.concurrent;
+@FunctionalInterface
+public interface OnStart {
+    void process();
+}
+
+//===========================================
+package io.inugami.api.providers;
+public interface Aggregator {
+    ProviderFutureResult aggregate(List<ProviderFutureResult> data) throws ProviderException;
+}
+
+//===========================================
+package io.inugami.api.processors;
+
+public interface ClassBehaviorParametersSPI {
+    boolean accept(Class<?> clazz);
+    <T> T build(ClassBehavior behavior, ConfigHandler<String, String> config);
+}
+
+//===========================================
+package io.inugami.api.processors;
+
+public interface ConfigHandler<K, V> extends Map<K, V> {
+    V applyProperties(V value);
+    String grabOrDefault(K key, String defaultValue);
+    String grab(K key);
+    String grab(String message, K key);
+    Integer grab(K key, int defaultValue);
+    Integer grabInt(K key);
+    Integer grabInt(K key, Integer defaultValue);
+    long grabLong(String key, long defaultValue);
+    boolean grabBoolean(K key);
+    boolean grabBoolean(K key, boolean defaultValue);
+    Double grab(K key, double defaultValue);
+    Double grabDouble(K key);
+    <T> T grabJson(K key, String json, JsonUnmarshalling unmarshaller);
+    <T> T grabJson(K key, JsonUnmarshalling unmarshaller);
+    <T> T grabJson(K key, Object jsonObj, JsonUnmarshalling unmarshaller);
+    ConfigHandler<K, V> optionnal();
+    List<String> grabValues(String prefix);    
+}
+
+//===========================================
+package io.inugami.api.providers;
+
+public interface NoForcingEventProvider {   
+}
+
+//===========================================
+package io.inugami.api.processors;
+public interface Processor extends NamedComponent {
+    ProviderFutureResult process(GenericEvent event, ProviderFutureResult data) throws ProcessorException;
+}
+
+//===========================================
+package io.inugami.api.spi;
+
+public interface PropertiesProducerSpi {
+    Map<String, String> produce();
+    
+    default Map<String, String> producerFromClasses(Class<?>... classes) {
+        // ...
+    }
+}
+
+//===========================================
+package io.inugami.api.providers;
+
+public interface Provider extends NamedComponent {
+   
+    <T extends SimpleEvent> FutureData<ProviderFutureResult> callEvent(T event, Gav pluginGav);
+    
+    ProviderFutureResult aggregate(List<ProviderFutureResult> data) throws ProviderException;
+    
+    String getType();
+    
+    default long getTimeout() {
+        return 0l;
+    }
+    
+    default ConfigHandler<String, String> getConfig() {
+        return null;
+    }
+}
+
+//===========================================
+package io.inugami.api.providers;
+@FunctionalInterface
+public interface ProviderCallbackOnError {
+    void process(Exception error);
+}
+
+//===========================================
+package io.inugami.api.providers;
+public interface ProviderForce {
+    <T extends SimpleEvent> ProviderFutureResult callEvent(T event);
+}
+
+//===========================================
+package io.inugami.api.providers;
+
+public interface ProviderRunner {
+    Future<ProviderFutureResult> run(String name, ProviderTask tasks);
+}
+
+//===========================================
+package io.inugami.api.providers.task;
+
+public interface ProviderTask extends Callable<ProviderFutureResult> {
+    
+    @Override
+    default ProviderFutureResult call() throws Exception {
+        return callProvider();
+    }
+    GenericEvent getEvent();
+    Gav getPluginGav();
+    ProviderFutureResult callProvider();
+}
+
+//===========================================
+package io.inugami.api.providers;
+
+public interface ProviderWithHttpConnector {
+
+    default int getTimeout(ConfigHandler<String, String> config, int defaultValue) {
+       // ...
+    }
+    
+    default int getTimeout(ConfigHandler<String, String> config, String name, int defaultValue) {
+     // ...
+    }
+    
+    default int getMaxConnections(ConfigHandler<String, String> config, int defaultValue) {
+     // ...
+    }
+    
+    default int getMaxConnections(ConfigHandler<String, String> config, String name,
+                                  int defaultValue) {
+     // ...
+    }
+    
+    default int getTTL(ConfigHandler<String, String> config, int defaultValue) {
+     // ...
+    }
+    
+    default int getTTL(ConfigHandler<String, String> config, String name, int defaultValue) {
+      // ...
+    }
+    
+    default int getMaxPerRoute(ConfigHandler<String, String> config, int defaultValue) {
+      // ...
+    }
+    
+    default int getMaxPerRoute(ConfigHandler<String, String> config, String name, int defaultValue) {
+      // ...
+    }
+    
+    default int getSocketTimeout(ConfigHandler<String, String> config, int defaultValue) {
+      // ...
+    }
+    
+    default int getSocketTimeout(ConfigHandler<String, String> config, String name,
+                                 int defaultValue) {
+     // ...
+    }
+    
+    default String buildConfigKey(String baseName, String name) {
+      // ...
+    }
+}
+
+//===========================================
+package io.inugami.api.providers;
+public interface ProviderWriter {
+    void write(JsonObject data);
+}
+
+//===========================================
+package io.inugami.api.spi;
+public interface SpiConfigurable {
+    
+    default String grabConfig(String key, ConfigHandler<String, String> configuration) {
+        // ...
+    }
+}
+
+//===========================================
+package io.inugami.api.monitoring;
+public interface BootstrapMonitoringSpi {
+    void startup();
+    void shutdown();
+}
+
+//===========================================
+package io.inugami.api.monitoring.models;
+
+public interface GenericMonitoringModel extends JsonObject{
+    String getAsset();
+    String getEnvironment() ;
+    String getInstanceName() ;
+    String getInstanceNumber();
+    String getCounterType();
+    String getDevice() ;
+    String getCallType();
+    String getService() ;
+    String getSubService() ;
+    String getValueType();
+    String getTimeUnit() ;
+    Date getDate();
+    long getTime() ;
+    String getErrorCode() ;
+    String getErrorType();
+    GraphiteNumber getValue();
+    String getPath();
+    String getData();
+    String getNonTemporalHash();
+}
+
+//===========================================
+package io.inugami.api.monitoring.interceptors;
+
+public interface MonitoringFilterInterceptor extends NamedSpi, MonitoringInitializer {
+    MonitoringFilterInterceptor buildInstance(ConfigHandler<String, String> configuration);
+    
+    default List<GenericMonitoringModel> onBegin(ResquestData request) {
+        return null;
+    }
+    
+    default List<GenericMonitoringModel> onDone(ResquestData request,
+                                                ResponseData response,
+                                                ErrorResult error) {
+        return null;
+    }
+    
+}
+
+//===========================================
+package io.inugami.api.monitoring;
+public interface MonitoringInitializer {
+    default void initialize() {
+    }
+}
+
+//===========================================
+package io.inugami.api.monitoring;
+public interface MonitoringLoaderSpi {
+    Monitoring load();
+}
+
+//===========================================
+package io.inugami.api.monitoring.senders;
+public interface MonitoringSender extends NamedSpi {
+    
+    MonitoringSender buildInstance(ConfigHandler<String, String> configuration);
+    
+    void process(List<GenericMonitoringModel> data) throws MonitoringSenderException;
+    
+    default void shutdown() {}
+}
+
+//===========================================
+package io.inugami.api.monitoring.sensors;
+public interface MonitoringSensor extends NamedSpi {
+    
+    MonitoringSensor buildInstance(long interval,
+                                   String query,
+                                   ConfigHandler<String, String> configuration);
+    
+    long getInterval();
+    List<GenericMonitoringModel> process();
+    default void shutdown() {
+    }   
+}
+
+//===========================================
+package io.inugami.api.exceptions;
+public interface ErrorCode {
+
+
+    public ErrorCode getCurrentErrorCode();
+
+    default int getStatusCode() {
+        return getCurrentErrorCode() == null ? 500 : getCurrentErrorCode().getStatusCode();
+    }
+
+
+    default String getErrorCode() {
+        return getCurrentErrorCode() == null ? "undefine" : getCurrentErrorCode().getErrorCode();
+    }
+
+
+    default String getMessage() {
+        return getCurrentErrorCode() == null ? "error" : getCurrentErrorCode().getMessage();
+    }
+
+
+    default String getMessageDetail() {
+        return getCurrentErrorCode() == null ? null : getCurrentErrorCode().getMessageDetail();
+    }
+
+    default boolean isExploitationError() {
+        return getCurrentErrorCode() == null ? false : getCurrentErrorCode().isExploitationError();
+    }
+
+    default String getErrorType() {
+        return getCurrentErrorCode() == null ? "technical" : getCurrentErrorCode().getErrorType();
+    }
+
+
+    default String getPayload() {
+        return getCurrentErrorCode() == null ? null : getCurrentErrorCode().getPayload();
+    }
+
+
+    default boolean isRollbackRequire() {
+        return getCurrentErrorCode() == null ? false : getCurrentErrorCode().isRollbackRequire();
+    }
+
+    default boolean isRetryable() {
+        return getCurrentErrorCode() == null ? false : getCurrentErrorCode().isRetryable();
+    }
+
+    default BiConsumer<String, Exception> getErrorHandler() {
+        return getCurrentErrorCode() == null ? null : getCurrentErrorCode().getErrorHandler();
+    }
+
+    default ErrorCode addDetail(String detail, Object... values) {
+        return toBuilder().addMessageDetail(detail, values).build();
+    }
+    
+    default String getCategory() {
+        return getCurrentErrorCode() == null ? null : getCurrentErrorCode().getCategory();
+    }
+
+
+    default DefaultErrorCode.DefaultErrorCodeBuilder toBuilder() {
+        DefaultErrorCode.DefaultErrorCodeBuilder builder = null;
+        if (getCurrentErrorCode() == null) {
+            builder = DefaultErrorCode.fromErrorCode(DefaultErrorCode.buildUndefineError());
+        }
+        else {
+            builder = DefaultErrorCode.fromErrorCode(getCurrentErrorCode());
+        }
+        return builder;
+    }
+
+}
+
+//===========================================
+import static io.inugami.api.exceptions.DefaultErrorCode.newBuilder;
+
+public enum CustomerError implements ErrorCode {
+    CUSTOMER_ID_IS_REQUIRED(newBuilder()
+                 .errorCode("CUST-1")
+                 .statusCode(400)
+                 .message("customer's id is required")
+                 .category("customer")
+                 .errorTypeFunctional()
+                 ),
+
+    CUSTOMER_NOT_ALLOWS(newBuilder()
+                 .errorCode("CUST-2")
+                 .statusCode(403)
+                 .message("customer isn't allows to execute this function")
+                 .category("customer")
+                 .errorTypeSecurity()
+                 ),
+
+    ERROR_ON_SAVING_CUSTOMER(newBuilder()
+                .errorCode("CUST-2")
+                .statusCode(500)
+                .message("unable to save customer")
+                .category("customer")
+                )
+    ;
+
+    private ErrorCode errorCode;
+
+    private CustomerError(DefaultErrorCode.DefaultErrorCodeBuilder errorBuilder) {
+        errorCode = errorBuilder.build();
+    }
+
+    @Override
+    public ErrorCode getCurrentErrorCode() {
+        return errorCode;
+    }
+}
+
+//===========================================
+public Customer getCustomerById(Long id){
+    Asserts.notNull(CustomerError.CUSTOMER_ID_IS_REQUIRED, id);
+}
+
+//===========================================
+package io.inugami.api.exceptions;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class Asserts {
+    
+    // ```````````````````````````````````````
+    // IS TRUE
+    // ```````````````````````````````````````
+    public static void isTrue(boolean expression) {
+        // ...
+    }
+
+    public static void isTrue(String message,
+                              boolean expression) {
+        // ...
+    }
+
+    public static void isTrue(ErrorCode errorCode,
+                              boolean expression) {
+        // ...
+    }
+
+    // ```````````````````````````````````````
+    // IS FALSE
+    // ```````````````````````````````````````
+    public static void isFalse(boolean expression) {
+        // ...
+    }
+
+    public static void isFalse(String message,
+                               boolean expression) {
+        // ...
+    }
+
+    public static void isFalse(ErrorCode errorCode,
+                               boolean expression) {
+        // ...
+    }
+
+    // ```````````````````````````````````````
+    // IS NULL
+    // ```````````````````````````````````````
+    public static void isNull(Object... objects) {
+        // ...
+    }
+
+    public static void isNull(String message,
+                              Object... values) {
+        // ...
+    }
+
+    public static void isNull(ErrorCode errorCode,
+                              Object... values) {
+        // ...
+    }
+
+    // ```````````````````````````````````````
+    // NOT NULL
+    // ```````````````````````````````````````
+    public static void notNull(Object... objects) {
+        // ...
+    }
+
+    public static void notNull(String message,
+                               Object... values) {
+        // ...
+    }
+
+    public static void notNull(ErrorCode errorCode,
+                               Object... values) {
+        // ...
+    }
+
+    // ```````````````````````````````````````
+    // NOT EMPTY
+    // ```````````````````````````````````````
+    public static void notEmpty(String message,
+                                String value) {
+        // ...
+    }
+
+    public static void notEmpty(ErrorCode errorCode,
+                                String value) {
+        // ...
+    }
+
+    public static boolean checkIsBlank(String value) {
+        // ...
+    }
+
+    public static void notEmpty(String message,
+                                Collection<?> value) {
+        // ...
+    }
+
+    public static void notEmpty(ErrorCode errorCode,
+                                Collection<?> value) {
+        // ...
+    }
+
+    public static void notEmpty(String message,
+                                Map<?, ?> value) {
+        // ...
+    }
+
+    public static void notEmpty(ErrorCode errorCode,
+                                Map<?, ?> value) {
+        // ...
+    }
+
+
+    // ```````````````````````````````````````
+    // EQUALS
+    // ```````````````````````````````````````
+    public static void equalsObj(Object ref,
+                                 Object value) {
+        // ...
+    }
+
+    public static void equalsObj(String message,
+                                 Object ref,
+                                 Object value) {
+        // ...
+    }
+
+    public static void equalsObj(ErrorCode errorCode,
+                                 Object ref,
+                                 Object value) {
+        // ...
+    }
+}
+
+//===========================================
+package io.inugami.api.exceptions;
+public interface Warning {
+    Warning getCurrentWaring();
+
+    default String getWarningCode() {
+        return getCurrentWaring() == null ? "warn" : getCurrentWaring().getWarningCode();
+    }
+
+    default String getMessage() {
+        return getCurrentWaring() == null ? null : getCurrentWaring().getMessage();
+    }
+
+    default String getMessageDetail() {
+        return getCurrentWaring() == null ? null : getCurrentWaring().getMessageDetail();
+    }
+
+    default String getWarningType() {
+        return getCurrentWaring() == null ? "functional" : getCurrentWaring().getWarningType();
+    }
+
+    default Warning addDetail(String detail, Object... values) {
+        return toBuilder().addMessageDetail(detail, values).build();
+    }
+    
+    default String getCategory() {
+        return getCurrentWaring() == null ? null : getCurrentWaring().getCategory();
+    }
+
+    default DefaultWarning.DefaultWarningBuilder toBuilder() {
+        DefaultWarning.DefaultWarningBuilder  builder = null;
+        if ( getCurrentWaring() == null) {
+            builder = DefaultWarning.builder();
+        }
+        else {
+            builder = DefaultWarning.fromWarningCode(getCurrentWaring());
+        }
+        return builder;
+    }
+}
+
+//===========================================
+import io.inugami.api.exceptions.DefaultWarning;
+
+public enum MyWarningCode implements implements Warning {
+    APP_ENDPOINT_DEPRECATED(
+            DefaultWarning.builder()
+                            .warningCode("WARN-1")
+                            .message("endpoint is deprecated")
+                            .warningType("business")
+    );
+
+    private Warning warningCode;
+
+    private MyWarningCode(DefaultWarning.DefaultWarningBuilder builder) {
+        this.warningCode = builder.build();
+    }
+
+    @Override
+    public Warning getCurrentWaring() {
+        return warningCode;
+    }
+}
+
+
+public class MyEndpoint{
+
+    public void process(){
+        WarningContext.getInstance()
+                      .addWarnings(MyWarningCode.APP_ENDPOINT_DEPRECATED);
+    }
+}
+
+//===========================================
+import io.inugami.acme;
+
+public interface MySpiService{
+    void process();
+}
+
+//===========================================
+import io.inugami.acme.implementations;
+
+public class MySpiServiceDefault implements MySpiService{
+    public void process(){
+        // do something ...
+    }
+}
+
+public class MySpiServiceFallback implements MySpiService{
+    public void process(){
+        // do something ...
+    }
+}
+
+//===========================================
+public class SomeService{
+    private static List<MySpiService> INSTANCES = SpiLoader.INSTANCE.loadSpiService(MySpiService.class);
+
+    public void processOnAllSpiImplementation(){
+        for(MySpiService instance : INSTANCES){
+            instance.process();
+        }
+    }
+}
+
+//===========================================
+package io.inugami.api.spi;
+
+public class SpiLoader {
+    public static SpiLoader INSTANCE = new SpiLoader();
+
+    public synchronized <T> List<T> loadSpiService(Class<?> type) {
+        // ...
+    }
+
+    public synchronized <T> T loadSpiSingleService(Class<?> type) {
+        // ...
+    }
+
+    public synchronized <T> List<T> loadSpiService(Class<?> type, T defaultImplementation) {
+        // ...
+    }
+
+    public synchronized <T> List<T> loadSpiServicesWithDefault(Class<?> type, T defaultImplementation) {
+        // ...
+    }
+
+    public synchronized <T> T loadSpiServiceByPriority(Class<?> type, T defaultImplementation) {
+        // ...
+    }
+
+    public synchronized <T> List<T> loadSpiServicesByPriority(Class<?> type) {
+        // ...
+    }
+
+    public synchronized <T> T loadSpiSingleServicesByPriority(Class<?> type) {
+        // ...
+    }
+
+    public synchronized <T> List<T> loadSpiServicesByPriority(Class<?> type, T defaultImplementation) {
+        // ...
+    }
+
+    public <T> T loadSpiService(String name, Class<?> type) {
+        // ...
+    }
+
+    public synchronized <T> T loadSpiService(String name, Class<?> type, boolean mandatory) {
+        // ...
+    }
+}
+
+//===========================================
+import io.inugami.acme.implementations;
+
+@SpiPriority(1)
+public class MySpiServiceDefault implements MySpiService{
+    public void process(){
+        // do something ...
+    }
+}
+
+@SpiPriority(10)
+public class MySpiServiceFallback implements MySpiService{
+    public void process(){
+        // do something ...
+    }
+}
+
+//===========================================
+public class SomeService{
+    private static List<MySpiService> INSTANCES = SpiLoader.INSTANCE.loadSpiServicesByPriority(MySpiService.class);
+
+    public void processOnAllSpiImplementation(){
+        // 0 - MySpiServiceFallback
+        // 1 - MySpiServiceDefault
+
+        for(MySpiService instance : INSTANCES){
+            instance.process();
+        }
+    }
+}
+
+//===========================================
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class AnnotationTools {
+
+    public static Annotation searchAnnotation(Annotation[] annotations, String... names) {
+        // ...
+    }
+    
+    public static Method searchMethod(Annotation annotation, String method) {
+        // ...
+    }
+    
+    public static <T> T invoke(Method method, Object object, Object... params) {
+        // ...
+    }
+    
+    public static String resolveNamed(Object object) {
+        // ...
+    }
+    
+}
+
+//===========================================
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class ConsoleColors {
+
+public static final String RESET     = "\033[0m";
+    public static final String CLEAR_ALL = "\033c";
+
+    // Regular Colors
+    public static final String BLACK  = "\033[0;30m";
+    public static final String RED    = "\033[0;31m";
+    public static final String GREEN  = "\033[0;32m";
+    public static final String YELLOW = "\033[0;33m";
+    public static final String BLUE   = "\033[0;34m";
+    public static final String PURPLE = "\033[0;35m";
+    public static final String CYAN   = "\033[0;36m";
+    public static final String WHITE  = "\033[0;37m";
+
+    // Bold
+    public static final String BLACK_BOLD  = "\033[1;30m";
+    public static final String RED_BOLD    = "\033[1;31m";
+    public static final String GREEN_BOLD  = "\033[1;32m";
+    public static final String YELLOW_BOLD = "\033[1;33m";
+    public static final String BLUE_BOLD   = "\033[1;34m";
+    public static final String PURPLE_BOLD = "\033[1;35m";
+    public static final String CYAN_BOLD   = "\033[1;36m";
+    public static final String WHITE_BOLD  = "\033[1;37m";
+
+    // Underline
+    public static final String BLACK_UNDERLINED  = "\033[4;30m";
+    public static final String RED_UNDERLINED    = "\033[4;31m";
+    public static final String GREEN_UNDERLINED  = "\033[4;32m";
+    public static final String YELLOW_UNDERLINED = "\033[4;33m";
+    public static final String BLUE_UNDERLINED   = "\033[4;34m";
+    public static final String PURPLE_UNDERLINED = "\033[4;35m";
+    public static final String CYAN_UNDERLINED   = "\033[4;36m";
+    public static final String WHITE_UNDERLINED  = "\033[4;37m";
+
+    // Background
+    public static final String BLACK_BACKGROUND  = "\033[40m";
+    public static final String RED_BACKGROUND    = "\033[41m";
+    public static final String GREEN_BACKGROUND  = "\033[42m";
+    public static final String YELLOW_BACKGROUND = "\033[43m";
+    public static final String BLUE_BACKGROUND   = "\033[44m";
+    public static final String PURPLE_BACKGROUND = "\033[45m";
+    public static final String CYAN_BACKGROUND   = "\033[46m";
+    public static final String WHITE_BACKGROUND  = "\033[47m";
+
+    // High Intensity
+    public static final String BLACK_BRIGHT  = "\033[0;90m";
+    public static final String RED_BRIGHT    = "\033[0;91m";
+    public static final String GREEN_BRIGHT  = "\033[0;92m";
+    public static final String YELLOW_BRIGHT = "\033[0;93m";
+    public static final String BLUE_BRIGHT   = "\033[0;94m";
+    public static final String PURPLE_BRIGHT = "\033[0;95m";
+    public static final String CYAN_BRIGHT   = "\033[0;96m";
+    public static final String WHITE_BRIGHT  = "\033[0;97m";
+
+    // Bold High Intensity
+    public static final String BLACK_BOLD_BRIGHT  = "\033[1;90m";
+    public static final String RED_BOLD_BRIGHT    = "\033[1;91m";
+    public static final String GREEN_BOLD_BRIGHT  = "\033[1;92m";
+    public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";
+    public static final String BLUE_BOLD_BRIGHT   = "\033[1;94m";
+    public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";
+    public static final String CYAN_BOLD_BRIGHT   = "\033[1;96m";
+    public static final String WHITE_BOLD_BRIGHT  = "\033[1;97m";
+
+    // High Intensity backgrounds
+    public static final String BLACK_BACKGROUND_BRIGHT  = "\033[0;100m";
+    public static final String RED_BACKGROUND_BRIGHT    = "\033[0;101m";
+    public static final String GREEN_BACKGROUND_BRIGHT  = "\033[0;102m";
+    public static final String YELLOW_BACKGROUND_BRIGHT = "\033[0;103m";
+    public static final String BLUE_BACKGROUND_BRIGHT   = "\033[0;104m";
+    public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m";
+    public static final String CYAN_BACKGROUND_BRIGHT   = "\033[0;106m";
+    public static final String WHITE_BACKGROUND_BRIGHT  = "\033[0;107m";
+
+    public enum State {
+        ERROR,
+        WARN,
+        SUCCESS,
+        UNDEFINE
+    }
+
+
+    public static String renderState(final State state) {
+        // ...
+    }
+
+    public static String renderState(final State state, final String message) {
+        // ...
+    }
+
+
+    public static String createLine(final String deco, final int size) {
+        // ...
+    }
+}
+
+//===========================================
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class Hex {
+   
+    public static String encodeHexString(final byte[] data) {
+        // ...
+    }
+    public static char[] encodeHex(final byte[] data) {
+        // ...
+    }
+    public static char[] encodeHex(final byte[] data, final boolean toLowerCase) {
+        // ...
+    }
+}
+
+//===========================================
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class StringTools {
+
+    public static String replaceAll(final Pattern regex, final String data, final String replacement) {
+        // ...
+    }
+    
+    public static String convertToAscii(final String value) {
+        // ...
+    }
+    
+    public static boolean containsChars(final String value, final String specialChar) {
+            // ...
+    }
+}
+
+
+//===========================================
+package io.inugami.api.models;
+public class JsonBuilder {
+    public static final char    SEPARATOR_CHAR = ',';
+    public static final String  VALUE_NULL     = "null";
+    public static final String  SPACE = " ";
+    private final StringBuilder buffer         = new StringBuilder();
+    
+    
+    public <E extends JsonBuilder>  E returnInstance() {
+        return (E)this;
+    }
+    
+    public <E extends JsonBuilder>  E writeFunction(final String name, final String... params) {
+        //...
+    }
+    
+    public <E extends JsonBuilder>  E addReturnKeyword() {
+        buffer.append("return ");
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E openObject() {
+        buffer.append("{");
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E closeObject() {
+        buffer.append("}");
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E openList() {
+        buffer.append('[');
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E closeList() {
+        buffer.append(']');
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E openTuple() {
+        buffer.append("(");
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E closeTuple() {
+        buffer.append(")");
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E openComment() {
+        buffer.append("/*");
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E closeComment() {
+        buffer.append("*/");
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E addField(final String name) {
+        valueQuot(name);
+        buffer.append(':');
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E write(final Object value) {
+        buffer.append(value);
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E write(final boolean value) {
+        buffer.append(value ? "true" : "false");
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E write(final byte value) {
+        buffer.append(value);
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E write(final short value) {
+        buffer.append(value);
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E write(final int value) {
+        buffer.append(value);
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E write(final long value) {
+        buffer.append(value);
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E write(final float value) {
+        buffer.append(value);
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E write(final double value) {
+        buffer.append(value);
+        return returnInstance();
+    }
+
+    public  <E extends JsonBuilder>  E  writeSpace() {
+        return writeSpace(1);
+    }
+    public  <E extends JsonBuilder>  E  writeSpace(final int size) {
+        if(size>0){
+            for(int i=size-1; i>=0; i--){
+                write(SPACE);
+            }
+        }
+        return returnInstance();
+    }
+    private <E extends JsonBuilder>  E writeParam(final String key, final String value) {
+        buffer.append('"');
+        buffer.append(key);
+        buffer.append('"');
+        buffer.append(':');
+        buffer.append('"');
+        buffer.append(value);
+        buffer.append('"');
+        
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E valueQuot(final Object value) {
+        if (value == null) {
+            valueNull();
+        }
+        else {
+            buffer.append("\"");
+            buffer.append(value);
+            buffer.append("\"");
+        }
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E valueNull() {
+        buffer.append(VALUE_NULL);
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E addLine() {
+        buffer.append("\n");
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E addSeparator() {
+        buffer.append(SEPARATOR_CHAR);
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E addEndLine() {
+        buffer.append(";\n");
+        return returnInstance();
+    }
+    
+
+    
+    public <E extends JsonBuilder>  E writeListString(final List<String> values) {
+        // ...
+    }
+    
+    public <E extends JsonBuilder>  E line() {
+        buffer.append('\n');
+        return returnInstance();
+    }
+    
+    public <E extends JsonBuilder>  E tab() {
+        buffer.append('\t');
+        return returnInstance();
+    }
+    
+    public JsonBuilder writeListJsonObject(final List<? extends JsonObject> values) {
+        //...
+    }
+    
+    public JsonObject toJsonObject() {
+        return new Json(toString());
+    }
+    
+    public StringBuilder append(final Object value) {
+        return buffer.append(value);
+    }
+    
+    public StringBuilder append(final String value) {
+        return buffer.append(value);
+    }
+    
+    public StringBuilder append(final StringBuffer value) {
+        return buffer.append(value);
+    }
+    
+    public StringBuilder append(final CharSequence value) {
+        return buffer.append(value);
+    }
+    
+    public StringBuilder append(final CharSequence value, final int start, final int end) {
+        return buffer.append(value, start, end);
+    }
+    
+    public StringBuilder append(final char... str) {
+        return buffer.append(str);
+    }
+    
+    public StringBuilder append(final char[] str, final int offset, final int len) {
+        return buffer.append(str, offset, len);
+    }
+    
+    public StringBuilder append(final boolean value) {
+        return buffer.append(value);
+    }
+    
+    public StringBuilder append(final char value) {
+        return buffer.append(value);
+    }
+    
+    public StringBuilder append(final int value) {
+        return buffer.append(value);
+    }
+    
+    public StringBuilder append(final long value) {
+        return buffer.append(value);
+    }
+    
+    public StringBuilder append(final float value) {
+        return buffer.append(value);
+    }
+    
+    public StringBuilder append(final double value) {
+        return buffer.append(value);
+    }
+    
+    @Override
+    public String toString() {
+        return buffer.toString();
+    }
+    
+  
+    public void clear() {
+        buffer.setLength(0);
+        buffer.trimToSize();
+    }
+}
+
+//===========================================
+{
+    "name":"Joe",
+    "tags":[
+        "JAVA", "API"
+    ]
+}
+
+
+//===========================================
+final JsonBuilder json = new JsonBuilder();
+
+json.openObject();
+json.writeParam("name","Joe").addSeparator();
+json.addField("tags").writeListString(List.of("JAVA", "API"))
+json.closeObject();
+
+
+//===========================================
+package io.inugami.api.models;
+public class Tuple<K, V> {
+    
+    private transient final K key;
+    private transient final V value;
+    
+    public Tuple(final K key, final V value) {
+        //...
+    }
+    
+    @Override
+    public int hashCode() {
+        // ...
+    }
+    
+    @Override
+    public boolean equals(final Object obj) {
+        // ...
+    }
+    
+    @Override
+    public String toString() {
+        // ...
+    }
+    
+    public K getKey() {
+        return key;
+    }
+    
+    public V getValue() {
+        return value;
+    }
+}
+
+
+//===========================================
+package io.inugami.api.models.tools;
+public class Chrono implements Serializable {
+
+    
+    private long              startTime;
+    
+    private long              startTimeMs;
+    
+    private long              stopTime;
+    
+    private long              stopTimeMs;
+    
+    private boolean           running          = false;
+    
+
+    public Chrono() {
+        // ...
+    }
+    
+    protected Chrono(long startTime, long stopTime) {
+        // ...
+    }
+    
+    private Chrono(long startTime,
+                   long startTimeMs,
+                   long stopTime,
+                   long stopTimeMs,
+                   boolean running) {
+        // ...
+    }
+    
+    public static Chrono startChrono() {
+        return new Chrono().start();
+    }
+    
+    public Chrono start() {
+        startTime = System.nanoTime();
+        startTimeMs = System.currentTimeMillis();
+        running = true;
+        return this;
+    }
+    
+    public Chrono stop() {
+        stopTime = System.nanoTime();
+        stopTimeMs = System.currentTimeMillis();
+        running = false;
+        return this;
+    }
+    
+    public Chrono snapshot() {
+        if (running) {
+            stopTime = System.nanoTime();
+        }
+        return this;
+    }
+    
+    @Override
+    public int hashCode() {
+        // ...
+    }
+    
+    @Override
+    public boolean equals(final Object obj) {
+        // ...
+    }
+    
+    @Override
+    public String toString() {
+       // ...
+    }
+    
+    public Chrono cloneObj() {
+        return new Chrono(startTime, startTimeMs, stopTime, stopTimeMs, running);
+    }
+    
+
+    public long getDelais() {
+        return stopTime == -1 ? -1 : stopTime - startTime;
+    }
+    
+    public long getDelaisInMillis() {
+        return getDelais() / 1000000;
+    }
+    
+    public long getStartTime() {
+        return startTime;
+    }
+    
+    public long getStopTime() {
+        return stopTime;
+    }
+    
+    public boolean isRunning() {
+        return running;
+    }
+    
+    public void setRunning(final boolean running) {
+        this.running = running;
+    }
+    
+    public long getStartTimeMs() {
+        return startTimeMs;
+    }
+    
+    public long getStopTimeMs() {
+        return stopTimeMs;
+    }
+    
+}
+
+//===========================================
+public class BlockingQueue<T> extends LinkedBlockingQueue<T> {
+    public List<T> pollAll() {
+        // ...
+    }
+}

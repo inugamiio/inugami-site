@@ -16,6 +16,7 @@
                     </div>
                 </header>
             
+             
                 
                 <!--****************************************************************************************
                 ** INTRO
@@ -23,7 +24,7 @@
                 <article>
                     <div class="content">
                         <pre>
-                            <code [languages]="['xml']" [highlight]="gav">                      
+                            <code [languages]="['xml']" [highlight]="sourceCode['gav']">                      
                             </code>
                         </pre>
                         Inugami_api module contains all basic java objects using by Inugami project. 
@@ -51,32 +52,213 @@
                     </header>
                     <div class="content">
             
+                        <!-- ##########################################################################################-->
                         <doc-item title="Functionals" [level]="3" href="inugami/inugami_api#functionals" id="functionals">
             
                             <doc-item title="Builder" [level]="4" href="inugami/inugami_api#functionals_builder" id="functionals_builder">
                                 This functional interface allows for the design of basic builder.
                                 <pre>
-                                    <code [languages]="['java']" [highlight]="builder">                      
+                                    <code [languages]="['java']" [highlight]="sourceCode['builder']">                      
                                     </code>
                                 </pre>
                             </doc-item>
             
                             <doc-item title="ConsumerWithException" [level]="4" href="inugami/inugami_api#functionals_ConsumerWithException" id="functionals_ConsumerWithException">
-                                When a consumer uses data, exception can occur. To manage this use case, the ConsumerWithException has been designed.
+                                When a consumer uses data, exception can occur. To manage this use case,
+                                the ConsumerWithException has been designed.
                                 <pre>
-                                    <code [languages]="['java']" [highlight]="consumerWithException">                      
+                                    <code [languages]="['java']" [highlight]="sourceCode['consumerWithException']">                      
                                     </code>
                                 </pre>
                             </doc-item>
             
                             <doc-item title="ErrorCodeResolver" [level]="4" href="inugami/inugami_api#functionals_ErrorCodeResolver" id="functionals_ErrorCodeResolver">
-                                <strong>ErrorCodeResolver</strong> is used to resolve an error code from exception. This interface is designed to be used as strategy pattern,
+                                <strong>ErrorCodeResolver</strong> is used to resolve an error code from exception.
+                                This interface is designed to be used as strategy pattern,
                                 <pre>
-                                    <code [languages]="['java']" [highlight]="errorCodeResolver">                      
+                                    <code [languages]="['java']" [highlight]="sourceCode['errorCodeResolver']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="FilterFunction" [level]="4" href="inugami/inugami_api#filterFunction" id="filterFunction">
+                                The <strong>FilterFunction</strong> is design to have a semantic term to designate a filter.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['filterFunction']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="FunctionWithException" [level]="4" href="inugami/inugami_api#functionWithException" id="functionWithException">
+                                When a generic function is used, it can throw an exception. To materialize this principle,
+                                the <strong>FunctionWithException</strong> is designed. You can specify the input,
+                                output and exception types.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['functionWithException']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="JsonUnmarshalling" [level]="4" href="inugami/inugami_api#jsonUnmarshalling" id="jsonUnmarshalling">
+                                The unmarshalling process is a very commons process in software application.
+                                But in many case, your implementation only need to invoke this process.
+                                The concrete implementation doesn't matter. The <strong>JsonUnmarshalling</strong> interface is designed to
+                                provide an unmarshalling solution without the requirement to specify how the application
+                                should do it.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['jsonUnmarshalling']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="Mapper" [level]="4" href="inugami/inugami_api#mapper" id="mapper">
+                                Most commonly used to materialize the mapper pattern.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['mapper']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="PostProcessing" [level]="4" href="inugami/inugami_api#postProcessing" id="postProcessing">
+                                The PostProcessing interface is designed to materialize a visitor pattern.
+                                In Inugami, it is used to manipulate data after it has been recovered.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['postProcessing']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="TaskFinishListener" [level]="4" href="inugami/inugami_api#taskFinishListener" id="taskFinishListener">
+                                Inugami heavily use multi-threading principle. To handle when a task is completed,
+                                you can create listeners. To designed this listener we have the <strong>TaskFinishListener</strong>
+                                interface. This interface can be used in common use cases.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['taskFinishListener']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="TaskStartListener" [level]="4" href="inugami/inugami_api#taskStartListener" id="taskStartListener">
+                                Inugami heavily use multi-threading principle. To handle when a task
+                                starting, you can create listeners. To designed this listener we have 
+                                the <strong>TaskStartListener</strong> interface. This interface can be used in common use cases.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['taskStartListener']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="TriConsumer" [level]="4" href="inugami/inugami_api#triConsumer" id="triConsumer">
+                                In Java we have the Consumer and BiConsumer interfaces. But in specific use case,
+                                we need to have three parameters. The <strong>TriConsumer</strong> is designed for that. However,
+                                if you have more than three parameters, the best approach is to define a DTO object as parameter.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['triConsumer']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="ValidatorFunction" [level]="4" href="inugami/inugami_api#validatorFunction" id="validatorFunction">
+                                Basically, the <strong>ValidatorFunction</strong> is designed to create a validation strategy.
+                                Your implementation should have a list of ValidatorFunction and execute all of them.
+                                If one of them throw an exception, you know that your input is not valid.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['validatorFunction']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="VoidFunction" [level]="4" href="inugami/inugami_api#VoidFunction" id="VoidFunction">
+                                The Java Function interface should return a value. 
+                                However if you need only to invoke a handler without a result 
+                                you need a functional interface such as <strong>VoidFunction</strong>.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['VoidFunction']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="VoidFunctionWithException" [level]="4" href="inugami/inugami_api#VoidFunctionWithException" id="VoidFunctionWithException">
+                                The Java Function interface should return a value. 
+                                However if you need only to invoke a handler without a result you need a 
+                                functional interface such as VoidFunctionWithException. 
+                                The <strong>VoidFunctionWithException</strong> inteface is designed to manage 
+                                the potential exception that a function can throw.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['VoidFunctionWithException']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+            
+                            <doc-item title="StringDataCleaner" [level]="4" href="inugami/inugami_api#stringDataCleaner" id="stringDataCleaner">
+                                Commonly used in Inugami to obfuscate data.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['stringDataCleaner']">                      
                                     </code>
                                 </pre>
                             </doc-item>
                         </doc-item>
+
+                        <!-- ##########################################################################################-->
+                        <doc-item title="Utility intefaces" [level]="3" href="inugami/inugami_api#utility_intefaces" id="utility_intefaces">
+                            <doc-item title="ApplyIfNotNull" [level]="4" href="inugami/inugami_api#applyIfNotNull" id="applyIfNotNull">
+                                Most facet than interface, The ApplyIfNotNull interface allow to prevent NullPopinterException.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['applyIfNotNull']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+    
+    
+                            <doc-item title="ApplyIfNotNullAndSameType" [level]="4" href="inugami/inugami_api#applyIfNotNullAndSameType" id="applyIfNotNullAndSameType">
+                                Same as ApplyIfNotNull but it will check also the data type.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['applyIfNotNullAndSameType']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+                            <doc-item title="ApplyIfNull" [level]="4" href="inugami/inugami_api#applyIfNull" id="applyIfNull">
+                                Same as ApplyIfNotNull but it will invoke the supplier only if the data is null.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['applyIfNull']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+    
+    
+                            <doc-item title="FunctionMustThrow" [level]="4" href="inugami/inugami_api#functionMustThrow" id="functionMustThrow">
+                                Commonly used in unit test, the FunctionMustThrow interface design 
+                                a function who will throw an exception. This approach is very helpful
+                                to verify error code returned.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['functionMustThrow']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+                        </doc-item>
+
+                        <!-- ##########################################################################################-->
+                        <doc-item title="Generic interface" [level]="3" href="inugami/inugami_api#generic_interface" id="generic_interface">
+                            <doc-item title="" [level]="4" href="inugami/inugami_api#" id="">
+                                    
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['empty']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+    
+                        </doc-item>
+                            
+    
+    
+                            
+
+
+                        <!-- ##########################################################################################-->
+          
+
+                       
             
                     </div>
                 </article>
