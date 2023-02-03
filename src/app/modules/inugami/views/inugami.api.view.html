@@ -27,6 +27,8 @@
                             <code [languages]="['xml']" [highlight]="sourceCode['gav']">                      
                             </code>
                         </pre>
+                        <a target="_blank" href="http://inugami.io/javadoc/inugami_api">Link for JavaDoc</a>
+
                         Inugami_api module contains all basic java objects using by Inugami project. 
                         It's contains also some fundamental tools and models.
                         This module have less dependencies as possible. We can found as dependencies :
@@ -40,6 +42,7 @@
                             </li>
                         </ul>
             
+                        
                     </div>
                 </article>
             
@@ -52,6 +55,8 @@
                     </header>
                     <div class="content">
             
+                        <!-- ##########################################################################################-->
+                        <!-- Functionals->
                         <!-- ##########################################################################################-->
                         <doc-item title="Functionals" [level]="3" href="inugami/inugami_api#functionals" id="functionals">
             
@@ -200,6 +205,8 @@
                         </doc-item>
 
                         <!-- ##########################################################################################-->
+                        <!-- Utility intefaces->
+                        <!-- ##########################################################################################-->
                         <doc-item title="Utility intefaces" [level]="3" href="inugami/inugami_api#utility_intefaces" id="utility_intefaces">
                             <doc-item title="ApplyIfNotNull" [level]="4" href="inugami/inugami_api#applyIfNotNull" id="applyIfNotNull">
                                 Most facet than interface, The ApplyIfNotNull interface allow to prevent NullPopinterException.
@@ -236,30 +243,406 @@
                                     </code>
                                 </pre>
                             </doc-item>
+    
+    
+                            <doc-item title="configHandler" [level]="4" href="inugami/inugami_api#configHandler" id="configHandler">
+                                In Inugami, the ConfigHandler is the root principle for configuration management.
+                                All configuration in Inugami are sent to components with this object.
+                                The configuration in Inugami are not static, values or functions can be injected or
+                                invoked using specific tags. To inject properties, use mustache template (<code class="inline" [innerHTML]="sourceCode['configHandler_someValue']"></code>).
+                                For functions, it's the same approach than EL expression (<code class="inline" [innerHTML]="sourceCode['configHandler_myFunction']"></code>)
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['configHandler']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
                         </doc-item>
 
                         <!-- ##########################################################################################-->
+                        <!-- Generic interface-->
+                        <!-- ##########################################################################################-->
                         <doc-item title="Generic interface" [level]="3" href="inugami/inugami_api#generic_interface" id="generic_interface">
-                            <doc-item title="" [level]="4" href="inugami/inugami_api#" id="">
+                            The <strong>ExceptionWithErrorCode</strong> is designed to be a type maker.
+                            With this interface we are able to identify an exception with an error code.
+
+                            <doc-item title="ExceptionWithErrorCode" [level]="4" href="inugami/inugami_api#exceptionWithErrorCode" id="exceptionWithErrorCode">
                                     
                                 <pre>
-                                    <code [languages]="['java']" [highlight]="sourceCode['empty']">                      
+                                    <code [languages]="['java']" [highlight]="sourceCode['exceptionWithErrorCode']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="JsonObject" [level]="4" href="inugami/inugami_api#jsonObject" id="jsonObject">
+                                In Inugami all information should be able to be converted to the JSON format.
+                                The JsonObject interface can track all serializable objects and offers a generic
+                                solution for marshalling the current object.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['jsonObject']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="NamedComponent" [level]="4" href="inugami/inugami_api#namedComponent" id="namedComponent">
+                                Used for SPI implementations or Inugami plugin, the <strong>NamedComponent</strong> allows to retrieve the component name.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['namedComponent']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="Strategy" [level]="4" href="inugami/inugami_api#strategy" id="strategy">
+                                Used for SPI implementations or Inugami plugin, the NamedComponent allows to retrieve the component name.
+                                The <strong>Strategy&lt;IN, OUT&gt;</strong> interface is designed to materialize the strategy pattern.    
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['strategy']">                      
+                                    </code>
+                                </pre>
+
+                                To be able to create a list of strategies, in Inugami we have the <strong>DefaultStrategy</strong>
+                                implementation. For use easily, The DefaultStrategy use lombok builder
+
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['defaultStrategy']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="Dao" [level]="4" href="inugami/inugami_api#dao" id="dao">
+                                The DAO allows to define the design pattern Data access object. This interface can execute all CRUD
+                                method on a model how implement the Identifiable interface.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['dao']">                      
                                     </code>
                                 </pre>
                             </doc-item>
     
                         </doc-item>
-                            
-    
-    
-                            
+
+                        <!-- ##########################################################################################-->
+                        <!-- Concurrency intefaces-->
+                        <!-- ##########################################################################################-->
+                        <doc-item title="Concurrency intefaces" [level]="3" href="inugami/inugami_api#concurrency_intefaces" id="concurrency_intefaces">
+
+
+                            <doc-item title="FutureData" [level]="4" href="inugami/inugami_api#futureData" id="futureData">
+                                Inugami heavily use multi-threading principle. All tasks will return a <strong>FutureData</strong>.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['futureData']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="lifecycleBootstrap" [level]="4" href="inugami/inugami_api#lifecycleBootstrap" id="lifecycleBootstrap">
+                                Some components required to have an initialization and shutdown process.
+                                To desgin this approach in Inugami we have the <strong>LifecycleBootstrap</strong>.
+                                Commonly used on Inugai main thread manager and SSE context.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['lifecycleBootstrap']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="OnDoneFunction" [level]="4" href="inugami/inugami_api#onDoneFunction" id="onDoneFunction">
+                                Inugami use events to retrieve information. To be able to aggregate information
+                                Inugami required to known when a provider have complete its process.
+                                The OnDoneFunction is designed to intercept this event.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['onDoneFunction']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="OnErrorFunction" [level]="4" href="inugami/inugami_api#onErrorFunction" id="onErrorFunction">
+                                Inugami use events to retrieve information. To be able to aggregate information Inugami
+                                required to known when a provider have complete its process. The OnErrorFunction is
+                                designed to intercept the case where a provider throws an error.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['onErrorFunction']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="onStart" [level]="4" href="inugami/inugami_api#onStart" id="onStart">
+                                The OnStart is very generic functional interface to invoke listeners when some tasks starting.
+
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['onStart']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+                        </doc-item>
 
 
                         <!-- ##########################################################################################-->
-          
+                        <!-- Inugami event processing-->
+                        <!-- ##########################################################################################-->
+                        <doc-item title="Inugami event processing" [level]="3" href="inugami/inugami_api#inugami_event_processing" id="inugami_event_processing">
+                            <doc-item title="Aggregator" [level]="4" href="inugami/inugami_api#aggregator" id="aggregator">
+                                In Inugami, a lot of events are managed. Each event retrieves information from a provider. Inugami has two event types:
+                                <ul>
+                                    <li>
+                                        <strong>simple event :</strong> which only one query for a provider
+                                    </li>
+                                    <li>
+                                        <strong>composite :</strong> which multi queries on multi providers. 
+                                        However, to ensure coherent data, an Aggregator is required 
+                                        to aggreate results form each provider.
+                                    </li>
+                                </ul>
 
-                       
-            
+
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['aggregator']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="classBehaviorParametersSPI" [level]="4" href="inugami/inugami_api#classBehaviorParametersSPI" id="classBehaviorParametersSPI">
+                                Inugami use a lot of SPI implementation, Some components required to be configured. 
+                                SPI implementation required to have on implementation a constructor without parameters.
+                                In Java is not possible to create an final SPI implementation with some initialized fields.
+                                To do it, the <strong>ClassBehaviorParametersSPI</strong> allows to build a newer SPI instance with given configuration.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['classBehaviorParametersSPI']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="NoForcingEventProvider" [level]="4" href="inugami/inugami_api#noForcingEventProvider" id="noForcingEventProvider">
+                                In Inugami, it's possible to force providers invocation.
+                                However, some providers mustn't be forced. In this case we have the NoForcingEventProvider to prevent this action.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['noForcingEventProvider']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="Processor" [level]="4" href="inugami/inugami_api#processor" id="processor">
+                                In Inugami, when a provider retrieve the data, it can invoke a Processor to manipulate
+                                and transform the data. For example, if we have a SQL provider how retrieve information
+                                from a table, the data should not be formatted directly as time serie data.
+                                In this case the Processor will transform your entity to another format.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['processor']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="PropertiesProducerSpi" [level]="4" href="inugami/inugami_api#propertiesProducerSpi" id="propertiesProducerSpi">
+                                In Inugami, the root configuration is defined in XML files.
+                                One XML file per plugin with another XML to define all events.
+                                It's possible to define properties in the plugin XML file.
+                                However, if your plugin required to generate programmatically some properties,
+                                use the PropertiesProducerSpi. It's a SPI interface, so it's required to create 
+                                the file <strong>/META-INF/services/io.inugami.api.spi.PropertiesProducerSpi</strong> with all implementations.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['propertiesProducerSpi']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="provider" [level]="4" href="inugami/inugami_api#provider" id="provider">
+                                Inugami is a solution that gathers information from various sources, combines it and sends it to the front-end.
+                                To accomplish this, Inugami uses data providers, which are represented by the Provider interface.
+                                These providers have two main functions :
+
+                                <ul>
+                                    <li>
+                                        first one is <strong>callEvent</strong>, which which retrieves data and takes
+                                        in an event (simple or composite) and plugin information
+                                    </li>
+                                    <li>
+                                        the second is the <strong>aggregate</strong>, which is used to process the data once it
+                                        has been retrieved and is only activated when "callEvent" is run with a composite event.
+                                    </li>
+                                </ul>
+
+
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['provider']">
+                                    </code>
+                                </pre>
+                                <pre>
+                                    <legend>GenericEvent model</legend>
+                                    <code [languages]="['java']" [highlight]="sourceCode['genericEvent']">
+                                    </code>
+                                </pre>
+                                <pre>
+                                    <legend>SimpleEvent model</legend>
+                                    <code [languages]="['java']" [highlight]="sourceCode['SimpleEvent']">
+                                    </code>
+                                </pre>
+                                <pre>
+                                    <legend>Event composite model</legend>
+                                    <code [languages]="['java']" [highlight]="sourceCode['Event']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="providerCallbackOnError" [level]="4" href="inugami/inugami_api#providerCallbackOnError" id="providerCallbackOnError">
+                                The ProviderCallbackOnError allows to intercept provider error.
+
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['providerCallbackOnError']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="ProviderCallbackOnSuccess" [level]="4" href="inugami/inugami_api#providerCallbackOnSuccess" id="providerCallbackOnSuccess">
+                                The ProviderCallbackOnError allows to intercept provider successfully processing.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['ProviderCallbackOnSuccess']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="providerForce" [level]="4" href="inugami/inugami_api#providerForce" id="providerForce">
+                                The ProviderForce is an interface marker to identify all providers how allow to force retrieve information.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['providerForce']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="ProviderRunner" [level]="4" href="inugami/inugami_api#providerRunner" id="providerRunner">
+                                The ProviderRunner allow to abstract the concrete implementation of provider runner.
+                                The main implementation is io.inugami.core.providers.MultiThreadedProviderRunner
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['providerRunner']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="ProviderTask" [level]="4" href="inugami/inugami_api#providerTask" id="providerTask">
+                                In Inugami, providers should be run in parallel threads.
+                                To run provider tasks in thread pool we need a Callable type.
+                                The ProviderTask represent a Callable that will return a ProviderFutureResult object.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['providerTask']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="providerWithHttpConnector" [level]="4" href="inugami/inugami_api#providerWithHttpConnector" id="providerWithHttpConnector">
+                                The ProviderWithHttpConnector is design to configure HTTP connector on Provider.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['providerWithHttpConnector']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="ProviderWriter" [level]="4" href="inugami/inugami_api#providerWriter" id="providerWriter">
+                                The ProviderWriter is designed to create writer providers. These will be able to write a JsonObject to datasource.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['providerWriter']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="SpiConfigurable" [level]="4" href="inugami/inugami_api#spiConfigurable" id="spiConfigurable">
+                                The SpiConfigurable is used mainly for metrics management. 
+                                However, it can be used to mark SPI implementation how required access to the configuration.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['spiConfigurable']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+                        </doc-item>
+
+                        <!-- ##########################################################################################-->
+                        <!-- Inugami monitoring-->
+                        <!-- ##########################################################################################-->
+                        <doc-item title="Inugami monitoring" [level]="3" href="inugami/inugami_api#inugami_event_processing" id="inugami_event_processing">
+
+
+                            <doc-item title="BootstrapMonitoringSpi" [level]="4" href="inugami/inugami_api#bootstrapMonitoringSpi" id="bootstrapMonitoringSpi">
+                                The monitoring context require to be initialized and has a shutdown process.
+                                The BootstrapMonitoringSpi allow to materialize this lifecycle.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['bootstrapMonitoringSpi']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="GenericMonitoringModel" [level]="4" href="inugami/inugami_api#genericMonitoringModel" id="genericMonitoringModel">
+                                This GenericMonitoringModel is designed to define the generic monitoring model.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['genericMonitoringModel']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="MonitoringFilterInterceptor" [level]="4" href="inugami/inugami_api#monitoringFilterInterceptor" id="monitoringFilterInterceptor">
+                                In Java application we can uses request filters. But on JavaEE or Spring (or other)
+                                it's not the same approach. The MonitoringFilterInterceptor is designed to unify the filter principle.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['empty']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="MonitoringInitializer" [level]="4" href="inugami/inugami_api#monitoringInitializer" id="monitoringInitializer">
+                                To be able to initialize the monitoring context, Inugami required a specific interface to invoke this phase.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['monitoringInitializer']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="MonitoringLoaderSpi" [level]="4" href="inugami/inugami_api#monitoringLoaderSpi" id="monitoringLoaderSpi">
+                                The monitoring context has a specific configuration file. To be able to load it, Inugami required a specific interface.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['monitoringLoaderSpi']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="MonitoringSender" [level]="4" href="inugami/inugami_api#" id="monitoringSender">
+                                The MonitoringSender interface allows to create monitoring sender provider.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['monitoringSender']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+
+                            <doc-item title="monitoringSensor" [level]="4" href="inugami/inugami_api#" id="monitoringSensor">
+                                The MonitoringSensor interface allows to create monitoring sensor provider.
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['monitoringSensor']">
+                                    </code>
+                                </pre>
+                            </doc-item>
+
+                        </doc-item>
+
                     </div>
                 </article>
                     
@@ -293,7 +676,82 @@
             
             
             
-            
+                        <doc-item title="errorCode" [level]="3" href="inugami/inugami_api#errorCode" id="errorCode">
+                            On all applications errors can occur. It is important to be able to identify them with precision.
+                            In java application we can use specific exception types to identify all errors.
+                            However, in many case, there is no fallback process. The best way is to allow the exception to propagate
+                            and have an error handler to intercept it.
+                        
+                            To do that in Inugami we have the ErrorCode approach. It's a basic Java interface
+                            allow to defining a semantic error code. This error code should provide different information, such as :
+                            <ul>
+                                <li>the message</li>
+                                <li>the http status</li>
+                                <li>error category</li>
+                                <li>...</li>
+                            </ul>
+                            
+                            
+                            <pre>
+                                <code [languages]="['java']" [highlight]="sourceCode['errorCode']">
+                                </code>
+                            </pre>
+                        
+                            This interface is designed to works with Java enumerations :
+                            <pre>
+                                <code [languages]="['java']" [highlight]="sourceCode['errorCodeEnum']">
+                                </code>
+                            </pre>
+                        
+                            With enumerations, you can easily define multiple exception types.
+                            This approach is designed to works with the Asserts service.
+                            <pre>
+                                <code [languages]="['java']" [highlight]="sourceCode['errorCodeUsage']">
+                                </code>
+                            </pre>
+                        
+                            The Asserts class will produce a RuntimeException if the condition isn't valid.
+                            Asserts class methods :
+                            <pre>
+                                <code [languages]="['java']" [highlight]="sourceCode['asserts']">
+                                </code>
+                            </pre>
+                        
+                        
+                        </doc-item>
+                        
+                        
+                        <doc-item title="warning" [level]="3" href="inugami/inugami_api#warning" id="warning">
+                            The warning mechanism works on same principal as the ErrorCode. You can find an interface Warning that represents a warning code.
+                            <pre>
+                                <code [languages]="['java']" [highlight]="sourceCode['warning']">
+                                </code>
+                            </pre>
+                            <p>
+                                The warning management is a little more complex than error code. The IOLOG management can easily manage your error code,
+                                but for the warning it depends of you implementation. The warning code should be presents in the server response.
+                                We can't intercept incoming and outgoing requests to manage this use case.
+                            </p>
+                            
+                            <p>
+                                To do that we need a warning context who is able to store the warning code during the execution.
+                                Just before sending the response, the warning context push all warning code in the server response.
+                            </p>
+                            
+                            <p>
+                                The class WarningContext is store in a ThreadLocal. All requests on server are represented by a new thread.
+                                A local thread is a value attached to current thread.
+                            </p>
+                            <pre>
+                                <legend>Example</legend>
+                                <code [languages]="['java']" [highlight]="sourceCode['warningEnum']"></code>
+                                <code [languages]="['java']" [highlight]="sourceCode['warningUsage']"></code>
+                            </pre>
+                            
+                            
+                        </doc-item>
+                        
+                        
             
             
                     </div>

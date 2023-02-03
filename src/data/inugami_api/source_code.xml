@@ -846,8 +846,338 @@ public interface Builder<T> {
     }
     ]]>
 </src>
+<src name="genericEvent">
+    <![CDATA[
+    public class GenericEvent implements Serializable, ClonableObject<GenericEvent> {
+    
+        // =========================================================================
+        // ATTRIBUTES
+        // =========================================================================
+        /** The Constant serialVersionUID. */
+        private static final long          serialVersionUID = -355683229478830003L;
+        
+        @XStreamAsAttribute
+        private final String               name;
+        
+        @XStreamAsAttribute
+        protected String                   fromFirstTime;
+        
+        @XStreamAsAttribute
+        protected String                   from;
+        
+        @XStreamAsAttribute
+        private String                     until;
+        
+        @XStreamAsAttribute
+        private String                     provider;
+        
+        @XStreamAsAttribute
+        private String                     mapper;
+        
+        @XStreamImplicit
+        private final List<ProcessorModel> processors;
+        
+        @XStreamImplicit
+        private final List<AlertingModel>  alertings;
+        
+        // =========================================================================
+        // CONSTRUCTORS
+        // =========================================================================
+        public GenericEvent() {
+                    // implementation
+        }
+        
+        public GenericEvent(final String name) {
+                    // implementation
+        }
+        
+        public GenericEvent(final String name,
+                            final String from,
+                            final String unitl,
+                            final String provider,
+                            final List<ProcessorModel> processors,
+                            final String mapper,
+                            final List<AlertingModel> alertings) {
+                    // implementation
+        }
+        
+        // =========================================================================
+        // OVERRIDES
+        // =========================================================================
+        @Override
+        public String toString() {
+                    // implementation
+        }
+        
+        @Override
+        public int hashCode() {
+            // implementation
+        }
+        
+        @Override
+        public boolean equals(final Object obj) {
+            // implementation
+        }
+        
+        // =========================================================================
+        // GETTERS & SETTERS
+        // =========================================================================
+        public String getName() {
+            return name;
+        }
+        
+        public Optional<String> getFrom() {
+            return Optional.ofNullable(from);
+        }
+        
+        public Optional<String> getProvider() {
+            return Optional.ofNullable(provider);
+        }
+        
+        public Optional<List<ProcessorModel>> getProcessors() {
+            return Optional.ofNullable(processors);
+        }
+        
+        public Optional<String> getUntil() {
+            return Optional.ofNullable(until);
+        }
+        
+        public Optional<String> getFromFirstTime() {
+            return Optional.ofNullable(fromFirstTime);
+        }
+        
+        public void buildFrom(final String from) {
+            this.from = from;
+        }
+        
+        public void buildUntil(final String until) {
+            this.until = until;
+        }
+        
+        public void buildProvider(final String provider) {
+            this.provider = provider;
+        }
+        
+        public void buildFromFirstTime(final String fromFirstTime) {
+            this.fromFirstTime = fromFirstTime;
+        }
+        
+        public Optional<String> getMapper() {
+            return Optional.ofNullable(mapper);
+        }
+        
+        public void buildMapper(final String mapper) {
+            this.mapper = mapper;
+        }
+        
+        public Optional<List<AlertingModel>> getAlertings() {
+            return Optional.ofNullable(alertings);
+        }
+        
+        @Override
+        public GenericEvent cloneObj() {
+            // implementation
+        }
+        
+    }
+    ]]>
+</src>
 
-
+<src name="SimpleEvent">
+    <![CDATA[
+   @XStreamAlias("simple-event")
+   public class SimpleEvent extends GenericEvent {
+       
+       // =========================================================================
+       // ATTRIBUTES
+       // =========================================================================
+       private static final long serialVersionUID = -1139191592954226047L;
+       
+       private final String      query;
+       
+       @XStreamOmitField
+       private final String      parent;
+       
+       @XStreamAsAttribute
+       private String            scheduler;
+       
+       // =========================================================================
+       // CONSTRUCTORS
+       // =========================================================================
+       public SimpleEvent() {
+           // implementation
+       }
+       
+       public SimpleEvent(final String name,
+                          final String from,
+                          final String until,
+                          final String provider,
+                          final List<ProcessorModel> processors,
+                          final String query,
+                          final String parent,
+                          final String scheduler,
+                          final String mapper,
+                          final List<AlertingModel> alertings) {
+           // implementation
+       }
+       
+       @Override
+       public GenericEvent cloneObj() {
+           // implementation
+       }
+       
+       // =========================================================================
+       // GETTERS & SETTERS
+       // =========================================================================
+       public String getQuery() {
+           return query;
+       }
+       
+       public Optional<String> getParent() {
+           return parent == null ? Optional.empty() : Optional.of(parent);
+       }
+       
+       public String getScheduler() {
+           return scheduler;
+       }
+       
+       public void setScheduler(final String scheduler) {
+           this.scheduler = scheduler;
+       }
+       
+       // =========================================================================
+       // FOR MAPPING
+       // =========================================================================
+       @Override
+       public String getName() {
+           return super.getName();
+       }
+       
+       @Override
+       public Optional<String> getFrom() {
+           return super.getFrom();
+       }
+       
+       @Override
+       public Optional<String> getProvider() {
+           return super.getProvider();
+       }
+       
+       @Override
+       public Optional<List<ProcessorModel>> getProcessors() {
+           return super.getProcessors();
+       }
+       
+       @Override
+       public Optional<String> getUntil() {
+           return super.getUntil();
+       }
+       
+       @Override
+       public Optional<String> getFromFirstTime() {
+           return super.getFromFirstTime();
+       }
+       
+       @Override
+       public void buildFrom(final String from) {
+           super.buildFrom(from);
+       }
+       
+       @Override
+       public void buildUntil(final String until) {
+           super.buildUntil(until);
+       }
+       
+       @Override
+       public void buildProvider(final String provider) {
+           super.buildProvider(provider);
+       }
+       
+       @Override
+       public void buildFromFirstTime(final String fromFirstTime) {
+           super.buildFromFirstTime(fromFirstTime);
+       }
+       
+       @Override
+       public Optional<String> getMapper() {
+           return super.getMapper();
+       }
+       
+       @Override
+       public void buildMapper(final String mapper) {
+           super.buildMapper(mapper);
+       }
+       
+       @Override
+       public Optional<List<AlertingModel>> getAlertings() {
+           return super.getAlertings();
+       }
+       
+   }
+   
+    ]]>
+</src>
+<src name="Event">
+    <![CDATA[
+    @XStreamAlias("event")
+    public class Event extends GenericEvent {
+        
+        // =========================================================================
+        // ATTRIBUTES
+        // =========================================================================
+        /** The Constant serialVersionUID. */
+        private static final long        serialVersionUID = 1783705856498891253L;
+        
+        @XStreamImplicit
+        private final List<TargetConfig> targets;
+        
+        @XStreamAsAttribute
+        private String                   scheduler;
+        
+        // =========================================================================
+        // CONSTRUCTORS
+        // =========================================================================
+        public Event() {
+            super();
+            targets = new ArrayList<>();
+        }
+        
+        //@formatter:off
+        public Event(final String name,
+                     final String from,
+                     final String until,
+                     final String provider,
+                     final List<ProcessorModel> processors,
+                     final List<TargetConfig> targets, 
+                     final String scheduler,
+                     final String mapper,
+                     final List<AlertingModel> alertings) {
+            // implementation
+        }
+        
+        @Override
+        public GenericEvent cloneObj() {
+            // implementation
+        }
+        
+        // =========================================================================
+        // GETTERS
+        // =========================================================================
+        public List<TargetConfig> getTargets() {
+            // implementation
+        }
+        
+        public String getScheduler() {
+            return scheduler;
+        }
+        
+        public void setScheduler(final String scheduler) {
+            this.scheduler = scheduler;
+        }
+        
+    }
+    ]]>
+</src>
 <!--*********************************************************************** 
 * 
 ***********************************************************************-->
@@ -860,7 +1190,18 @@ public interface Builder<T> {
     }
     ]]>
 </src>
-
+<!--*********************************************************************** 
+* 
+***********************************************************************-->
+<src name="ProviderCallbackOnSuccess">
+    <![CDATA[
+    package io.inugami.api.providers;
+    @FunctionalInterface
+    public interface ProviderCallbackOnSuccess {
+        void sendData(String data);
+    }
+    ]]>
+</src>
 
 <!--*********************************************************************** 
 * 
@@ -1491,6 +1832,11 @@ public interface Builder<T> {
     }
     
     
+    
+    ]]>
+</src>
+<src name="warningUsage">
+    <![CDATA[
     public class MyEndpoint{
     
         public void process(){
@@ -1500,7 +1846,6 @@ public interface Builder<T> {
     }
     ]]>
 </src>
-
 
 <!--*********************************************************************** 
 * 

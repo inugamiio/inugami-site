@@ -25,6 +25,10 @@ export class InugamiApiView  implements  OnInit {
 
     private initData(values:string){
         this.sourceCode['empty'] ="";
+
+        this.sourceCode['configHandler_someValue'] ="{{someValue}}";
+        this.sourceCode['configHandler_myFunction'] ="#{myFunction(param1, param2)}";
+
         let parser = new DOMParser();
         let node = parser.parseFromString(values,"text/xml");
         let sources = node.getElementsByTagName("src");
