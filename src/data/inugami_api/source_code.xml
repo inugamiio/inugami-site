@@ -1882,7 +1882,12 @@ public interface Builder<T> {
     ]]>
 </src>
 
-
+<src name="mySpiServiceDeclaration">
+    <![CDATA[
+    io.inugami.acme.implementations.MySpiServiceDefault
+    io.inugami.acme.implementations.MySpiServiceFallback
+    ]]>
+</src>
 <!--*********************************************************************** 
 * 
 ***********************************************************************-->

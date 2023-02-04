@@ -6,6 +6,8 @@ import { Component, Inject, OnInit } from '@angular/core';
   providers: []
 })
 export class InugamiApiToc {
+
+  tupleTitle : string = "Tuple<K,V>";
   constructor() {
   }
 }

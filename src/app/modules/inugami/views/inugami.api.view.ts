@@ -28,7 +28,10 @@ export class InugamiApiView  implements  OnInit {
 
         this.sourceCode['configHandler_someValue'] ="{{someValue}}";
         this.sourceCode['configHandler_myFunction'] ="#{myFunction(param1, param2)}";
+        this.sourceCode['interface_full_name'] ="{{interface.full.name}}";
+        this.sourceCode['tuple_title'] ="Tuple<K, V>";
 
+        
         let parser = new DOMParser();
         let node = parser.parseFromString(values,"text/xml");
         let sources = node.getElementsByTagName("src");
