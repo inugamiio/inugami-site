@@ -8,12 +8,15 @@ import { NgModule } from '@angular/core';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 
 import { InugamiProjectAnalysisView } from './views/inugami.project.analysis';
-
+import { InugamiPluginToc } from './components/inugami_plugin_toc/inugami.plugin.toc';
+import { InugamiPluginAsideMenu } from './components/inugami_plugin_aside_menu/inugami.plugin.aside.menu';
 
 
 @NgModule({
     declarations: [
-        InugamiProjectAnalysisView
+        InugamiProjectAnalysisView,
+        InugamiPluginToc,
+        InugamiPluginAsideMenu
     ],
     imports: [
         BrowserModule,
