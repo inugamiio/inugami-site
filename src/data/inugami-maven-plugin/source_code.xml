@@ -1,0 +1,125 @@
+<xml>
+
+
+<!--*********************************************************************** 
+* GAV    
+***********************************************************************-->
+<src name="gav">
+<![CDATA[
+<plugin>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+    <version>1.6.3</version>
+
+    <extension>true</extension>
+    <executions>
+        <execution>
+            <id>check</id>
+            <phase>analyze</phase>
+            <goals>
+                <goal>check</goal>
+            </goals>
+        </execution>
+        <execution>
+            <id>info</id>
+            <phase>info</phase>
+            <goals>
+                <goal>retrieveInformation</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
+]]>
+</src>
+
+
+<!--*********************************************************************** 
+* docker_compose    
+***********************************************************************-->
+<src name="docker_compose">
+    <![CDATA[
+    version: "3"
+    services:
+      neo4j:
+        image: neo4j:4.1.1
+        ports:
+          - "7474:7474"
+          - "7473:7473"
+          - "7687:7687"
+        expose:
+          - 7474
+          - 7473
+          - 7687
+        environment:
+          - NEO4J_AUTH=neo4j/password
+          - EXTENSION_SCRIPT=/var/lib/neo4j/import/neo4j-bootstrap.sh
+          - NEO4J_dbms_unmanaged__extension__classes=semantics.extension=/rdf
+          - NEO4J_dbms_security_procedures_whitelist=apoc.coll.*,apoc.load.*,semantics.*
+          - NEO4J_dbms_security_procedures_unrestricted=apoc.*,semantics.*
+          - NEO4J_apoc_export_file_enabled=true
+          - NEO4J_apoc_import_file_enabled=true
+          - NEO4J_apoc_import_file_use__neo4j__config=true
+        volumes:
+          - ./import:/var/lib/neo4j/import
+          - ./conf:/var/lib/neo4j/conf
+          - ./logs:/var/lib/neo4j/logs
+          - ./plugins:/var/lib/neo4j/plugins
+        networks:
+          - neo4j-network
+    networks:
+      neo4j-network:
+        driver: bridge
+    ]]>
+    </src>
+
+<!--*********************************************************************** 
+* maven_pom_properties    
+***********************************************************************-->
+<src name="maven_pom_properties">
+    <![CDATA[
+    <properties>
+        <inugami.maven.plugin.analysis.project.base.name>your.base.package</inugami.maven.plugin.analysis.project.base.name>
+        <inugami.maven.plugin.analysis.writer.neo4j.url>bolt://localhost:7687</inugami.maven.plugin.analysis.writer.neo4j.url>
+        <inugami.maven.plugin.analysis.writer.neo4j.user>neo4j</inugami.maven.plugin.analysis.writer.neo4j.user>
+        <inugami.maven.plugin.analysis.writer.neo4j.password>password</inugami.maven.plugin.analysis.writer.neo4j.password>
+    </properties>
+]]>
+</src>
+
+<!--*********************************************************************** 
+* maven_settings    
+***********************************************************************-->
+<src name="maven_settings">
+    <![CDATA[
+    <servers>
+        <servers>
+            <id>neo4j</id>
+            <username>neo4j</username>
+            <password>{Yt5nGluOZ0sHzEiL7Le2IHFjtuTonkfx4yVEG3CYzZ8=}</password>
+            <configuration>
+                <url>bolt://localhost:7687</url>
+            </configuration>
+        </servers>
+    </servers>
+]]>
+</src>
+
+
+<!--*********************************************************************** 
+* mvn_analyze    
+***********************************************************************-->
+<src name="mvn_analyze">
+    <![CDATA[
+mvn analyze
+]]>
+</src>
+
+<!--*********************************************************************** 
+* maven_settings    
+***********************************************************************-->
+<src name="mvn_info">
+    <![CDATA[
+    mvn info
+]]>
+</src>
+</xml>

@@ -16,7 +16,13 @@
                     </div>
                 </header>
             
+                 <!--****************************************************************************************
+                ** INTRO
+                ****************************************************************************************-->
                 <article>
+                    <header>
+                        <a href="inugami/inugami-project-analysis-maven-plugin#introduction"><h2 id="introduction">Introduction</h2></a>
+                    </header>
                     <div class="content">
                         <pre>
                             <code [languages]="['xml']" [highlight]="sourceCode['gav']">                      
@@ -36,13 +42,168 @@
                                 <a target="_blank" href="http://inugami.io/javadoc/inugami-project-analysis-maven-plugin">Plugin JavaDoc</a>
                             </li>
                         </ul>
-                        
-
-                        
+                        <p>
+                            Inugami project analysis maven plugin have for target to generate a release note on your project. 
+                            Detect hidden dependencies on microservices is not easy. This plugin use Neo4J to resolve them.
+                            You can find a generated release note example here : 
+                            <a target="_blank" href="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/blob/master/doc/release-note-example.adoc">release-note</a>
+                        </p>
                     </div>
+
+                    
                 </article>
 
              
+
+                <!--****************************************************************************************
+               ** Quick start
+               ****************************************************************************************-->
+               <article>
+                   <header>
+                       <a href="inugami/inugami-project-analysis-maven-plugin#quick_start"><h2 id="quick_start">Quick start</h2></a>
+                   </header>
+
+                   <div class="content">
+                        <p>
+                            This maven plugin use Neo4J database to store information and resolve them.
+                            If you don’t have Neo4J you can test on your local environment or run a Neo4J with docker.
+                        </p>
+                        
+                        <pre>
+                            <legend>docker-compose.yml</legend>
+                            <code [languages]="['yaml']" [highlight]="sourceCode['docker_compose']">                      
+                            </code>
+                        </pre>
+                        
+                        In your project pom.xml (or settings) we need to add some properties :
+                        <pre>
+                            <legend>pom.xml</legend>
+                            <code [languages]="['xml']" [highlight]="sourceCode['maven_pom_properties']">                      
+                            </code>
+                        </pre>
+
+                        You can also define Neo4J configuration into your maven settings :
+                        <pre>
+                            <legend>settings.xml</legend>
+                            <code [languages]="['xml']" [highlight]="sourceCode['maven_settings']">                      
+                            </code>
+                        </pre>
+
+                        In this case, your maven settings will override your pom.xml properties.
+
+                        <p>
+                            In your project build definition :
+                        </p>
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['gav']">                      
+                            </code>
+                        </pre>
+                        
+                        First you need to analyse your project to send data into NEO4J:
+                        <pre>
+                            <code [languages]="['shell']" [highlight]="sourceCode['mvn_analyze']">                      
+                            </code>
+                        </pre>
+
+                        <img src="/assets/analyze-01.png" alt="maven execution result" />
+                        <img src="/assets/analyze-02.png" alt="result data in Neo4J" />
+                        <p>
+                        After this analyse you can see in Neo4j your project information or just execute maven phase info
+                        </p>
+                        <pre>
+                            <code [languages]="['shell']" [highlight]="sourceCode['mvn_info']">                      
+                            </code>
+                        </pre>
+
+                        <img src="/assets/analyze-04.png" alt="result data in Neo4J" />
+                        <p>
+                            This phase requires to specify an action to display information
+                        </p>
+                        
+                   </div>
+               </article>
+
+             
+
+              <!--****************************************************************************************
+             ** Quick start
+             ****************************************************************************************-->
+             <article>
+                 <header>
+                     <a href="inugami/inugami-project-analysis-maven-plugin#neo4j_structure"><h2 id="neo4j_structure">Neo4j data structure</h2></a>
+                 </header>
+
+                 <div class="content">
+                   
+                 </div>
+             </article>
+
+             
+
+            <!--****************************************************************************************
+           ** Retrieve information
+           ****************************************************************************************-->
+           <article>
+               <header>
+                   <a href="inugami/inugami-project-analysis-maven-plugin#retrieve_information"><h2 id="retrieve_information">Retrieve information</h2></a>
+               </header>
+
+               <div class="content">
+                 
+               </div>
+           </article>
+
+
+             
+
+           <!--****************************************************************************************
+          ** analyzers
+          ****************************************************************************************-->
+          <article>
+              <header>
+                  <a href="inugami/inugami-project-analysis-maven-plugin#analyzers"><h2 id="analyzers">Analyzers</h2></a>
+              </header>
+
+              <div class="content">
+                
+              </div>
+          </article>
+
+
+             
+
+          <!--****************************************************************************************
+         ** springboot_integration
+         ****************************************************************************************-->
+         <article>
+             <header>
+                 <a href="inugami/inugami-project-analysis-maven-plugin#springboot_integration"><h2 id="springboot_integration">SpringBoot integration</h2></a>
+             </header>
+
+             <div class="content">
+               
+             </div>
+         </article>
+
+
+             
+
+         <!--****************************************************************************************
+        ** Others goals
+        ****************************************************************************************-->
+        <article>
+            <header>
+                <a href="inugami/inugami-project-analysis-maven-plugin#other_goals"><h2 id="other_goals">Others goals</h2></a>
+            </header>
+
+            <div class="content">
+              
+            </div>
+        </article>
+
+
+
+
                
             </section>  
         </div>
