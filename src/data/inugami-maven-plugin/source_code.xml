@@ -72,6 +72,39 @@
     ]]>
     </src>
 
+
+<!--*********************************************************************** 
+* neo4j_indexes
+***********************************************************************-->
+<src name="neo4j_indexes">
+<![CDATA[
+CREATE INDEX ON :Artifact(name,groupId,artifactId,packaging,shortName,version);
+CREATE INDEX ON :Version(name, uid,artifactId,groupId,major,minor,packaging,patch,tag,version );
+
+CREATE INDEX ON :ErrorCode(exploitationError,name,errorCode,message,shortName,statusCode);
+CREATE INDEX ON :ErrorType(name,shortName);
+
+
+CREATE INDEX ON :Service(accept,autoStartup,bindings,containerFactory,contentType,converterWinsContentType,destination,errorHandler,event,exclusive,identifier,listenerId,method,name,payload,queue,queuesToDeclare,requestPayload,responsePayload,uid,uri,verb);
+CREATE INDEX ON :ServiceType(name, uid);
+
+CREATE INDEX ON :Method(name, uid,class,method,parameters,returnType);
+
+CREATE INDEX ON :Property(name, uid,mandatory,propertyType );
+
+CREATE INDEX ON :INPUT_DTO(name, uid);
+CREATE INDEX ON :OUTPUT_DTO(name, uid);
+
+CREATE INDEX ON :LocalEntity(name, uid,payload);
+CREATE INDEX ON :Entity(name, uid,payload);
+
+
+CREATE INDEX ON :Scm(name, uid,commit);
+CREATE INDEX ON :Author(name, uid,email);
+]]>
+</src>
+    
+
 <!--*********************************************************************** 
 * maven_pom_properties    
 ***********************************************************************-->
