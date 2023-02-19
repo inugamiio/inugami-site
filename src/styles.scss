@@ -181,3 +181,33 @@ section.documentation{
 dd{
     margin-bottom: 1em;
 }
+
+
+
+table.properties{
+    border:1px solid;
+
+    thead{
+        border:1px solid;
+
+        tr{
+            background-color: #dddddd;
+            th{
+                border:1px solid;
+            }
+        }
+    }
+
+    tbody{
+        border:1px solid;
+        tr{
+            border:1px solid;
+
+            td{
+                border:1px solid;
+ 
+            }
+        }
+    }
+
+}

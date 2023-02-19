@@ -149,6 +149,10 @@
                     <div>
                         <img src="/assets/analyze-neo4j-structure.png" alt="neo4J structure" />
                     </div>
+                    <pre>
+                        <code [languages]="['cpql']" [highlight]="sourceCode['neo4j_structure']">                      
+                        </code>
+                    </pre>
                  </div>
              </article>
 
@@ -163,7 +167,228 @@
                </header>
 
                <div class="content">
-                 
+                 <p>
+                    After analyze, all information is present into Neo4J. We can now query Neo4J to
+                    retrieve information. Attention : in some commons use cases it’s easier to invoke
+                    the plugin to display result.
+                </p>
+
+                <p>
+                    All additional properties can be defined in properties section of pom.xml
+                    or via command line invocation (with -D prefix).
+                </p>
+
+
+                
+                <doc-item title="restServices" [level]="3" href="inugami-project-analysis-maven-plugin#restServices" id="restServices">
+                    <p>
+                        One of common problems in microservice architecture is to known interconnections between services.
+                        What’s happen if I change my service ? Who consume a service and which version is currently in use ?
+                        To address this issue, the inugami analysis plugin will analyze all Springboot Rest endpoint and
+                        feign clients to detect interdependencies between projects.
+                    </p>
+                    
+                    <p>
+                        REST endpoints can be defined in current project or as a transitive dependency.
+                        The plugin retrieve transitive dependencies over 10 sub levels.
+                    </p>
+                    
+                    <pre>
+                        <code [languages]="['shell']" [highlight]="sourceCode['info_restServices']">                      
+                        </code>
+                    </pre>
+                    <p>
+                        The color code is the same as Swagger, all GET endpoints are blue, green for POST, and red for DELETE.
+                    </p>
+                    <div>
+                        <img src="/assets/analyze-neo4j-restServices-01.png" alt="plugin display project rest services" />
+                    </div>
+
+                    <p>
+                        In case where some projects consume an endpoint these will be described in the result :
+                    </p>
+                    <div>
+                        <img src="/assets/analyze-neo4j-restServices-02.png" alt="plugin display services consumers" />
+                    </div>
+
+                </doc-item>
+
+
+
+                <doc-item title="queryDisplay" [level]="3" href="inugami-project-analysis-maven-plugin#queryDisplay" id="queryDisplay">
+                    <p>
+                        Query display allows the generation of a Neo4J cypher query from the current project.
+                    </p>
+                    <pre>
+                        <code [languages]="['shell']" [highlight]="sourceCode['info_queryDisplay']">                      
+                        </code>
+                    </pre>
+                    <div>
+                        <img src="/assets/analyze-neo4j-queryDisplay-01.png" alt="plugin information about queries" />
+                    </div>
+                    <p>
+                        Different queries are available, so it’s required to specify the one in use.
+                    </p>
+
+                    <pre>
+                        <code [languages]="['shell']" [highlight]="sourceCode['info_search_services_rest']"></code>
+                        <code [languages]="['shell']" [highlight]="sourceCode['info_search_error_codes']"></code>
+                    </pre>
+                    <div>
+                        <img src="/assets/analyze-neo4j-queryDisplay-02.png" alt="plugin display Neo4J query" />
+                    </div>
+                </doc-item>
+
+
+
+                <doc-item title="properties" [level]="3" href="inugami-project-analysis-maven-plugin#properties" id="properties">
+                    <p>
+                        Properties action displays project properties. This action retrieves also dependencies properties.
+                        At this moment these properties are extracted from Spring properties 
+                        (@Value, bean properties, conditionals beans, properties usages on JMS or RabbitMQ listeners)
+                    </p>
+                    <p>
+                        If a property has no default value, it will be displayed in red. In yellow,
+                        we have properties who enable some beans. If a property have bean validator
+                        constraints, these will be displayed too.
+                    </p>
+                    <div>
+                        <img src="/assets/analyze-neo4j-properties.png" alt="plugin display all project properties" />
+                    </div>
+                </doc-item>
+
+
+                <doc-item title="queueInfo" [level]="3" href="inugami-project-analysis-maven-plugin#queueInfo" id="queueInfo">
+                    <p>
+                        Queue information have the same approach as restServices but for JMS and RabbitMQ. 
+                        It’s able to detect producers and listeners, tracing event payload and all information on queue binding.
+                    </p>
+                    <p>    
+                        Like restServices, the queueInfo retrieves information over 10 levels of transitive dependencies.
+                    </p>
+                    <pre>
+                        <code [languages]="['shell']" [highlight]="sourceCode['info_queueInfo']">                      
+                        </code>
+                    </pre>
+                    <div>
+                        <img src="/assets/analyze-neo4j-queue.png" alt="plugin display all project queues information" />
+                    </div>
+
+                    <p>
+                        To track all JMS senders and RabbitMQ sender it’s required to add annotations in your source code.
+                    </p>
+                    <pre>
+                        <legend>For JMS :</legend>
+                        <code [languages]="['java']" [highlight]="sourceCode['info_queue_jms_sender']">                      
+                        </code>
+                    </pre>
+                    <pre>
+                        <legend>For RabbitMQ :</legend>
+                        <code [languages]="['java']" [highlight]="sourceCode['info_queue_rabbit_sender']">                      
+                        </code>
+                    </pre>
+                    <p>
+                        If you use multi-handler on RabbitLister you need to add an annotation specifying which routing key is in use :
+                    </p>
+                    <pre>
+                        <legend>For RabbitMQ :</legend>
+                        <code [languages]="['java']" [highlight]="sourceCode['info_queue_rabbit_handler']">                      
+                        </code>
+                    </pre>
+
+                    <p>
+                        All specific annotations are contained into an inugami artifact :
+                    </p>
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['gav_inugami-project-analysis-maven-plugin-annotations']">                      
+                        </code>
+                    </pre>
+                    <p aria-bloc="information">
+                        This artifact contains only annotations, nothing else.
+                    </p>
+
+                </doc-item>
+
+
+
+
+
+                <doc-item title="errorDisplay" [level]="3" href="inugami-project-analysis-maven-plugin#errorDisplay" id="errorDisplay">
+                    <p>
+                        Error management is essential to make better applications. Interteam communication is a must.
+                        Writing wiki is not our way, it’s time-consuming and quickly outdate. Inugami generates errors directly from code.
+                    </p>
+                    <pre>
+                        <code [languages]="['shell']" [highlight]="sourceCode['info_errorDisplay']"></code>
+                    </pre>
+
+                    <p>
+                        Per default Inugami plugin use the Inugami error interface to detect error code :
+                    </p>
+                    <pre>
+                        <code [languages]="['java']" [highlight]="sourceCode['errorCode']"></code>
+                    </pre>
+                    
+                    <p>
+                        This interface is present in inugami_api artifact :
+                    </p>
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['gav_inugami_api']"></code>
+                    </pre>
+                    <p>
+                        This interface can be used over enum types or on static class fields.
+                    </p>
+                    <pre>
+                        <code [languages]="['java']" [highlight]="sourceCode['errorCodeEnum']"></code>
+                    </pre>
+
+                    <p>
+                        You can found more information about inugami error management : 
+                        <a href="inugami/inugami_api#exception_management" target="_blank">here</a>
+                    </p>
+
+                    <p>
+                        You can define <strong>your error code interface</strong>, to do so just add a property in your pom.xml
+                    </p>
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['errorCode_override']"></code>
+                    </pre>
+                    <p>
+                        In this case the plugin will retrieve all values defined in your interface.
+                    </p>
+
+                    <div>
+                        <img src="/assets/analyze-neo4j-errorCode.png" alt="plugin display all project error codes information" />
+                    </div>
+                    
+
+                    <table class="properties">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>type</th>
+                                <th>default value</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>inugami.maven.plugin.analysis.analyzer.errorCode.interface</td>
+                                <td>String</td>
+                                <td>io.inugami.api.exceptions.ErrorCode</td>
+                                <td>The error code interface to use</td>
+                            </tr>
+                            <tr>
+                                <td>export</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>allow exporting results as CSV files</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </doc-item>
+
                </div>
            </article>
 

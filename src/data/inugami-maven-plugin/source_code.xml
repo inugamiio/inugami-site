@@ -34,6 +34,34 @@
 
 
 <!--*********************************************************************** 
+* gav_inugami-project-analysis-maven-plugin-annotations    
+***********************************************************************-->
+<src name="gav_inugami-project-analysis-maven-plugin-annotations">
+<![CDATA[
+<dependency>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin-annotations</artifactId>
+    <version>1.6.3</version>
+</dependency>
+]]>
+</src>
+
+
+<!--*********************************************************************** 
+* gav_inugami-project-analysis-maven-plugin-annotations    
+***********************************************************************-->
+<src name="gav_inugami_api">
+<![CDATA[
+<dependencies>
+    <groupId>io.inugami</groupId>
+    <artifactId>inugami_api</artifactId>
+    <version>2.1.0</version>
+</dependencies>
+]]>
+</src>
+
+
+<!--*********************************************************************** 
 * docker_compose    
 ***********************************************************************-->
 <src name="docker_compose">
@@ -104,6 +132,234 @@ CREATE INDEX ON :Author(name, uid,email);
 ]]>
 </src>
     
+
+<!--*********************************************************************** 
+* neo4j_structure
+***********************************************************************-->
+<src name="neo4j_structure">
+<![CDATA[
+CALL db.schema.visualization
+]]>
+</src>
+    
+<!--*********************************************************************** 
+* info_restServices
+***********************************************************************-->
+<src name="info_restServices">
+<![CDATA[
+mvn info -Daction=restServices
+]]>
+</src>
+        
+<!--*********************************************************************** 
+* info_queryDisplay
+***********************************************************************-->
+<src name="info_queryDisplay">
+<![CDATA[
+mvn info -Daction=queryDisplay
+]]>
+</src>
+
+<!--*********************************************************************** 
+* info_search_services_rest
+***********************************************************************-->
+<src name="info_search_services_rest">
+<![CDATA[
+mvn info -Daction=queryDisplay -Dquery=search_services_rest
+]]>
+</src>
+
+<!--*********************************************************************** 
+* info_search_error_codes
+***********************************************************************-->
+<src name="info_search_error_codes">
+<![CDATA[
+mvn info -Daction=queryDisplay -Dquery=search_error_codes
+]]>
+</src>
+
+
+
+<!--*********************************************************************** 
+* info_queueInfo
+***********************************************************************-->
+<src name="info_queueInfo">
+<![CDATA[
+mvn info -Daction=queueInfo
+]]>
+</src>
+    
+
+<!--*********************************************************************** 
+* info_queue_jms_sender
+***********************************************************************-->
+<src name="info_queue_jms_sender">
+<![CDATA[
+@JmsSender(destination = "${my.activeMq.onUserCreated.queue}", id = "create.user.queue")
+public void sendCreateUser(final String someParameter, @JmsEvent final User user) {
+    // process sending event
+}
+]]>
+</src>
+
+<!--*********************************************************************** 
+* info_queue_rabbit_sender
+***********************************************************************-->
+<src name="info_queue_rabbit_sender">
+<![CDATA[
+@RabbitMqSender(echangeName = "${events.exchangeName}",
+                queue = "${events.method.user.queueName}",
+                routingKey = "${events.user.method.created.routingKey}"
+)
+public void fireEvent(@RabbitMqEvent  final UserCreatedEvent event) {
+    // process sending event
+}
+]]>
+</src>
+
+
+<!--*********************************************************************** 
+* info_queue_rabbit_handler
+***********************************************************************-->
+<src name="info_queue_rabbit_handler">
+<![CDATA[
+@RabbitMqHandlerInfo(routingKey = "${events.user.authenticated.routingKey}",
+typeId = "${events.user.authenticated.typeId}")
+@RabbitHandler
+public void onAuthenticated(final UserAuthenticatedEvent event) {
+    // process listen
+}
+]]>
+</src>
+
+
+
+<!--*********************************************************************** 
+* info_errorDisplay
+***********************************************************************-->
+<src name="info_errorDisplay">
+<![CDATA[
+mvn info -Daction=errorDisplay
+]]>
+</src>
+    
+<src name="errorCode">
+    <![CDATA[
+    package io.inugami.api.exceptions;
+    public interface ErrorCode {
+    
+    
+        public ErrorCode getCurrentErrorCode();
+    
+        default int getStatusCode() {
+            return getCurrentErrorCode() == null ? 500 : getCurrentErrorCode().getStatusCode();
+        }
+    
+    
+        default String getErrorCode() {
+            return getCurrentErrorCode() == null ? "undefine" : getCurrentErrorCode().getErrorCode();
+        }
+    
+    
+        default String getMessage() {
+            return getCurrentErrorCode() == null ? "error" : getCurrentErrorCode().getMessage();
+        }
+    
+    
+        default String getMessageDetail() {
+            return getCurrentErrorCode() == null ? null : getCurrentErrorCode().getMessageDetail();
+        }
+    
+        default boolean isExploitationError() {
+            return getCurrentErrorCode() == null ? false : getCurrentErrorCode().isExploitationError();
+        }
+    
+        default String getErrorType() {
+            return getCurrentErrorCode() == null ? "technical" : getCurrentErrorCode().getErrorType();
+        }
+    
+    
+        default String getPayload() {
+            return getCurrentErrorCode() == null ? null : getCurrentErrorCode().getPayload();
+        }
+    
+    
+        default boolean isRollbackRequire() {
+            return getCurrentErrorCode() == null ? false : getCurrentErrorCode().isRollbackRequire();
+        }
+    
+        default boolean isRetryable() {
+            return getCurrentErrorCode() == null ? false : getCurrentErrorCode().isRetryable();
+        }
+    
+        default BiConsumer<String, Exception> getErrorHandler() {
+            return getCurrentErrorCode() == null ? null : getCurrentErrorCode().getErrorHandler();
+        }
+    
+        default ErrorCode addDetail(String detail, Object... values) {
+            return toBuilder().addMessageDetail(detail, values).build();
+        }
+        
+        default String getCategory() {
+            return getCurrentErrorCode() == null ? null : getCurrentErrorCode().getCategory();
+        }
+    
+    
+        default DefaultErrorCode.DefaultErrorCodeBuilder toBuilder() {
+            DefaultErrorCode.DefaultErrorCodeBuilder builder = null;
+            if (getCurrentErrorCode() == null) {
+                builder = DefaultErrorCode.fromErrorCode(DefaultErrorCode.buildUndefineError());
+            }
+            else {
+                builder = DefaultErrorCode.fromErrorCode(getCurrentErrorCode());
+            }
+            return builder;
+        }
+    }
+    ]]>
+</src>
+    
+    
+<src name="errorCodeEnum">
+<![CDATA[
+public enum IssuesError implements ErrorCode {
+
+    ISSUES_1(newBuilder()
+            .setStatusCode(400)
+            .setMessage("issues request invalid")
+            .setErrorType("input")),
+
+    ISSUES_1_1(newBuilder()
+            .setStatusCode(400)
+            .setMessage("issue uid is mandatory")
+            .setFonctionnalError());
+
+    private final ErrorCode errorCode;
+
+    private IssuesError(final ErrorCodeBuilder errorBuilder) {
+        errorCode = errorBuilder.setErrorCode(this.name()).build();
+    }
+
+    @Override
+    public ErrorCode getCurrentErrorCode() {
+        return errorCode;
+    }
+}
+]]>
+</src>
+
+
+<src name="errorCode_override">
+<![CDATA[
+<properties>
+    <inugami.maven.plugin.analysis.analyzer.errorCode.interface>
+        you.project.ErrorCode
+    </inugami.maven.plugin.analysis.analyzer.errorCode.interface>
+</properties>
+]]>
+</src>
+
+
 
 <!--*********************************************************************** 
 * maven_pom_properties    

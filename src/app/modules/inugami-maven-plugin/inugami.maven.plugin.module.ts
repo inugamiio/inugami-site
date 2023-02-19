@@ -6,7 +6,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import {RouterModule} from '@angular/router';
 import { NgModule } from '@angular/core';
 import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
-
+import { CommonsModule } from '../commons/commons.module';
 import { InugamiProjectAnalysisView } from './views/inugami.project.analysis';
 import { InugamiPluginToc } from './components/inugami_plugin_toc/inugami.plugin.toc';
 import { InugamiPluginAsideMenu } from './components/inugami_plugin_aside_menu/inugami.plugin.aside.menu';
@@ -24,7 +24,8 @@ import { InugamiPluginAsideMenu } from './components/inugami_plugin_aside_menu/i
         FormsModule,
         ReactiveFormsModule,
         HighlightModule,
-        RouterModule
+        RouterModule,
+        CommonsModule
     ],
     exports: [
         
