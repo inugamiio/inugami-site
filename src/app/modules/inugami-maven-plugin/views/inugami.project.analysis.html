@@ -258,7 +258,7 @@
                 </doc-item>
 
 
-                <doc-item title="queueInfo" [level]="3" href="inugami-project-analysis-maven-plugin#queueInfo" id="queueInfo">
+                <doc-item title="Queue information" [level]="3" href="inugami-project-analysis-maven-plugin#queueInfo" id="queueInfo">
                     <p>
                         Queue information have the same approach as restServices but for JMS and RabbitMQ. 
                         It’s able to detect producers and listeners, tracing event payload and all information on queue binding.
@@ -313,7 +313,7 @@
 
 
 
-                <doc-item title="errorDisplay" [level]="3" href="inugami-project-analysis-maven-plugin#errorDisplay" id="errorDisplay">
+                <doc-item title="Error display" [level]="3" href="inugami-project-analysis-maven-plugin#errorDisplay" id="errorDisplay">
                     <p>
                         Error management is essential to make better applications. Interteam communication is a must.
                         Writing wiki is not our way, it’s time-consuming and quickly outdate. Inugami generates errors directly from code.
@@ -389,6 +389,37 @@
                     </table>
                 </doc-item>
 
+
+
+
+                <doc-item title="Specifics queries" [level]="3" href="inugami-project-analysis-maven-plugin#specifics_queries" id="specifics_queries">
+                </doc-item>
+
+                <doc-item title="importData" [level]="3" href="inugami-project-analysis-maven-plugin#importData" id="importData">
+                </doc-item>
+
+
+
+
+                <doc-item title="Deployment management" [level]="3" href="inugami-project-analysis-maven-plugin#deployment_management" id="deployment_management">
+                
+                    <doc-item title="publish" [level]="4" href="inugami-project-analysis-maven-plugin#publish" id="publish">
+                    </doc-item>
+
+                    <doc-item title="unpublish" [level]="4" href="inugami-project-analysis-maven-plugin#unpublish" id="unpublish">
+                    </doc-item>
+
+                    <doc-item title="versionEnv" [level]="4" href="inugami-project-analysis-maven-plugin#versionEnv" id="versionEnv">
+                    </doc-item>
+
+                    <doc-item title="envInfo" [level]="4" href="inugami-project-analysis-maven-plugin#envInfo" id="envInfo">
+                    </doc-item>
+                </doc-item>
+
+
+                <doc-item title="encodePassword" [level]="3" href="inugami-project-analysis-maven-plugin#encodePassword" id="encodePassword">
+                </doc-item>
+
                </div>
            </article>
 
@@ -404,12 +435,55 @@
               </header>
 
               <div class="content">
+
+                <doc-item title="Feign clients" [level]="3" href="inugami-project-analysis-maven-plugin#feign_clients" id="feign_clients">
+                </doc-item>
+
+                <doc-item title="SpringBoot RestControllers" [level]="3" href="inugami-project-analysis-maven-plugin#springboot_restcontrollers" id="springboot_restcontrollers">
+                </doc-item>
+
+                <doc-item title="Spring properties" [level]="3" href="inugami-project-analysis-maven-plugin#spring_properties" id="spring_properties">
+                </doc-item>
+
+                <doc-item title="ActiveMQ" [level]="3" href="inugami-project-analysis-maven-plugin#activemq" id="activemq">
+                </doc-item>
+
+                <doc-item title="Error code" [level]="3" href="inugami-project-analysis-maven-plugin#error_code_analyzer" id="error_code_analyzer">
+                </doc-item>
+
+                <doc-item title="Flyway" [level]="3" href="inugami-project-analysis-maven-plugin#flyway" id="flyway">
+                </doc-item>
+
+                <doc-item title="Git SCM" [level]="3" href="inugami-project-analysis-maven-plugin#git_scm" id="git_scm">
+                </doc-item>
+
+                <doc-item title="Issue Management" [level]="3" href="inugami-project-analysis-maven-plugin#issue_management" id="issue_management">
+                    <doc-item title="For GitLab" [level]="4" href="inugami-project-analysis-maven-plugin#issue_gitlab" id="issue_gitlab">
+                    </doc-item>
+
+                    <doc-item title="For GitHub" [level]="4" href="inugami-project-analysis-maven-plugin#issue_github" id="issue_github">
+                    </doc-item>
+
+                    <doc-item title="For Jira" [level]="4" href="inugami-project-analysis-maven-plugin#issue_jira" id="issue_jira">
+                    </doc-item>
+                </doc-item>
+
                 
+
               </div>
           </article>
 
 
-             
+  
+
+        <!--****************************************************************************************
+        ** analyzers
+        ****************************************************************************************-->
+        <article>
+            <header>
+                <a href="inugami-project-analysis-maven-plugin#release_note"><h2 id="release_note">ReleaseNote</h2></a>
+            </header>
+        </article>
 
           <!--****************************************************************************************
          ** springboot_integration
@@ -421,15 +495,25 @@
 
              <div class="content">
                
-
-                <iframe #video
+                <doc-item title="ReleaseNote UI" [level]="3" href="inugami-project-analysis-maven-plugin#release_note_ui" id="release_note_ui">
+                
+                    <iframe #video
                         width="560"
                         height="315"
                         src="https://www.youtube.com/embed/dJlF4RYd4eI"
                         title="YouTube video player"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
-                </iframe>
+                    </iframe>
+
+                </doc-item>
+
+
+                <doc-item title="Update & ban dependencies" [level]="3" href="inugami-project-analysis-maven-plugin#update_ban_dependencies" id="update_ban_dependencies">
+                
+
+                </doc-item>
+                
              </div>
          </article>
 
@@ -445,7 +529,79 @@
             </header>
 
             <div class="content">
-              
+                <doc-item title="mkdirs" [level]="3" href="inugami-project-analysis-maven-plugin#other_mkdirs" id="other_mkdirs">
+                
+
+                </doc-item>
+
+
+                <doc-item title="delete" [level]="3" href="inugami-project-analysis-maven-plugin#other_delete" id="other_delete">
+                
+
+                </doc-item>
+
+
+                <doc-item title="Load properties" [level]="3" href="inugami-project-analysis-maven-plugin#other_loadProperties" id="other_loadProperties">
+                
+
+                    <doc-item title="Global properties" [level]="4" href="inugami-project-analysis-maven-plugin#other_loadProperties_globalproperties" id="other_loadProperties_globalproperties">
+                
+
+                    </doc-item>
+
+
+                    <doc-item title="Local file properties" [level]="4" href="inugami-project-analysis-maven-plugin#other_loadProperties_fileproperties" id="other_loadProperties_fileproperties">
+                
+
+                    </doc-item>
+
+
+                    <doc-item title="Properties convertors" [level]="4" href="inugami-project-analysis-maven-plugin#other_loadProperties_convertor" id="other_loadProperties_convertor">
+                
+
+                    </doc-item>
+
+
+                    <doc-item title="External URL properties" [level]="4" href="inugami-project-analysis-maven-plugin#other_loadProperties_external_url" id="other_loadProperties_external_url">
+                
+
+                    </doc-item>
+
+                </doc-item>
+
+
+
+                <doc-item title="writeFile" [level]="3" href="inugami-project-analysis-maven-plugin#other_writeFile" id="other_writeFile">
+                
+
+                </doc-item>
+
+
+                <doc-item title="copy" [level]="3" href="inugami-project-analysis-maven-plugin#other_copy" id="other_copy">
+                
+                    <doc-item title="copy simple file" [level]="4" href="inugami-project-analysis-maven-plugin#other_copy_file" id="other_copy_file">
+                
+
+                    </doc-item>
+
+                    <doc-item title="copy folder" [level]="4" href="inugami-project-analysis-maven-plugin#other_copy_folder" id="other_copy_folder">
+                
+
+                    </doc-item>
+
+                    <doc-item title="maven dependencies" [level]="4" href="inugami-project-analysis-maven-plugin#other_copy_maven_dependencies" id="other_copy_maven_dependencies">
+                
+
+                    </doc-item>
+                </doc-item>
+
+
+
+                <doc-item title="unpack" [level]="3" href="inugami-project-analysis-maven-plugin#other_unpack" id="other_unpack">
+                
+
+                </doc-item>
+
             </div>
         </article>
 
