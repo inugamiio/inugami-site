@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GoogleAnalyticsService } from 'ngx-google-analytics';
 import { HttpServices } from '../../commons/services/http.services';
 import { InugamiAsideMenu } from '../components/inugami-aside-menu/inugami.aside.menu';
 import { cleanContent } from '../../commons/services/string.tools';
@@ -18,9 +19,11 @@ export class InugamiApiView  implements  OnInit {
     /**************************************************************************
     * CONSTRUCTORS
     **************************************************************************/
-    constructor(private httpService : HttpServices) {
+    constructor(private httpService : HttpServices,
+        private googleAnalytics:GoogleAnalyticsService) {
     }
     ngOnInit(): void {
+        this.googleAnalytics.pageView("/inugami/inugami_api");
         this.httpService.getSourceCode("data/inugami_api/source_code.xml").then(data=> this.initData(data));
     }
   
