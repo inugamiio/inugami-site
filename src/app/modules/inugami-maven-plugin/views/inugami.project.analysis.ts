@@ -11,9 +11,10 @@ export class InugamiProjectAnalysisView  implements  OnInit {
     /**************************************************************************
     * ATTRIBUTES
     **************************************************************************/
-     public sourceCode : any = {};
-     
-
+    public sourceCode : any = {};
+    public folderName : string = "{{folder name}}";
+    public issueManagementUrl : string = "${issueManagement.url}"
+    public linkedHashMapStringSerializable: string = "LinkedHashMap<String, Serializable>";
     /**************************************************************************
     * CONSTRUCTORS
     **************************************************************************/

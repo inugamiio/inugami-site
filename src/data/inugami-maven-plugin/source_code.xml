@@ -411,4 +411,213 @@ mvn analyze
     mvn info
 ]]>
 </src>
+
+<!--*********************************************************************** 
+* mvn_info_specificsQuery    
+***********************************************************************-->
+<src name="mvn_info_specificsQuery">
+    <![CDATA[
+mvn info -Daction=specificsQuery -Dexport=true
+]]>
+</src>
+
+<!--*********************************************************************** 
+* mvn_info_specificsQuery    
+***********************************************************************-->
+<src name="mvn_info_importData">
+    <![CDATA[
+mvn info -Daction=importData
+]]>
+</src>
+
+<src name="mvn_info_importData_example">
+    <![CDATA[
+{
+    "nodes": [
+        {
+        "type": "String",
+        "uid": "String",
+        "name": "String",
+        "properties": {
+            "<String>": "Serializable",
+            "<String>": 42
+        }
+        }
+    ],
+    "nodesToDeletes": ["String"],
+    "createScripts" : ["String(Cypher)"],
+    "relationships": [
+        {
+        "from": "String",
+        "to": "String",
+        "type": "String",
+        "properties": {
+            "<String>": "Serializable"
+        }
+        }
+    ],
+    "relationshipsToDeletes": [
+        {
+        "from": "String",
+        "to": "String",
+        "type": "String",
+        "properties": {
+            "<String>": "Serializable"
+        }
+        }
+    ],
+    "deleteScripts": ["String(Cypher)"]
+    }
+]]>
+</src>
+
+<!--*********************************************************************** 
+* mvn_info_publish    
+***********************************************************************-->
+<src name="mvn_info_publish">
+    <![CDATA[
+mvn info -Daction=publish
+]]>
+</src>
+
+<!--*********************************************************************** 
+* mvn_info_unpublish    
+***********************************************************************-->
+<src name="mvn_info_unpublish">
+    <![CDATA[
+mvn info -Daction=unpublish
+]]>
+</src>
+
+
+<!--*********************************************************************** 
+* mvn_info_versionEnv    
+***********************************************************************-->
+<src name="mvn_info_versionEnv">
+    <![CDATA[
+mvn info -Daction=versionEnv
+]]>
+</src>
+
+
+<!--*********************************************************************** 
+* mvn_info_envInfo    
+***********************************************************************-->
+<src name="mvn_info_envInfo">
+    <![CDATA[
+mvn info -Daction=envInfo
+]]>
+</src>
+
+
+<!--*********************************************************************** 
+* mvn_info_encodePassword    
+***********************************************************************-->
+<src name="mvn_info_encodePassword">
+    <![CDATA[
+mvn info -Daction=encodePassword
+]]>
+</src>
+
+
+
+<!--*********************************************************************** 
+* mvn_info_releaseNote    
+***********************************************************************-->
+<src name="mvn_info_releaseNote">
+    <![CDATA[
+mvn info -Daction=releaseNote -PpreviousVersion={previousVersion}
+]]>
+</src>
+
+<!--*********************************************************************** 
+* mvn_info_issue_gitlab    
+***********************************************************************-->
+<src name="mvn_info_issue_gitlab">
+    <![CDATA[
+<issueManagement>
+    <system>gitlab</system>
+    <url>https://gitlab.com/api/v4/projects/123457890</url>
+</issueManagement>
+]]>
+</src>
+
+<!--*********************************************************************** 
+* mvn_info_issue_github    
+***********************************************************************-->
+<src name="mvn_info_issue_github">
+    <![CDATA[
+<issueManagement>
+    <system>github</system>
+    <url>https://api.github.com/repos/inugamiio/inugami-project-analysis-maven-plugin-parent</url>
+</issueManagement>
+]]>
+</src>
+
+<!--*********************************************************************** 
+* mvn_info_issue_jira    
+***********************************************************************-->
+<src name="mvn_info_issue_jira">
+    <![CDATA[
+<issueManagement>
+    <system>jira</system>
+    <url>https://jira.url</url>
+</issueManagement>
+]]>
+</src>
+
+<src name="mvn_info_issue_jira_settings">
+    <![CDATA[
+<servers>
+    <server>
+        <id>gitlab</id>
+        <privateKey>{MIAuTFbZUxsHC0aBub3Frxr1d/kik/yafcVYW6KDzqU=}</privateKey>
+    </server>
+
+    <server>
+        <id>github</id>
+        <privateKey>{s5Ydy14rYAwHekKyJxAYAFnFO6igA9/lykiQCT+ct8U=}</privateKey>
+    </server>
+
+    <server>
+        <id>jira</id>
+        <username>{1Jur5y14rYAwHekKyJxAYAFnFO6igA9/lyki+ct8U=}</username>
+        <password>{s5Ydy14rYAwHekKyJxAYAFnFO6igA9/lykiQCT+ct8U=}</password>
+    </server>
+</servers>
+]]>
+</src>
+
+
+<src name="mvn_info_issue_jira_custom_fields">
+    <![CDATA[
+public interface JiraCustomFieldsAppender {
+    void append(String issueId,
+                JsonNode json,
+                LinkedHashMap<String, Serializable> issueProperties,
+                ScanNeo4jResult neo4jResult);
+}
+]]>
+</src>
+<src name="mvn_info_issue_jira_custom_fields_spi">
+    <![CDATA[
+io.app.JiraCustomFieldExtractor
+]]>
+</src>
+
+<src name="mvn_info_issue_jira_custom_fields_spi_impl">
+    <![CDATA[
+package io.app;
+
+public class JiraCustomFieldExtractor implements JiraCustomFieldsAppender {
+    public void append(String issueId,
+                JsonNode json,
+                LinkedHashMap<String, Serializable> issueProperties,
+                ScanNeo4jResult neo4jResult){
+        // implementation
+    }
+}
+]]>
+</src>
+
 </xml>

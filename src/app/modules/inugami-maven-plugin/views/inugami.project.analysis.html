@@ -377,7 +377,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr class="odd">
                                 <td>inugami.maven.plugin.analysis.analyzer.errorCode.interface</td>
                                 <td>String</td>
                                 <td>io.inugami.api.exceptions.ErrorCode</td>
@@ -390,7 +390,6 @@
                                 <td>allow exporting results as CSV files</td>
                             </tr>
                         </tbody>
-
                     </table>
                 </doc-item>
 
@@ -398,31 +397,310 @@
 
 
                 <doc-item title="Specifics queries" [level]="3" href="inugami-project-analysis-maven-plugin#specifics_queries" id="specifics_queries">
+                    The plugin is able to retrieve information from Neo4J and display them. If you need to execute a specific cypher query is possible to use this plugin to do that.
+                    <pre>
+                        <code [languages]="['bash']" [highlight]="sourceCode['mvn_info_specificsQuery']"></code>
+                    </pre>
+
+                    <table class="properties">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>type</th>
+                                <th>default value</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td>-Dinugami.query.path</td>
+                                <td>String</td>
+                                <td>null</td>
+                                <td>Path to cypher query, if isn’t define the plugin will ask for this one in prompt.</td>
+                            </tr>
+                            <tr>
+                                <td>-Dinugami.skip.properties</td>
+                                <td>String (Regex Pattern)</td>
+                                <td>null</td>
+                                <td>for not display some nodes properties</td>
+                            </tr>
+                            <tr class="odd">
+                                <td>-Dexport</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td>Allow to export result as CSV file</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </doc-item>
 
                 <doc-item title="importData" [level]="3" href="inugami-project-analysis-maven-plugin#importData" id="importData">
+                    <p>
+                        To import some data into Neo4J it’s possible to call the importData action. This action is able to execute a cypher query or to import a JSON model.
+                    </p>
+                    
+                    <p>
+                        For both it’s required to specify the property <strong>inugami.query.path</strong> to define the import script path
+                    </p>
+                    <pre>
+                        <code [languages]="['bash']" [highlight]="sourceCode['mvn_info_importData']"></code>
+                    </pre>
+                    <p>
+                        For cypher query is just a basic .cql script. This one must juste have for extension .cql.
+                        Neo4j has great documentation on cypher language : <a href="https://neo4j.com/docs/cypher-manual/current/" target="_blank">https://neo4j.com/docs/cypher-manual/current/</a>
+                    </p>
+
+                    <p>
+                        For the JSON model, is the internal plugin model as JSON :
+                    </p>
+                    <pre>
+                        <code [languages]="['json']" [highlight]="sourceCode['mvn_info_importData_example']"></code>
+                    </pre>
+                    <table class="properties">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>type</th>
+                                <th>default value</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td>-Dinugami.query.path</td>
+                                <td>String</td>
+                                <td>null</td>
+                                <td>Path to cypher or JSON import script query, if it’s not defined the plugin will prompt for a value.</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </doc-item>
 
 
 
 
                 <doc-item title="Deployment management" [level]="3" href="inugami-project-analysis-maven-plugin#deployment_management" id="deployment_management">
-                
+                    <p>
+                        Microservices complicate the deployment process. It’s very important to know which microservice is on which environment.
+                    </p>
                     <doc-item title="publish" [level]="4" href="inugami-project-analysis-maven-plugin#publish" id="publish">
+                        <p>
+                            You need to pass some additional information to Neo4J to detect which artifact is on wich environment. 
+                            The easiest way is to use the "publish action".
+                        </p>
+                        <pre>
+                            <code [languages]="['bash']" [highlight]="sourceCode['mvn_info_publish']"></code>
+                        </pre>
+                        <div>
+                            <img src="/assets/publish-01.png" alt="plugin publishing" />
+                        </div>
+                        <div>
+                            <img src="/assets/publish-02.png" alt="nodes after publishing" />
+                        </div>
+                        <p>
+                            On DEPLOY we can see that the plugin has added the deployment date (on ISO date and timestamp, both are on system time zone and on UTC).
+                            Additional configuration
+                        </p>
+                        <table class="properties">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>type</th>
+                                    <th>default value</th>
+                                    <th>description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd">
+                                    <td>-DuseMavenProject</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Allow using current project GAV, if null the plugin will prompt for a value.</td>
+                                </tr>
+                                <tr>
+                                    <td>-Denv</td>
+                                    <td>String</td>
+                                    <td>null</td>
+                                    <td>Destination environment, if null the plugin will prompt for a value.</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td>-DenvLevel</td>
+                                    <td>int</td>
+                                    <td>0</td>
+                                    <td>To sort environments it’s necessary to add weight, if null the plugin will prompt for a value.</td>
+                                </tr>
+                                <tr>
+                                    <td>-DenvType</td>
+                                    <td>String</td>
+                                    <td>null</td>
+                                    <td>The environment type (like DEV, INT, PREP, PROD..), if null the plugin will prompt for a value.</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td>-DautoUnpublish</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Allow remove relationship between an artifact and an environment node</td>
+                                </tr>
+                                <tr>
+                                    <td>-DjustThisVersion</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>If you want to clean all version relationship between an artifact and an environment node</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td>-DpreviousEnv</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>For cleaning previous staging environment, this value will be prompted if not defined on an enabled autoPublish.</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </doc-item>
 
                     <doc-item title="unpublish" [level]="4" href="inugami-project-analysis-maven-plugin#unpublish" id="unpublish">
+                        <p>
+                            It’s very closer than publish but in this action we will remove deployments relationship on a specific version and an environment.
+                        </p>
+                        <pre>
+                            <code [languages]="['bash']" [highlight]="sourceCode['mvn_info_unpublish']"></code>
+                        </pre>
+                        <table class="properties">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>type</th>
+                                    <th>default value</th>
+                                    <th>description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd">
+                                    <td>-DuseMavenProject</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Allow using current project GAV and not ask for this information</td>
+                                </tr>
+                                <tr>
+                                    <td>-Denv</td>
+                                    <td>String</td>
+                                    <td>null</td>
+                                    <td>Destination environment, if null the plugin will prompt for a value.</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td>-DenvLevel</td>
+                                    <td>int</td>
+                                    <td>0</td>
+                                    <td>To sort environments it’s necessary to add weight, if null the plugin will prompt for a value.</td>
+                                </tr>
+                                <tr>
+                                    <td>-DenvType</td>
+                                    <td>String</td>
+                                    <td>null</td>
+                                    <td>The environment type (like DEV, INT, PREP, PROD..), if null the plugin will prompt for a value.</td>
+                                </tr>
+                                <tr class="odd">
+                                    <td>-DjustThisVersion</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>If you want to clean all version relationship between an artifact and an environment node</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </doc-item>
 
                     <doc-item title="versionEnv" [level]="4" href="inugami-project-analysis-maven-plugin#versionEnv" id="versionEnv">
+                        <p>
+                            The action versionEnv is able to verify if your project have all dependencies available on all environments.
+                        </p>
+                        <pre>
+                            <code [languages]="['bash']" [highlight]="sourceCode['mvn_info_versionEnv']"></code>
+                        </pre>
+                        <p>
+                            In this example, the project project-consumer is using a REST endpoint produced
+                            by spring-boot-training-lifecycle. PREP_2 is not deployed.
+                            The service project project-consumer can’t work correctly on this environment.
+                        </p>
+                        
+                        <p>
+                            Also, this project use a REST endpoint <strong>[GET]/comments/comments</strong> but no producer have been detected
+                        </p>
+
+                        <div>
+                            <img src="/assets/versionEnv.png" alt="REST services deployed on environments" />
+                        </div>
+                        <table class="properties">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>type</th>
+                                    <th>default value</th>
+                                    <th>description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd">
+                                    <td>-Dexport</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Allow exporting result as CSV file</td>
+                                </tr>
+                                <tr>
+                                    <td>-DuseMavenProject</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Allow using current project GAV and not ask for this information</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        
                     </doc-item>
 
                     <doc-item title="envInfo" [level]="4" href="inugami-project-analysis-maven-plugin#envInfo" id="envInfo">
+                        <p>
+                            This action is a quick representation of an environment deployment status. It’s able to retrieve which artifacts are present on which environments.
+                        </p>
+                        <pre>
+                            <code [languages]="['bash']" [highlight]="sourceCode['mvn_info_envInfo']"></code>
+                        </pre>
+
+                        <div>
+                            <img src="/assets/envInfo.png" alt="application deployed on environments" />
+                        </div>
+                        <table class="properties">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>type</th>
+                                    <th>default value</th>
+                                    <th>description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd">
+                                    <td>-Dexport</td>
+                                    <td>boolean</td>
+                                    <td>false</td>
+                                    <td>Allow exporting result as CSV file</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </doc-item>
                 </doc-item>
 
 
                 <doc-item title="encodePassword" [level]="3" href="inugami-project-analysis-maven-plugin#encodePassword" id="encodePassword">
+                    <p>
+                        This action is just a small tool to encode a password or sensible value in AES.
+                    </p>
+
+                    <pre>
+                        <code [languages]="['bash']" [highlight]="sourceCode['mvn_info_encodePassword']"></code>
+                    </pre>
+
+                    <div>
+                        <img src="/assets/password.png" alt="encoding password" />
+                    </div>
+                    
                 </doc-item>
 
                </div>
@@ -442,34 +720,352 @@
               <div class="content">
 
                 <doc-item title="Feign clients" [level]="3" href="inugami-project-analysis-maven-plugin#feign_clients" id="feign_clients">
+                    <p>
+                        Feign clients analyzer scan all feign client interface to resolve project consuming REST endpoints.
+                    </p>
+                    <table class="properties">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>type</th>
+                                <th>default value</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td>inugami.maven.plugin.analysis.analyzer.feign.enable</td>
+                                <td>boolean</td>
+                                <td>false</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>inugami.maven.plugin.analysis.analyzer.restControllers.strict</td>
+                                <td>boolean</td>
+                                <td>true</td>
+                                <td>if this mode isn’t enable, only mandatory fields in models have been used for identify REST endpoint</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </doc-item>
 
                 <doc-item title="SpringBoot RestControllers" [level]="3" href="inugami-project-analysis-maven-plugin#springboot_restcontrollers" id="springboot_restcontrollers">
+
+                    <table class="properties">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>type</th>
+                                <th>default value</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td>inugami.maven.plugin.analysis.analyzer.feign.enable</td>
+                                <td>boolean</td>
+                                <td>true</td>
+                                <td>Allow to disable feign client analyzer</td>
+                            </tr>
+                            <tr>
+                                <td>inugami.maven.plugin.analysis.analyzer.restControllers.strict</td>
+                                <td>boolean</td>
+                                <td>true</td>
+                                <td>if this mode isn’t enable, only mandatory fields in models have been used for identify REST endpoint</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </doc-item>
 
                 <doc-item title="Spring properties" [level]="3" href="inugami-project-analysis-maven-plugin#spring_properties" id="spring_properties">
+                    <p>
+                        Bad properties configuration is the source of most problems on a spring project.
+                        This analyzer scan all properties injected by @Value annotation or Bean configuration definition.
+                    </p>
+                    <table class="properties">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>type</th>
+                                <th>default value</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td>inugami.maven.plugin.analysis.analyzer.properties.enable</td>
+                                <td>boolean</td>
+                                <td>true</td>
+                                <td>Allow disabling properties analyzer</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </doc-item>
 
                 <doc-item title="ActiveMQ" [level]="3" href="inugami-project-analysis-maven-plugin#activemq" id="activemq">
+                    <p>
+                        To resolve activeMQ consumers and listeners, this analyzer is scanning all Spring @JmsListener annotation.
+                    </p>
+                    <table class="properties">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>type</th>
+                                <th>default value</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td>inugami.maven.plugin.analysis.analyzer.jms.enable</td>
+                                <td>boolean</td>
+                                <td>true</td>
+                                <td>Allow disabling activeMQ client analyzer</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </doc-item>
 
                 <doc-item title="Error code" [level]="3" href="inugami-project-analysis-maven-plugin#error_code_analyzer" id="error_code_analyzer">
+                    <p>
+                        To resolve all application error codes.
+                    </p>
+                    <table class="properties">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>type</th>
+                                <th>default value</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td>inugami.maven.plugin.analysis.analyzer.errorCode.enable</td>
+                                <td>boolean</td>
+                                <td>true</td>
+                                <td>Allow disabling error code analyzer</td>
+                            </tr>
+                            <tr>
+                                <td>inugami.maven.plugin.analysis.analyzer.errorCode.interface</td>
+                                <td>String</td>
+                                <td>io.inugami.api.exceptions.ErrorCode</td>
+                                <td>Allow to specify the error code interface, configured by default with inugami error code interface</td>
+                            </tr>
+                            <tr class="odd">
+                                <td>inugami.maven.plugin.analysis.analyzer.errorCode.fieldName</td>
+                                <td>String</td>
+                                <td>errorCode</td>
+                                <td>Allow to override the default error code "field". The method defined in error code interface resolves this field. Accessor prefix is ignored</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </doc-item>
 
                 <doc-item title="Flyway" [level]="3" href="inugami-project-analysis-maven-plugin#flyway" id="flyway">
+                    <p>
+                        this analyze allow to reference all flyway script. In release note you will see all them as differential.
+                    </p>
+                    <table class="properties">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>type</th>
+                                <th>default value</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td>inugami.maven.plugin.analysis.analyzer.flyway.enabled</td>
+                                <td>boolean</td>
+                                <td>true</td>
+                                <td>Allow to enable or disable flyway analyzer</td>
+                            </tr>
+                            <tr>
+                                <td>inugami.maven.plugin.analysis.analyzer.flyway.paths</td>
+                                <td>String (path)</td>
+                                <td>null</td>
+                                <td>To define all root folders who contains flyway scripts. Semicolon is use for split each path</td>
+                            </tr>
+                            <tr class="odd">
+                                <td>inugami.maven.plugin.analysis.analyzer.flyway.defaultDb</td>
+                                <td>String</td>
+                                <td>{{folderName}}</td>
+                                <td>Allow force default Database name</td>
+                            </tr>
+                            <tr>
+                                <td>inugami.maven.plugin.analysis.analyzer.flyway.scriptTypes</td>
+                                <td>String</td>
+                                <td>sql</td>
+                                <td>Allow to define scripts type</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </doc-item>
 
                 <doc-item title="Git SCM" [level]="3" href="inugami-project-analysis-maven-plugin#git_scm" id="git_scm">
+                    <p>
+                        Git scm analyzer allow to extract all commit since last project tag.
+                        If your project haven’t tag yet, this analyzer retrieve all commit since repository creation.
+                    </p>
+                    <p>
+                        After analyze, new nodes types appear :
+                    </p>
+                    <ul>
+                        <li>Scm, who contains all commit details</li>
+                        <li>MergeRequest, to retrace all merges requests on version.
+                            If you use feature branch, the specified issue will be retrieve
+                            too (for example with branch name <strong>feature/123_my_feature</strong>, issue 123 will be extracted).</li>
+                        <li>Issue</li>
+                        <li>Issue label</li>
+                    </ul>
+
+                    <div>
+                        <img src="/assets/git_scm.png"/>
+                    </div>
+                    <div>
+                        <img src="/assets/github_issues.png"/>
+                    </div>
+                    <div>
+                        <img src="/assets/github_merge_request.png"/>
+                    </div>
+                    <pre>
+                        <code [languages]="['bash']" [highlight]="sourceCode['mvn_info_releaseNote']"></code>
+                    </pre>
+                    <div>
+                        <img src="/assets/release_note_light.png"/>
+                    </div>
+                    <p>
+                        You can see on this example generated release-note as asciidoc : 
+                        <a href="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/blob/master/doc/release-note-example.adoc"
+                        target="_blank">release-note</a>
+                    </p>
+                
                 </doc-item>
 
                 <doc-item title="Issue Management" [level]="3" href="inugami-project-analysis-maven-plugin#issue_management" id="issue_management">
+                    <p>
+                        the Git scm analyzer will extract issues and merge request from commit message. On each it will
+                        call your issue management to retrieve more information on tickets.
+                    </p>
+                    <p>
+                        To enable this behavior it’s require to add <strong>issueManagement</strong> with link to SCM API in your pom.xml :
+                    </p>
                     <doc-item title="For GitLab" [level]="4" href="inugami-project-analysis-maven-plugin#issue_gitlab" id="issue_gitlab">
+
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['mvn_info_issue_gitlab']"></code>
+                        </pre>
                     </doc-item>
 
                     <doc-item title="For GitHub" [level]="4" href="inugami-project-analysis-maven-plugin#issue_github" id="issue_github">
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['mvn_info_issue_github']"></code>
+                        </pre>
                     </doc-item>
 
                     <doc-item title="For Jira" [level]="4" href="inugami-project-analysis-maven-plugin#issue_jira" id="issue_jira">
+
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['mvn_info_issue_jira']"></code>
+                        </pre>
+                        <p>All issue management need credentials to grant access on REST API. To configure these you will add server tag in your maven settings.xml</p>
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['mvn_info_issue_jira_settings']"></code>
+                        </pre>
+
+                        <p>
+                            It’s possible to encrypt your password with maven standard encryption mechanism (
+                                <a href="https://maven.apache.org/guides/mini/guide-encryption.html" target="_blank">https://maven.apache.org/guides/mini/guide-encryption.html</a> )
+                        <table class="properties">
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>type</th>
+                                    <th>default value</th>
+                                    <th>description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="odd">
+                                    <td>inugami.maven.plugin.analysis.git</td>
+                                    <td>boolean</td>
+                                    <td>true</td>
+                                    <td>Allow to enable git scanning and retrieve information from issues manager</td>
+                                </tr>
+                                <tr>
+                                    <td>inugami.maven.plugin.analysis.issue.tracker.pr.url</td>
+                                    <td>String</td>
+                                    <td>{{issueManagementUrl}}</td>
+                                    <td>If you use another repository to manage your project backlog,
+                                        <strong>issueManagement.url</strong> must be configure on it. But to trace merge
+                                        request you should define <strong>inugami.maven.plugin.analysis.issue.tracker.pr.url</strong> 
+                                        with the issue management of your source code repository</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <doc-item title="Jira custom fields" [level]="5" href="inugami-project-analysis-maven-plugin#issue_jira_custom_fields" id="issue_jira_custom_fields">
+                            <p>
+                                Jira allow to define custom fields on your issues. To extract these you can create a SPI implementation of 
+                                interface <strong>io.inugami.maven.plugin.analysis.api.scan.issue.tracker.JiraCustomFieldsAppender</strong>
+                            </p>
+                            <pre>
+                                <code [languages]="['java']" [highlight]="sourceCode['mvn_info_issue_jira_custom_fields']"></code>
+                            </pre>
+                            <table class="properties">
+                                <thead>
+                                    <tr>
+                                        <th>Property</th>
+                                        <th>type</th>
+                                        <th>description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd">
+                                        <td>issueId</td>
+                                        <td>String</td>
+                                        <td>Current issue uid</td>
+                                    </tr>
+                                    <tr>
+                                        <td>json</td>
+                                        <td>com.fasterxml.jackson.databind.JsonNode</td>
+                                        <td>Tree representation of current Json response.
+                                            For more information on Jira Rest API see 
+                                            <a href="https://docs.atlassian.com/software/jira/docs/api/REST/8.13.2/#api/2/issue-getIssue" target="_blank">
+                                                https://docs.atlassian.com/software/jira/docs/api/REST/8.13.2/#api/2/issue-getIssue
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <tr class="odd">
+                                        <td>issueProperties</td>
+                                        <td>{{linkedHashMapStringSerializable}}</td>
+                                        <td>Current properties</td>
+                                    </tr>
+                                    <tr>
+                                        <td>neo4jResult</td>
+                                        <td>io.inugami.maven.plugin.analysis.api.models.ScanNeo4jResult</td>
+                                        <td>Allow to create another nodes or relationships</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>
+                                Your implementation can be in classpath or linked on plugin dependencies.
+                                All implementation must be declare into 
+                                <strong>src/resources/META-INF/services/io.inugami.maven.plugin.analysis.api.scan.issue.tracker.JiraCustomFieldsAppender</strong>
+                            </p>
+                            <p>Example :</p>
+
+                            <pre>
+                                <legend>src/resources/META-INF/services/io.inugami.maven.plugin.analysis.api.scan.issue.tracker.JiraCustomFieldsAppender :</legend>
+                                <code [languages]="['text']" [highlight]="sourceCode['mvn_info_issue_jira_custom_fields_spi']"></code>
+                            </pre>
+
+                            <pre>
+                                <legend>Implementation:</legend>
+                                <code [languages]="['text']" [highlight]="sourceCode['mvn_info_issue_jira_custom_fields_spi_impl']"></code>
+                            </pre>
+                        </doc-item>
                     </doc-item>
                 </doc-item>
 
@@ -488,6 +1084,37 @@
             <header>
                 <a href="inugami-project-analysis-maven-plugin#release_note"><h2 id="release_note">ReleaseNote</h2></a>
             </header>
+
+            <table class="properties">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>type</th>
+                        <th>default value</th>
+                        <th>description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd">
+                        <td></td>
+                        <td>boolean</td>
+                        <td>true</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>String</td>
+                        <td>null</td>
+                        <td></td>
+                    </tr>
+                    <tr class="odd">
+                        <td></td>
+                        <td>String</td>
+                        <td>null</td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
         </article>
 
           <!--****************************************************************************************
