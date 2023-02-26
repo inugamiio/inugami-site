@@ -15,6 +15,10 @@ export class InugamiProjectAnalysisView  implements  OnInit {
     public folderName : string = "{{folder name}}";
     public issueManagementUrl : string = "${issueManagement.url}"
     public linkedHashMapStringSerializable: string = "LinkedHashMap<String, Serializable>";
+    public builddir : string= "{{builddir}}";
+    public artifactName : string = "{{inugami.release.note.artifactName}}";
+    public version : string = "{{version}}";
+    public baseDir : string = "${basedir}";
     /**************************************************************************
     * CONSTRUCTORS
     **************************************************************************/

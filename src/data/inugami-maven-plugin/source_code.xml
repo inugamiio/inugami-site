@@ -47,6 +47,18 @@
 </src>
 
 
+<src name="gav_inugami-project-analysis-front-springboot">
+    <![CDATA[
+    <dependency>
+        <groupId>io.inugami.maven.plugin.analysis.front</groupId>
+        <artifactId>inugami-project-analysis-front-springboot</artifactId>
+        <version>1.6.3</version>
+    </dependency>
+    ]]>
+    </src>
+    
+
+
 <!--*********************************************************************** 
 * gav_inugami-project-analysis-maven-plugin-annotations    
 ***********************************************************************-->
@@ -620,4 +632,583 @@ public class JiraCustomFieldExtractor implements JiraCustomFieldsAppender {
 ]]>
 </src>
 
+
+
+<!--*********************************************************************** 
+* mvn_info_releaseNote    
+***********************************************************************-->
+<src name="mvn_info_releaseNote">
+    <![CDATA[
+mvn info -Daction=releaseNote -PpreviousVersion={previousVersion}
+]]>
+</src>
+
+
+
+<!--*********************************************************************** 
+* mvn_info_releaseNote    
+***********************************************************************-->
+<src name="dependenciesCheckService">
+    <![CDATA[
+public interface DependenciesCheckService {
+    DependenciesCheck getDependenciesCheckData();
+}
+]]>
+</src>
+<src name="myProjectConfiguration">
+    <![CDATA[
+@Configuration
+public class MyProjectConfiguration {
+
+    @Primary
+    @Bean
+    public DependenciesCheck buildDependenciesCheck(){
+        return new MyDependenciesCheckService();
+    }
+}
+]]>
+</src>
+<src name="DependenciesCheck">
+    <![CDATA[
+@ToString
+@Builder(toBuilder = true)
+@Setter
+@Getter
+public class DependenciesCheck {
+    private List<DependencyRule> deprecated;
+    private List<DependencyRule> ban;
+    private List<DependencyRule> securityIssue;
+}
+]]>
+</src>
+<src name="DependencyRule">
+    <![CDATA[
+@ToString
+@Builder(toBuilder = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Setter
+@Getter
+public class DependencyRule {
+    @EqualsAndHashCode.Include
+    private String       groupId;
+    @EqualsAndHashCode.Include
+    private String       artifactId;
+    @EqualsAndHashCode.Include
+    private VersionRules rules;
+    private String       comment;
+    private String       link;
+    private Level        level;
+}
+]]>
+</src>
+
+
+
+<!--*********************************************************************** 
+* goal_mkdirs    
+***********************************************************************-->
+<src name="goal_mkdirs">
+    <![CDATA[
+<plugin>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+
+    <executions>
+        <execution>
+            <id>mkdirs</id>
+            <phase>validate</phase>
+            <goals>
+                <goal>mkdirs</goal>
+            </goals>
+            <configuration>
+                <paths>
+                    <path>${basedir}/target/test</path>
+                    <path>${basedir}/target/test2</path>
+                </paths>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+    ]]>
+</src>
+
+
+<!--*********************************************************************** 
+* goal_delete    
+***********************************************************************-->
+<src name="goal_delete">
+    <![CDATA[
+<plugin>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+
+    <executions>
+        <execution>
+            <id>mkdirs</id>
+            <phase>validate</phase>
+            <goals>
+                <goal>delete</goal>
+            </goals>
+            <configuration>
+                <paths>
+                    <path>${basedir}/target/test.*</path>
+                    <path>${basedir}/target/generate/.*log</path>
+                </paths>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+    ]]>
+</src>
+
+
+<!--*********************************************************************** 
+* goal_loadProperties  
+***********************************************************************-->
+<src name="goal_loadProperties">
+<![CDATA[
+<plugin>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+    
+    <executions>
+        <execution>
+            <id>loadProperties</id>
+            <phase>validate</phase>
+            <goals>
+                <goal>loadProperties</goal>
+            </goals>
+            <configuration>
+                <properties>
+                    <simple.properties>joe</simple.properties>
+                </properties>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+]]>
+</src>
+
+
+<src name="goal_loadProperties_local_01">
+<![CDATA[
+application.name=demo-app
+application.title=My application
+]]>
+</src>
+
+
+<src name="goal_loadProperties_local_02">
+<![CDATA[
+<plugin>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+    <version>1.6.3</version>
+
+    <executions>
+        <execution>
+            <id>loadProperties</id>
+            <phase>validate</phase>
+            <goals>
+                <goal>loadProperties</goal>
+            </goals>
+            <configuration>
+                <properties>
+                    <simple.properties>joe</simple.properties>
+                </properties>
+                <resources>
+                    <resource>
+                        <type>properties</type>
+                        <propertiesPath>${basedir}/src/test/resources/simple.properties</propertiesPath>
+                        <properties>
+                            <specific.file.properties>specific value</specific.file.properties>
+                        </properties>
+                    </resource>
+                </resources>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+]]>
+</src>
+
+<src name="goal_loadProperties_local_03">
+<![CDATA[
+{
+    "version": "0.0.1-SNAPSHOT",
+    "app": {
+        "name": "my application"
+    },
+    "rules": [
+        {
+        "type": "json",
+        "enabled": "true"
+        },
+        {
+        "type": "yaml",
+        "enabled": "false"
+        }
+    ],
+    "authors": [
+        "john",
+        "smith"
+    ]
+}
+]]>
+</src>
+
+<src name="goal_loadProperties_local_04">
+<![CDATA[
+{
+    "version" : "0.0.1-SNAPSHOT",
+    "app.name" : "my application",
+    "rules.0.type" : "json",
+    "rules.0.enabled" : "true",
+    "rules.1.type" : "yaml",
+    "rules.1.enabled" : "false",
+    "authors.0" : "john",
+    "authors.1" : "smith"
+}
+]]>
+</src>
+
+
+
+<!--*********************************************************************** 
+* goal_loadProperties  
+***********************************************************************-->
+<src name="PropertiesConvertorSpi">
+<![CDATA[
+public interface PropertiesConvertorSpi {
+    boolean accept(final String type);
+
+    Map<String, String> convert(final String content);
+}
+]]>
+</src>
+<src name="PropertiesConvertorSpi_spi">
+    <![CDATA[
+io.inugami.maven.plugin.analysis.plugin.services.build.convertors.MyConverto
+]]>
+</src>
+<src name="PropertiesConvertorSpi_impl">
+    <![CDATA[
+@SpiPriority(10)
+public class MyConvertor implements PropertiesConvertorSpi {
+
+    public static final String PROPERTIES = "properties";
+
+
+    @Override
+    public boolean accept(final String type) {
+        return PROPERTIES.equalsIgnoreCase(type);
+    }
+
+    @Override
+    public Map<String, String> convert(final String content) {
+        // implementation
+    }
+}
+]]>
+</src>
+    
+
+<!--*********************************************************************** 
+* goal_loadProperties  
+***********************************************************************-->
+<src name="loadProperties_external">
+<![CDATA[
+<plugin>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+
+    <executions>
+        <execution>
+            <id>loadProperties</id>
+            <phase>validate</phase>
+            <goals>
+                <goal>loadProperties</goal>
+            </goals>
+            <configuration>
+                <resources>
+                    <resource>
+                        <propertiesUrl>http://localhost:8888/demo.json</propertiesUrl>
+                        <propertiesUrlAuthorization>Basic YWRtaW46cGFzc3dvcmQ=</propertiesUrlAuthorization>
+                    </resource>
+                </resources>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+]]>
+    </src>
+
+<src name="loadProperties_external_01">
+<![CDATA[
+{
+    "external": {
+        "applicationName": "externalJson"
+    }
+}
+]]>
+</src>
+
+<src name="loadProperties_external_02">
+<![CDATA[
+{
+    "external.applicationName" : "externalJson"
+}
+]]>
+</src>
+
+<!--*********************************************************************** 
+* goal_loadProperties  
+***********************************************************************-->
+<src name="writeFile">
+    <![CDATA[
+    <plugin>
+        <groupId>io.inugami.maven.plugin.analysis</groupId>
+        <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+    
+        <executions>
+            <execution>
+                <id>loadProperties</id>
+                <phase>generate-resources</phase>
+                <goals>
+                    <goal>writeFile</goal>
+                </goals>
+                <configuration>
+                    <mavenFiltering>true</mavenFiltering>
+                    <fileResources>
+                        <fileResource>
+                            <target>${basedir}/target/file.from.innerTemplate.html</target>
+                            <template>
+    <h1>${project.artifactId}</h1>
+    <h2>{{subtitle}}</h2>
+                        </template>
+                        <properties>
+                            <subtitle>Simple inner template rendering</subtitle>
+                        </properties>
+                    </fileResource>
+                </fileResources>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+]]>
+</src>
+
+<src name="writeFile_01">
+    <![CDATA[
+<h1>demo</h1>
+<h2>Simple inner template rendering</h2>
+]]>
+</src>
+
+<src name="writeFile_02">
+    <![CDATA[
+<plugin>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+
+    <executions>
+        <execution>
+            <id>loadProperties</id>
+            <phase>generate-resources</phase>
+            <goals>
+                <goal>writeFile</goal>
+            </goals>
+            <configuration>
+                <mavenFiltering>true</mavenFiltering>
+                <fileResources>
+                    <fileResource>
+                        <target>${basedir}/target/file.from.externalTemplate.html</target>
+                        <templatePath>${basedir}/src/test/resources/simple.template.html</templatePath>
+                        <properties>
+                            <subtitle>Simple external template rendering</subtitle>
+                            <description>With external template, you can create more complex file without
+                                pollute your maven pom.xml
+                            </description>
+                        </properties>
+                    </fileResource>
+                </fileResources>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+]]>
+</src>
+
+
+<src name="writeFile_03">
+    <![CDATA[
+<h1>demo</h1>
+<h2>Simple external template rendering</h2>
+
+<p>
+With external template, you can create more complex file without
+                                pollute your maven pom.xml
+</p>
+]]>
+</src>
+
+
+<src name="writeFile_04">
+    <![CDATA[
+<h1>${project.artifactId}</h1>
+<h2>{{subtitle}}</h2>
+
+<p>
+    {{description}}
+</p>
+]]>
+</src>
+
+
+<!--*********************************************************************** 
+* copy_01  
+***********************************************************************-->
+<src name="copy_01">
+    <![CDATA[
+<h1>${project.artifactId}</h1>
+<h2>{{subtitle}}</h2>
+
+<p>
+    {{description}}
+</p>
+]]>
+</src>
+
+<src name="copy_02">
+    <![CDATA[
+<plugin>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+
+    <executions>
+        <execution>
+            <id>loadProperties</id>
+            <phase>generate-resources</phase>
+            <goals>
+                <goal>copy</goal>
+            </goals>
+            <configuration>
+                <mavenFiltering>true</mavenFiltering>
+                <resources>
+                    <resource>
+                        <target>${basedir}/target/generated/file.from.externalTemplate.html</target>
+                        <path>${basedir}/src/test/resources/simple.template.html</path>
+                        <properties>
+                            <subtitle>Simple copy</subtitle>
+                            <description>Lorem ipsum</description>
+                        </properties>
+                    </resource>
+                </resources>
+            </configuration>
+        </execution>
+    </executions>
+    </plugin>
+]]>
+</src>
+
+<src name="copy_03">
+    <![CDATA[
+<h1>demo</h1>
+<h2>Simple copy</h2>
+
+<p>
+    Lorem ipsum
+</p>
+]]>
+</src>
+
+<src name="copy_folers">
+    <![CDATA[
+<plugin>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+
+    <executions>
+        <execution>
+            <id>loadProperties</id>
+            <phase>generate-resources</phase>
+            <goals>
+                <goal>copy</goal>
+            </goals>
+            <configuration>
+                <mavenFiltering>true</mavenFiltering>
+                <resources>
+                    <resource>
+                        <target>${basedir}/target/generated/template</target>
+                        <path>${basedir}/src/test/resources/template</path>
+                        <properties>
+                            <subtitle>Simple copy</subtitle>
+                            <description>Lorem ipsum</description>
+                        </properties>
+                    </resource>
+                </resources>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+]]>
+</src>
+<src name="copy_dependencies">
+    <![CDATA[
+<plugin>
+    <groupId>io.inugami.maven.plugin.analysis</groupId>
+    <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+
+    <executions>
+        <execution>
+            <id>loadProperties</id>
+            <phase>generate-resources</phase>
+            <goals>
+                <goal>copy</goal>
+            </goals>
+            <configuration>
+                <mavenFiltering>true</mavenFiltering>
+                <resources>
+                    <resource>
+                        <target>${basedir}/target/maven/io.inugami.maven.plugin.analysis.front.jar</target>
+                        <gav>io.inugami.maven.plugin.analysis.front:inugami-project-analysis-front-plugins:1.6.2-SNAPSHOT</gav>
+                    </resource>
+                </resources>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+]]>
+</src>
+
+
+<src name="unpack">
+    <![CDATA[
+    <plugin>
+        <groupId>io.inugami.maven.plugin.analysis</groupId>
+        <artifactId>inugami-project-analysis-maven-plugin</artifactId>
+        <executions>
+            <execution>
+                <id>loadProperties</id>
+                <phase>generate-resources</phase>
+                <goals>
+                    <goal>unpack</goal>
+                </goals>
+                <configuration>
+                    <filtering>true</filtering>
+                    <mavenFiltering>true</mavenFiltering>
+                    <resources>
+                        <resource>
+                            <target>${basedir}/target/unpack</target>
+                            <gav>
+                                io.inugami.maven.plugin.analysis.front:inugami-project-analysis-front-plugins:1.6.2-SNAPSHOT
+                            </gav>
+                        </resource>
+                    </resources>
+                </configuration>
+            </execution>
+        </executions>
+    </plugin>
+]]>
+</src>
 </xml>

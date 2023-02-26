@@ -1085,6 +1085,19 @@
                 <a href="inugami-project-analysis-maven-plugin#release_note"><h2 id="release_note">ReleaseNote</h2></a>
             </header>
 
+            <p>
+                Plugin main target is to generate a release note from current project.
+                By default this release note will be generate as Json file.
+            </p>
+            <p>
+                An ASCIIDOC implementation is present to generate a documentation more human friendly.
+            </p>
+            <p>
+                To display the release note you can invoke task mvn info
+            </p>
+            <pre>
+                <code [languages]="['bash']" [highlight]="sourceCode['mvn_info_releaseNote']"></code>
+            </pre>
             <table class="properties">
                 <thead>
                     <tr>
@@ -1096,22 +1109,40 @@
                 </thead>
                 <tbody>
                     <tr class="odd">
-                        <td></td>
+                        <td>inugami.maven.plugin.analysis.display.release.note.full</td>
                         <td>boolean</td>
-                        <td>true</td>
-                        <td></td>
+                        <td>false</td>
+                        <td>Allow to append more information on your release note</td>
                     </tr>
                     <tr>
-                        <td></td>
+                        <td>previousVersion</td>
                         <td>String</td>
                         <td>null</td>
-                        <td></td>
+                        <td>To be able to compute the difference between two version; it’s require to specify previous version.</td>
                     </tr>
                     <tr class="odd">
-                        <td></td>
-                        <td>String</td>
-                        <td>null</td>
-                        <td></td>
+                        <td>interactive</td>
+                        <td>boolean</td>
+                        <td>true</td>
+                        <td>If you doesn’t need JSON release note; you can disable this feature with this parameter</td>
+                    </tr>
+                    <tr>
+                        <td>inugami.maven.plugin.analysis.display.release.note.asciidoc</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Allow to generate release note as ASCIIDOC</td>
+                    </tr>
+                    <tr class="odd">
+                        <td>inugami.maven.plugin.analysis.display.release.note.asciidoc.baseDir</td>
+                        <td>String (path)</td>
+                        <td>{{builddir}}/src/doc/releases</td>
+                        <td>Allow to specify target folder</td>
+                    </tr>
+                    <tr>
+                        <td>inugami.maven.plugin.analysis.display.release.note.asciidoc.splitFile</td>
+                        <td>boolean</td>
+                        <td>false</td>
+                        <td>Allow to generate the release note with one document or multi document parts</td>
                     </tr>
                 </tbody>
             </table>
@@ -1128,7 +1159,53 @@
              <div class="content">
                
                 <doc-item title="ReleaseNote UI" [level]="3" href="inugami-project-analysis-maven-plugin#release_note_ui" id="release_note_ui">
-                
+                    <p>
+                        Since version 1.6.0 a spring boot module allow to display current project release notes. To include this ui you should add this dependency :
+                    </p>
+                    <pre>
+                        <code [languages]="['bash']" [highlight]="sourceCode['gav_inugami-project-analysis-front-springboot']"></code>
+                    </pre>
+                    <p>
+                        By default the ui is accessible on URL : <a href="http://localhost:8080/release-note-app/" target="_blank">http://localhost:8080/release-note-app/</a>
+                    </p>
+
+                    <table class="properties">
+                        <thead>
+                            <tr>
+                                <th>Property</th>
+                                <th>type</th>
+                                <th>Required</th>
+                                <th>description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td>inugami.release.note.artifactName</td>
+                                <td>String</td>
+                                <td>true</td>
+                                <td>Release note list json file name. This property is mandatory.
+                                    After the release note building, two file will be created in your project :
+                                    <ul>
+                                        <li>
+                                            src/main/resources/META-INF/releases/{{artifactName}}.releases.json : this files contains the releases note list
+                                        </li>
+                                        <li>
+                                            src/main/resources/META-INF/releases/{{artifactName}}.{{version}}.json : the release note as json
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <div>
+                        <img src="/assets/ui-01.png" title="global release information"/>
+                    </div>
+                    <div>
+                        <img src="/assets/ui-01.png" title="detailed release information"/>
+                    </div>
+
                     <iframe #video
                         width="560"
                         height="315"
@@ -1142,8 +1219,35 @@
 
 
                 <doc-item title="Update & ban dependencies" [level]="3" href="inugami-project-analysis-maven-plugin#update_ban_dependencies" id="update_ban_dependencies">
-                
+                    <p>
+                        The inugami front ui is able to display information about dependencies baned or deprecated.
+                        The scan process doesn’t check this information at this moment.
+                    </p>
+                    <p>
+                        But you can create new DependenciesCheckService implementation:
+                    </p>
 
+                    <pre>
+                        <code [languages]="['java']" [highlight]="sourceCode['dependenciesCheckService']"></code>
+                    </pre>
+
+                    <pre>
+                        <code [languages]="['java']" [highlight]="sourceCode['myProjectConfiguration']"></code>
+                    </pre>
+                    <p>
+                        This interface requires to return a DependenciesCheck object. This object is a basic DTO :
+                    </p>
+
+                    <pre>
+                        <code [languages]="['java']" [highlight]="sourceCode['DependenciesCheck']"></code>
+                    </pre>
+                    <p>
+                        Each list contains a DependencyRule object like :
+                    </p>
+
+                    <pre>
+                        <code [languages]="['java']" [highlight]="sourceCode['DependencyRule']"></code>
+                    </pre>
                 </doc-item>
                 
              </div>
@@ -1162,41 +1266,123 @@
 
             <div class="content">
                 <doc-item title="mkdirs" [level]="3" href="inugami-project-analysis-maven-plugin#other_mkdirs" id="other_mkdirs">
-                
-
+                    <p>
+                        This goal allow to create basic folders
+                    </p>
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['goal_mkdirs']"></code>
+                    </pre>
                 </doc-item>
 
 
                 <doc-item title="delete" [level]="3" href="inugami-project-analysis-maven-plugin#other_delete" id="other_delete">
-                
-
+                    <p>
+                        This goal allow to delete folder or files
+                    </p>
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['goal_delete']"></code>
+                    </pre>
                 </doc-item>
 
 
                 <doc-item title="Load properties" [level]="3" href="inugami-project-analysis-maven-plugin#other_loadProperties" id="other_loadProperties">
-                
+                    <p>
+                        This goal allow to load maven properties. All loaded properties will be accessible in nextmaven phase.
+                    </p>
 
                     <doc-item title="Global properties" [level]="4" href="inugami-project-analysis-maven-plugin#other_loadProperties_globalproperties" id="other_loadProperties_globalproperties">
-                
+                        <p>
+                            The goal loadProperties can have global properties. All of them will added in maven properties context.
+                        </p>
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['goal_loadProperties']"></code>
+                        </pre>
 
                     </doc-item>
 
 
                     <doc-item title="Local file properties" [level]="4" href="inugami-project-analysis-maven-plugin#other_loadProperties_fileproperties" id="other_loadProperties_fileproperties">
-                
+                        <p>
+                            In most of time, we need to add properties from local file. This files can be
+                            properties file or json file (another file will be supported in next release).
+                            To do that you can specify resources. Each one need to specify the path
+                            (this path can have maven properties to templatize this one).
+                            Also it’s require to specify the file type (properties or json)
+                        </p>
+                        <pre>
+                            <code [languages]="['properties']" [highlight]="sourceCode['goal_loadProperties_local_01']"></code>
+                        </pre>
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['goal_loadProperties_local_02']"></code>
+                        </pre>
+                        <p>
+                            After properties loaded, you can use properties in maven context.
+                        </p>
+                        <p>
+                            In case of JSON file, all properties will be render as flat value. For example :
+                        </p>
 
+                        <pre>
+                            <code [languages]="['json']" [highlight]="sourceCode['goal_loadProperties_local_03']"></code>
+                        </pre>
+                        <p>
+                            Will be rendered in maven context as :
+                        </p>
+                        <pre>
+                            <code [languages]="['json']" [highlight]="sourceCode['goal_loadProperties_local_04']"></code>
+                        </pre>
                     </doc-item>
 
 
                     <doc-item title="Properties convertors" [level]="4" href="inugami-project-analysis-maven-plugin#other_loadProperties_convertor" id="other_loadProperties_convertor">
-                
-
+                        <p>
+                            All properties convertors are SPI implementation. You can create easly one and
+                            enable its by including your jar dependency in inugami plugin. Inugami use a strateg
+                             partner to resolve right implementation. All of them need to implement
+                             the PropertiesConvertorSPI interface.
+                        </p>
+                        <pre>
+                            <code [languages]="['java']" [highlight]="sourceCode['PropertiesConvertorSpi']"></code>
+                        </pre>
+                        <p>
+                            As all SPI implementation you need to declare its in the specific file <strong>/META-INF/services/io.inugami.maven.plugin.analysis.api.convertors.PropertiesConvertorSpi</strong>
+                        </p>
+                        <pre>
+                            <code [languages]="['text']" [highlight]="sourceCode['PropertiesConvertorSpi_spi']"></code>
+                        </pre>
+                        <p>
+                            After that you can create your implementation :
+                        </p>
+                        <pre>
+                            <code [languages]="['java']" [highlight]="sourceCode['PropertiesConvertorSpi_impl']"></code>
+                        </pre>
+                        <p>
+                            Inugami order all implementation by higher SpiPriority. You can use this annotation if you need to override existing implementation.
+                        </p>
                     </doc-item>
 
 
                     <doc-item title="External URL properties" [level]="4" href="inugami-project-analysis-maven-plugin#other_loadProperties_external_url" id="other_loadProperties_external_url">
-                
+            
+                        <p>
+                            If you need to retrieve properties from external source, like springboot cloud config,
+                            you can specify corresponding url to load this resource.
+                        </p>
 
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['loadProperties_external']"></code>
+                        </pre>
+                        <p>
+                            In this example, the endpoint will give us a response like :
+                        </p>
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['loadProperties_external_01']"></code>
+                        </pre>
+                        <p>It will be accessible in maven context by flatten value :</p>
+
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['loadProperties_external_02']"></code>
+                        </pre>
                     </doc-item>
 
                 </doc-item>
@@ -1204,33 +1390,102 @@
 
 
                 <doc-item title="writeFile" [level]="3" href="inugami-project-analysis-maven-plugin#other_writeFile" id="other_writeFile">
-                
+                    <p>
+                        WriteFile goal allw to write file by using mustache template. By default, maven properties will be transform to mustache values.
+                    </p>
+                    <p>
+                        For example :
+                    </p>
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['writeFile']"></code>
+                    </pre>
+                    <p>
+                        Will write in <strong>{{baseDir}}/target/file.from.innerTemplate.html</strong> this content :
+                    </p>
+
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['writeFile_01']"></code>
+                    </pre>
+                    <p>
+                        You can also create external template file :
+                    </p>
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['writeFile_02']"></code>
+                    </pre>
+                    <p>
+                        with template like :
+                    </p>
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['writeFile_03']"></code>
+                    </pre>
+                    <p>Will generate this file :</p>
+
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['writeFile_04']"></code>
+                    </pre>
 
                 </doc-item>
 
 
                 <doc-item title="copy" [level]="3" href="inugami-project-analysis-maven-plugin#other_copy" id="other_copy">
+                    <p>
+                        This goal allow to copy file. It’s also allow to filtering resource.
+                        This goal will inject properties only on text file, binary file will only be copy to target file.
+                    </p>
                 
                     <doc-item title="copy simple file" [level]="4" href="inugami-project-analysis-maven-plugin#other_copy_file" id="other_copy_file">
-                
+                        <p>In this example we have a simple file in {{baseDir}}/src/test/resources/simple.template.html</p>
 
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['copy_01']"></code>
+                        </pre>
+
+                        <p>
+                            This file will be copy to {{baseDir}}/src/test/resources/simple.template.html and all maven context properties will be injected :
+                        </p>
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['copy_02']"></code>
+                        </pre>
+                        <p>The file result will be :</p>
+
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['copy_03']"></code>
+                        </pre>
                     </doc-item>
 
                     <doc-item title="copy folder" [level]="4" href="inugami-project-analysis-maven-plugin#other_copy_folder" id="other_copy_folder">
-                
+                        <p>
+                            The copy goal can also copy folder. To do that you need only to specify folder path and target as directories:
+                        </p>
 
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['copy_folers']"></code>
+                        </pre>
                     </doc-item>
 
                     <doc-item title="maven dependencies" [level]="4" href="inugami-project-analysis-maven-plugin#other_copy_maven_dependencies" id="other_copy_maven_dependencies">
-                
+                        <p>
+                            The copy goal can copy maven dependencies. In this case you need to specify the artifact GAV to copy in target destination :
+                        </p>
 
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['copy_dependencies']"></code>
+                        </pre>
                     </doc-item>
                 </doc-item>
 
 
 
                 <doc-item title="unpack" [level]="3" href="inugami-project-analysis-maven-plugin#other_unpack" id="other_unpack">
-                
+                    <p>
+                        Unpack goal can unzip resources into folder.
+                        When resources are write on filesystem, if it’s text resources,
+                        the filtering is apply. This behavior can be disabled by configuration.
+                    </p>
+
+                    <pre>
+                        <code [languages]="['xml']" [highlight]="sourceCode['unpack']"></code>
+                    </pre>
 
                 </doc-item>
 
