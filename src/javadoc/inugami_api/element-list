@@ -5,6 +5,7 @@ io.inugami.api.ctx
 io.inugami.api.dao
 io.inugami.api.dao.event
 io.inugami.api.exceptions
+io.inugami.api.exceptions.asserts
 io.inugami.api.exceptions.services
 io.inugami.api.exceptions.services.exceptions
 io.inugami.api.exceptions.tools

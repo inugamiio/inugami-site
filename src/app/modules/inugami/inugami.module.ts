@@ -16,12 +16,18 @@ import { InugamiAsideMenu } from './components/inugami-aside-menu/inugami.aside.
 
 import { InugamiApiView } from '../inugami/views/inugami.api.view';
 import { InugamiApiToc } from './components/inugami-aside-menu/inugami.api.toc';
+
+import { InugamiCommonsTestView } from '../inugami/views/inugami_commons_test/inugami_commons_test';
+import { InugamiCommonsTestToc } from '../inugami/views/inugami_commons_test/inugami_commons_test_toc';
+
 @NgModule({
     declarations: [
         InugamiView,
         InugamiAsideMenu,
         InugamiApiView,
-        InugamiApiToc
+        InugamiApiToc,
+        InugamiCommonsTestView,
+        InugamiCommonsTestToc
     ],
     imports: [
         BrowserModule,
@@ -36,7 +42,9 @@ import { InugamiApiToc } from './components/inugami-aside-menu/inugami.api.toc';
         InugamiView,
         InugamiAsideMenu,
         InugamiApiView,
-        InugamiApiToc
+        InugamiApiToc,
+        InugamiCommonsTestView,
+        InugamiCommonsTestToc
     ]
 })
 export class InugamiModule { }

@@ -9,7 +9,7 @@
 <dependency>
     <groupId>io.inugami</groupId>
     <artifactId>inugami_api</artifactId>
-    <version>2.1.0</version>
+    <version>2.1.1</version>
 </dependency>
 ]]>
 </src>
@@ -1623,135 +1623,1478 @@ public interface Builder<T> {
     <![CDATA[
     package io.inugami.api.exceptions;
 
-    @NoArgsConstructor(access = AccessLevel.PRIVATE)
-    public class Asserts {
-        
-        // ```````````````````````````````````````
-        // IS TRUE
-        // ```````````````````````````````````````
-        public static void isTrue(boolean expression) {
-            // ...
-        }
-    
-        public static void isTrue(String message,
-                                  boolean expression) {
-            // ...
-        }
-    
-        public static void isTrue(ErrorCode errorCode,
-                                  boolean expression) {
-            // ...
-        }
-    
-        // ```````````````````````````````````````
-        // IS FALSE
-        // ```````````````````````````````````````
-        public static void isFalse(boolean expression) {
-            // ...
-        }
-    
-        public static void isFalse(String message,
-                                   boolean expression) {
-            // ...
-        }
-    
-        public static void isFalse(ErrorCode errorCode,
-                                   boolean expression) {
-            // ...
-        }
-    
-        // ```````````````````````````````````````
-        // IS NULL
-        // ```````````````````````````````````````
-        public static void isNull(Object... objects) {
-            // ...
-        }
-    
-        public static void isNull(String message,
-                                  Object... values) {
-            // ...
-        }
-    
-        public static void isNull(ErrorCode errorCode,
-                                  Object... values) {
-            // ...
-        }
-    
-        // ```````````````````````````````````````
-        // NOT NULL
-        // ```````````````````````````````````````
-        public static void notNull(Object... objects) {
-            // ...
-        }
-    
-        public static void notNull(String message,
-                                   Object... values) {
-            // ...
-        }
-    
-        public static void notNull(ErrorCode errorCode,
-                                   Object... values) {
-            // ...
-        }
-    
-        // ```````````````````````````````````````
-        // NOT EMPTY
-        // ```````````````````````````````````````
-        public static void notEmpty(String message,
-                                    String value) {
-            // ...
-        }
-    
-        public static void notEmpty(ErrorCode errorCode,
-                                    String value) {
-            // ...
-        }
-    
-        public static boolean checkIsBlank(String value) {
-            // ...
-        }
-    
-        public static void notEmpty(String message,
-                                    Collection<?> value) {
-            // ...
-        }
-    
-        public static void notEmpty(ErrorCode errorCode,
-                                    Collection<?> value) {
-            // ...
-        }
-    
-        public static void notEmpty(String message,
-                                    Map<?, ?> value) {
-            // ...
-        }
-    
-        public static void notEmpty(ErrorCode errorCode,
-                                    Map<?, ?> value) {
-            // ...
-        }
-    
-    
-        // ```````````````````````````````````````
-        // EQUALS
-        // ```````````````````````````````````````
-        public static void equalsObj(Object ref,
-                                     Object value) {
-            // ...
-        }
-    
-        public static void equalsObj(String message,
-                                     Object ref,
-                                     Object value) {
-            // ...
-        }
-    
-        public static void equalsObj(ErrorCode errorCode,
-                                     Object ref,
-                                     Object value) {
-            // ...
-        }
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public final class Asserts {
+
+    // -------------------------------------------------------------------------
+    // IS TRUE
+    // -------------------------------------------------------------------------
+    @Deprecated
+    public static void isTrue(final boolean expression) {
+         // ...
     }
+
+    public static void assertTrue(final boolean expression) {
+         // ...
+    }
+
+    @Deprecated
+    public static void isTrue(final String message,
+                              final boolean expression) {
+         // ...
+    }
+
+    public static void assertTrue(final String message,
+                                  final boolean expression) {
+         // ...
+    }
+
+    @Deprecated
+    public static void isTrue(final ErrorCode errorCode,
+                              final boolean expression) {
+         // ...
+    }
+
+    public static void assertTrue(final ErrorCode errorCode,
+                                  final boolean expression) {
+         // ...
+    }
+
+    @Deprecated
+    public static void isTrue(final Supplier<String> messageProducer,
+                              final boolean expression) {
+         // ...
+    }
+
+    public static void assertTrue(final Supplier<String> messageProducer,
+                                  final boolean expression) {
+         // ...
+    }
+
+    // -------------------------------------------------------------------------
+    // IS FALSE
+    // -------------------------------------------------------------------------
+    @Deprecated
+    public static void isFalse(final boolean expression) {
+         // ...
+    }
+
+    public static void assertFalse(final boolean expression) {
+         // ...
+    }
+
+    @Deprecated
+    public static void isFalse(final String message,
+                               final boolean expression) {
+         // ...
+    }
+
+    public static void assertFalse(final String message,
+                                   final boolean expression) {
+         // ...
+    }
+
+    @Deprecated
+    public static void isFalse(final Supplier<String> messageProducer,
+                               final boolean expression) {
+         // ...
+    }
+
+    public static void assertFalse(final Supplier<String> messageProducer,
+                                   final boolean expression) {
+         // ...
+    }
+
+    @Deprecated
+    public static void isFalse(final ErrorCode errorCode,
+                               final boolean expression) {
+         // ...
+    }
+
+    public static void assertFalse(final ErrorCode errorCode,
+                                   final boolean expression) {
+         // ...
+    }
+
+    // -------------------------------------------------------------------------
+    // IS NULL
+    // -------------------------------------------------------------------------
+    @Deprecated
+    public static void isNull(final Object... objects) {
+         // ...
+    }
+
+    public static void assertNull(final Object... objects) {
+         // ...
+    }
+
+    @Deprecated
+    public static void isNull(final String message,
+                              final Object... values) {
+         // ...
+    }
+
+    public static void assertNull(final String message,
+                                  final Object... values) {
+        // ...
+    }
+
+    @Deprecated
+    public static void isNull(final Supplier<String> messageProducer,
+                              final Object... values) {
+         // ...
+    }
+
+    public static void assertNull(final Supplier<String> messageProducer,
+                                  final Object... values) {
+         // ...
+    }
+
+    @Deprecated
+    public static void isNull(final ErrorCode errorCode,
+                              final Object... values) {
+         // ...
+    }
+
+    public static void assertNull(final ErrorCode errorCode,
+                                  final Object... values) {
+         // ...
+    }
+
+    // -------------------------------------------------------------------------
+    // NOT NULL
+    // -------------------------------------------------------------------------
+    @Deprecated
+    public static void notNull(final Object... objects) {
+        // ...
+    }
+
+    public static void assertNotNull(final Object... objects) {
+         // ...
+    }
+
+    @Deprecated
+    public static void notNull(final String message,
+                               final Object... values) {
+        // ...
+    }
+
+    public static void assertNotNull(final String message,
+                                     final Object... values) {
+         // ...
+    }
+
+    @Deprecated
+    public static void notNull(final Supplier<String> messageProducer,
+                               final Object... values) {
+         // ...
+    }
+
+    public static void assertNotNull(final Supplier<String> messageProducer,
+                                     final Object... values) {
+         // ...
+    }
+
+    @Deprecated
+    public static void notNull(final ErrorCode errorCode,
+                               final Object... values) {
+         // ...
+    }
+
+    public static void assertNotNull(final ErrorCode errorCode,
+                                     final Object... values) {
+         // ...
+    }
+
+    private static boolean checkIfHasNull(final Object... values) {
+         // ...
+    }
+
+    // -------------------------------------------------------------------------
+    // NOT EMPTY
+    // -------------------------------------------------------------------------
+    public static void assertNotEmpty(final String value) {
+         // ...
+    }
+
+    @Deprecated
+    public static void notEmpty(final String message,
+                                final String value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final String message,
+                                      final String value) {
+         // ...
+    }
+
+
+    public static void assertNotEmpty(final Supplier<String> messageProducer,
+                                      final String value) {
+         // ...
+    }
+
+    @Deprecated
+    public static void notEmpty(final ErrorCode errorCode,
+                                final String value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final ErrorCode errorCode,
+                                      final String value) {
+         // ...
+    }
+
+    public static boolean checkIsBlank(final String value) {
+        // ...
+    }
+
+    public static void assertNotEmpty(final Collection<?> value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final Supplier<String> messageProducer,
+                                      final Collection<?> value) {
+         // ...
+    }
+
+    @Deprecated
+    public static void notEmpty(final String message,
+                                final Collection<?> value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final String message,
+                                      final Collection<?> value) {
+         // ...
+    }
+
+    @Deprecated
+    public static void notEmpty(final ErrorCode errorCode,
+                                final Collection<?> value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final ErrorCode errorCode,
+                                      final Collection<?> value) {
+         // ...
+    }
+
+
+    public static void assertNotEmpty(final IsEmptyFacet value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final String message,
+                                final IsEmptyFacet value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final Supplier<String> messageProducer,
+                                      final IsEmptyFacet value) {
+         // ...
+    }
+    public static void assertNotEmpty(final ErrorCode errorCode,
+                                      final IsEmptyFacet value) {
+         // ...
+    }
+
+    @Deprecated
+    public static void notEmpty(final Map<?, ?> value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final Map<?, ?> value) {
+         // ...
+    }
+
+
+    @Deprecated
+    public static void notEmpty(final String message,
+                                final Map<?, ?> value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final String message,
+                                      final Map<?, ?> value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final Supplier<String> messageProducer,
+                                      final Map<?, ?> value) {
+         // ...
+    }
+
+    @Deprecated
+    public static void notEmpty(final ErrorCode errorCode,
+                                final Map<?, ?> value) {
+         // ...
+    }
+
+    public static void assertNotEmpty(final ErrorCode errorCode,
+                                      final Map<?, ?> value) {
+         // ...
+    }
+
+
+    // -------------------------------------------------------------------------
+    // EMPTY
+    // -------------------------------------------------------------------------
+    public static void assertEmpty(final String value) {
+         // ...
+    }
+
+    public static void assertEmpty(final String message,
+                                   final String value) {
+         // ...
+    }
+
+    public static void assertEmpty(final Supplier<String> messageProducer,
+                                   final String value) {
+         // ...
+    }
+
+    public static void assertEmpty(final ErrorCode errorCode,
+                                   final String value) {
+         // ...
+    }
+
+
+    public static void assertEmpty(final Collection<?> value) {
+         // ...
+    }
+
+    public static void assertEmpty(final Supplier<String> messageProducer,
+                                   final Collection<?> value) {
+         // ...
+    }
+
+    public static void assertEmpty(final String message,
+                                   final Collection<?> value) {
+         // ...
+    }
+
+    public static void assertEmpty(final ErrorCode errorCode,
+                                   final Collection<?> value) {
+         // ...
+    }
+
+    public static void assertEmpty(final Map<?, ?> value) {
+         // ...
+    }
+
+    public static void assertEmpty(final String message,
+                                   final Map<?, ?> value) {
+         // ...
+    }
+
+    public static void assertEmpty(final Supplier<String> messageProducer,
+                                   final Map<?, ?> value) {
+         // ...
+    }
+
+    public static void assertEmpty(final ErrorCode errorCode,
+                                   final Map<?, ?> value) {
+         // ...
+    }
+
+
+
+
+    public static void assertEmpty(final IsEmptyFacet value) {
+         // ...
+    }
+
+    public static void assertEmpty(final Supplier<String> messageProducer,
+                                   final IsEmptyFacet value) {
+         // ... 
+    }
+
+    public static void assertEmpty(final String message,
+                                   final IsEmptyFacet value) {
+         // ...
+    }
+
+    public static void assertEmpty(final ErrorCode errorCode,
+                                   final IsEmptyFacet value) {
+         // ...
+    }
+
+    // -------------------------------------------------------------------------
+    // EQUALS
+    // -------------------------------------------------------------------------
+    @Deprecated
+    public static void equalsObj(final Object ref,
+                                 final Object value) {
+        // ...
+    }
+
+    public static void assertEquals(final Object ref,
+                                    final Object value) {
+        // ...
+    }
+
+
+    @Deprecated
+    public static void equalsObj(final String message,
+                                 final Object ref,
+                                 final Object value) {
+        // ...
+    }
+
+    public static void assertEquals(final String message,
+                                    final Object ref,
+                                    final Object value) {
+        // ...
+    }
+
+    public static void assertEquals(final Supplier<String> messageProducer,
+                                    final Object ref,
+                                    final Object value) {
+        // ...
+    }
+
+
+    @Deprecated
+    public static void equalsObj(final ErrorCode errorCode,
+                                 final Object ref,
+                                 final Object value) {
+        // ...
+    }
+
+    public static void assertEquals(final ErrorCode errorCode,
+                                    final Object ref,
+                                    final Object value) {
+        // ...
+    }
+
+
+    public static void assertEquals(final int ref,
+                                    final int value) {
+        // ...
+    }
+
+    public static void assertEquals(final String message,
+                                    final int ref,
+                                    final int value) {
+        // ...
+    }
+
+    public static void assertEquals(final Supplier<String> messageProducer,
+                                    final int ref,
+                                    final int value) {
+        // ...
+    }
+
+    public static void assertEquals(final ErrorCode errorCode,
+                                    final int ref,
+                                    final int value) {
+        // ...
+    }
+
+    public static void assertEquals(final long ref,
+                                    final long value) {
+        // ...
+    }
+
+    public static void assertEquals(final String message,
+                                    final long ref,
+                                    final long value) {
+        // ...
+    }
+
+    public static void assertEquals(final Supplier<String> messageProducer,
+                                    final long ref,
+                                    final long value) {
+        // ...
+    }
+
+    public static void assertEquals(final ErrorCode errorCode,
+                                    final long ref,
+                                    final long value) {
+        // ...
+    }
+
+    public static void assertEquals(final float ref,
+                                    final float value) {
+        // ...
+    }
+
+    public static void assertEquals(final String message,
+                                    final float ref,
+                                    final float value) {
+        // ...
+    }
+
+    public static void assertEquals(final Supplier<String> messageProducer,
+                                    final float ref,
+                                    final float value) {
+        // ...
+    }
+
+    public static void assertEquals(final ErrorCode errorCode,
+                                    final float ref,
+                                    final float value) {
+        // ...
+    }
+
+    public static void assertEquals(final double ref,
+                                    final double value) {
+        // ...
+    }
+
+    public static void assertEquals(final String message,
+                                    final double ref,
+                                    final double value) {
+        // ...
+    }
+
+    public static void assertEquals(final Supplier<String> messageProducer,
+                                    final double ref,
+                                    final double value) {
+        // ...
+    }
+
+    public static void assertEquals(final ErrorCode errorCode,
+                                    final double ref,
+                                    final double value) {
+        // ...
+    }
+
+
+    // -------------------------------------------------------------------------
+    // NOT EQUALS
+    // -------------------------------------------------------------------------
+    public static void assertNotEquals(final Object ref,
+                                       final Object value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final String message,
+                                       final Object ref,
+                                       final Object value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final Supplier<String> messageProducer,
+                                       final Object ref,
+                                       final Object value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final ErrorCode errorCode,
+                                       final Object ref,
+                                       final Object value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final int ref,
+                                       final int value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final String message,
+                                       final int ref,
+                                       final int value) {
+        // ...
+    }
+
+
+    public static void assertNotEquals(final Supplier<String> messageProducer,
+                                       final int ref,
+                                       final int value) {
+        // ...
+    }
+
+
+    public static void assertNotEquals(final ErrorCode errorCode,
+                                       final int ref,
+                                       final int value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final long ref,
+                                       final long value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final String message,
+                                       final long ref,
+                                       final long value) {
+        // ...
+    }
+
+
+    public static void assertNotEquals(final Supplier<String> messageProducer,
+                                       final long ref,
+                                       final long value) {
+        // ...
+    }
+
+
+    public static void assertNotEquals(final ErrorCode errorCode,
+                                       final long ref,
+                                       final long value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final float ref,
+                                       final float value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final String message,
+                                       final float ref,
+                                       final float value) {
+        // ...
+    }
+
+
+    public static void assertNotEquals(final Supplier<String> messageProducer,
+                                       final float ref,
+                                       final float value) {
+        // ...
+    }
+
+
+    public static void assertNotEquals(final ErrorCode errorCode,
+                                       final float ref,
+                                       final float value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final double ref,
+                                       final double value) {
+        // ...
+    }
+
+    public static void assertNotEquals(final String message,
+                                       final double ref,
+                                       final double value) {
+        // ...
+    }
+
+
+    public static void assertNotEquals(final Supplier<String> messageProducer,
+                                       final double ref,
+                                       final double value) {
+        // ...
+    }
+
+
+    public static void assertNotEquals(final ErrorCode errorCode,
+                                       final double ref,
+                                       final double value) {
+        // ...
+    }
+
+
+    // -------------------------------------------------------------------------
+    // LOWER
+    // -------------------------------------------------------------------------
+    public static void assertLower(final int ref,
+                                   final int value) {
+        // ...
+    }
+
+    public static void assertLower(final String message,
+                                   final int ref,
+                                   final int value) {
+        // ...
+    }
+
+    public static void assertLower(final Supplier<String> messageProducer,
+                                   final int ref,
+                                   final int value) {
+        // ...
+    }
+
+    public static void assertLower(final ErrorCode errorCode,
+                                   final int ref,
+                                   final int value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLower(final long ref,
+                                   final long value) {
+        // ...
+    }
+
+    public static void assertLower(final String message,
+                                   final long ref,
+                                   final long value) {
+        // ...
+    }
+
+    public static void assertLower(final Supplier<String> messageProducer,
+                                   final long ref,
+                                   final long value) {
+        // ...
+    }
+
+    public static void assertLower(final ErrorCode errorCode,
+                                   final long ref,
+                                   final long value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLower(final float ref,
+                                   final float value) {
+        // ...
+    }
+
+    public static void assertLower(final String message,
+                                   final float ref,
+                                   final float value) {
+        // ...
+    }
+
+    public static void assertLower(final Supplier<String> messageProducer,
+                                   final float ref,
+                                   final float value) {
+        // ...
+    }
+
+    public static void assertLower(final ErrorCode errorCode,
+                                   final float ref,
+                                   final float value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLower(final double ref,
+                                   final double value) {
+        // ...
+    }
+
+    public static void assertLower(final String message,
+                                   final double ref,
+                                   final double value) {
+        // ...
+    }
+
+    public static void assertLower(final Supplier<String> messageProducer,
+                                   final double ref,
+                                   final double value) {
+        // ...
+    }
+
+    public static void assertLower(final ErrorCode errorCode,
+                                   final double ref,
+                                   final double value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLower(final Integer ref,
+                                   final Integer value) {
+        // ...
+    }
+
+    public static void assertLower(final String message,
+                                   final Integer ref,
+                                   final Integer value) {
+
+        // ...
+    }
+
+    public static void assertLower(final Supplier<String> messageProducer,
+                                   final Integer ref,
+                                   final Integer value) {
+        // ...
+    }
+
+    public static void assertLower(final ErrorCode errorCode,
+                                   final Integer ref,
+                                   final Integer value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLower(final Long ref,
+                                   final Long value) {
+        // ...
+    }
+
+    public static void assertLower(final String message,
+                                   final Long ref,
+                                   final Long value) {
+        // ...
+    }
+
+    public static void assertLower(final Supplier<String> messageProducer,
+                                   final Long ref,
+                                   final Long value) {
+        // ...
+    }
+
+    public static void assertLower(final ErrorCode errorCode,
+                                   final Long ref,
+                                   final Long value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLower(final Double ref,
+                                   final Double value) {
+        // ...
+    }
+
+    public static void assertLower(final String message,
+                                   final Double ref,
+                                   final Double value) {
+        // ...
+    }
+
+    public static void assertLower(final Supplier<String> messageProducer,
+                                   final Double ref,
+                                   final Double value) {
+        // ...
+    }
+
+    public static void assertLower(final ErrorCode errorCode,
+                                   final Double ref,
+                                   final Double value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLower(final BigDecimal ref,
+                                   final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertLower(final String message,
+                                   final BigDecimal ref,
+                                   final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertLower(final Supplier<String> messageProducer,
+                                   final BigDecimal ref,
+                                   final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertLower(final ErrorCode errorCode,
+                                   final BigDecimal ref,
+                                   final BigDecimal value) {
+        // ...
+    }
+
+
+    // -------------------------------------------------------------------------
+    // LOWER OR EQUALS
+    // -------------------------------------------------------------------------
+    public static void assertLowerOrEquals(final int ref,
+                                           final int value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final String message,
+                                           final int ref,
+                                           final int value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final Supplier<String> messageProducer,
+                                           final int ref,
+                                           final int value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final ErrorCode errorCode,
+                                           final int ref,
+                                           final int value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLowerOrEquals(final long ref,
+                                           final long value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final String message,
+                                           final long ref,
+                                           final long value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final Supplier<String> messageProducer,
+                                           final long ref,
+                                           final long value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final ErrorCode errorCode,
+                                           final long ref,
+                                           final long value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLowerOrEquals(final float ref,
+                                           final float value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final String message,
+                                           final float ref,
+                                           final float value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final Supplier<String> messageProducer,
+                                           final float ref,
+                                           final float value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final ErrorCode errorCode,
+                                           final float ref,
+                                           final float value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLowerOrEquals(final double ref,
+                                           final double value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final String message,
+                                           final double ref,
+                                           final double value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final Supplier<String> messageProducer,
+                                           final double ref,
+                                           final double value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final ErrorCode errorCode,
+                                           final double ref,
+                                           final double value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLowerOrEquals(final Integer ref,
+                                           final Integer value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final String message,
+                                           final Integer ref,
+                                           final Integer value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final Supplier<String> messageProducer,
+                                           final Integer ref,
+                                           final Integer value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final ErrorCode errorCode,
+                                           final Integer ref,
+                                           final Integer value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLowerOrEquals(final Long ref,
+                                           final Long value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final String message,
+                                           final Long ref,
+                                           final Long value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final Supplier<String> messageProducer,
+                                           final Long ref,
+                                           final Long value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final ErrorCode errorCode,
+                                           final Long ref,
+                                           final Long value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLowerOrEquals(final Double ref,
+                                           final Double value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final String message,
+                                           final Double ref,
+                                           final Double value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final Supplier<String> messageProducer,
+                                           final Double ref,
+                                           final Double value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final ErrorCode errorCode,
+                                           final Double ref,
+                                           final Double value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertLowerOrEquals(final BigDecimal ref,
+                                           final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final String message,
+                                           final BigDecimal ref,
+                                           final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final Supplier<String> messageProducer,
+                                           final BigDecimal ref,
+                                           final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertLowerOrEquals(final ErrorCode errorCode,
+                                           final BigDecimal ref,
+                                           final BigDecimal value) {
+        // ...
+    }
+
+    // -------------------------------------------------------------------------
+    // HIGHER
+    // -------------------------------------------------------------------------
+    public static void assertHigher(final int ref,
+                                    final int value) {
+        // ...
+    }
+
+    public static void assertHigher(final String message,
+                                    final int ref,
+                                    final int value) {
+        // ...
+    }
+
+    public static void assertHigher(final Supplier<String> messageProducer,
+                                    final int ref,
+                                    final int value) {
+        // ...
+    }
+
+    public static void assertHigher(final ErrorCode errorCode,
+                                    final int ref,
+                                    final int value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigher(final long ref,
+                                    final long value) {
+        // ...
+    }
+
+    public static void assertHigher(final String message,
+                                    final long ref,
+                                    final long value) {
+        // ...
+    }
+
+    public static void assertHigher(final Supplier<String> messageProducer,
+                                    final long ref,
+                                    final long value) {
+        // ...
+    }
+
+    public static void assertHigher(final ErrorCode errorCode,
+                                    final long ref,
+                                    final long value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigher(final float ref,
+                                    final float value) {
+        // ...
+    }
+
+    public static void assertHigher(final String message,
+                                    final float ref,
+                                    final float value) {
+        // ...
+    }
+
+    public static void assertHigher(final Supplier<String> messageProducer,
+                                    final float ref,
+                                    final float value) {
+        // ...
+    }
+
+    public static void assertHigher(final ErrorCode errorCode,
+                                    final float ref,
+                                    final float value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigher(final double ref,
+                                    final double value) {
+        // ...
+    }
+
+    public static void assertHigher(final String message,
+                                    final double ref,
+                                    final double value) {
+        // ...
+    }
+
+    public static void assertHigher(final Supplier<String> messageProducer,
+                                    final double ref,
+                                    final double value) {
+        // ...
+    }
+
+    public static void assertHigher(final ErrorCode errorCode,
+                                    final double ref,
+                                    final double value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigher(final Integer ref,
+                                    final Integer value) {
+        // ...
+    }
+
+    public static void assertHigher(final String message,
+                                    final Integer ref,
+                                    final Integer value) {
+        // ...
+    }
+
+    public static void assertHigher(final Supplier<String> messageProducer,
+                                    final Integer ref,
+                                    final Integer value) {
+        // ...
+    }
+
+    public static void assertHigher(final ErrorCode errorCode,
+                                    final Integer ref,
+                                    final Integer value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigher(final Long ref,
+                                    final Long value) {
+        // ...
+    }
+
+    public static void assertHigher(final String message,
+                                    final Long ref,
+                                    final Long value) {
+        // ...
+    }
+
+    public static void assertHigher(final Supplier<String> messageProducer,
+                                    final Long ref,
+                                    final Long value) {
+        // ...
+    }
+
+    public static void assertHigher(final ErrorCode errorCode,
+                                    final Long ref,
+                                    final Long value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigher(final Double ref,
+                                    final Double value) {
+        // ...
+    }
+
+    public static void assertHigher(final String message,
+                                    final Double ref,
+                                    final Double value) {
+        // ...
+    }
+
+    public static void assertHigher(final Supplier<String> messageProducer,
+                                    final Double ref,
+                                    final Double value) {
+        // ...
+    }
+
+    public static void assertHigher(final ErrorCode errorCode,
+                                    final Double ref,
+                                    final Double value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigher(final BigDecimal ref,
+                                    final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertHigher(final String message,
+                                    final BigDecimal ref,
+                                    final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertHigher(final Supplier<String> messageProducer,
+                                    final BigDecimal ref,
+                                    final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertHigher(final ErrorCode errorCode,
+                                    final BigDecimal ref,
+                                    final BigDecimal value) {
+        // ...
+    }
+
+
+    // -------------------------------------------------------------------------
+    // assertHigherOrEquals
+    // -------------------------------------------------------------------------
+    public static void assertHigherOrEquals(final int ref,
+                                            final int value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final String message,
+                                            final int ref,
+                                            final int value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final Supplier<String> messageProducer,
+                                            final int ref,
+                                            final int value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final ErrorCode errorCode,
+                                            final int ref,
+                                            final int value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigherOrEquals(final long ref,
+                                            final long value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final String message,
+                                            final long ref,
+                                            final long value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final Supplier<String> messageProducer,
+                                            final long ref,
+                                            final long value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final ErrorCode errorCode,
+                                            final long ref,
+                                            final long value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigherOrEquals(final float ref,
+                                            final float value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final String message,
+                                            final float ref,
+                                            final float value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final Supplier<String> messageProducer,
+                                            final float ref,
+                                            final float value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final ErrorCode errorCode,
+                                            final float ref,
+                                            final float value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigherOrEquals(final double ref,
+                                            final double value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final String message,
+                                            final double ref,
+                                            final double value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final Supplier<String> messageProducer,
+                                            final double ref,
+                                            final double value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final ErrorCode errorCode,
+                                            final double ref,
+                                            final double value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigherOrEquals(final Integer ref,
+                                            final Integer value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final Supplier<String> messageProducer,
+                                            final Integer ref,
+                                            final Integer value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final String message,
+                                            final Integer ref,
+                                            final Integer value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final ErrorCode errorCode,
+                                            final Integer ref,
+                                            final Integer value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigherOrEquals(final Long ref,
+                                            final Long value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final String message,
+                                            final Long ref,
+                                            final Long value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final Supplier<String> messageProducer,
+                                            final Long ref,
+                                            final Long value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final ErrorCode errorCode,
+                                            final Long ref,
+                                            final Long value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigherOrEquals(final Double ref,
+                                            final Double value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final String message,
+                                            final Double ref,
+                                            final Double value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final Supplier<String> messageProducer,
+                                            final Double ref,
+                                            final Double value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final ErrorCode errorCode,
+                                            final Double ref,
+                                            final Double value) {
+        // ...
+    }
+
+    // ------------------------------------------------------------------------
+    public static void assertHigherOrEquals(final BigDecimal ref,
+                                            final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final String message,
+                                            final BigDecimal ref,
+                                            final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final Supplier<String> messageProducer,
+                                            final BigDecimal ref,
+                                            final BigDecimal value) {
+        // ...
+    }
+
+    public static void assertHigherOrEquals(final ErrorCode errorCode,
+                                            final BigDecimal ref,
+                                            final BigDecimal value) {
+        // ...
+    }
+
+
+    // -------------------------------------------------------------------------
+    // Assert throws
+    // -------------------------------------------------------------------------
+    public static void assertThrow(final String message,
+                                   final VoidFunctionWithException function) {
+        // ...
+    }
+
+
+    // -------------------------------------------------------------------------
+    // TOOLS
+    // -------------------------------------------------------------------------
+    public static void throwException(final String message) {
+        // ...
+    }
+
+    public static void throwException(final ErrorCode errorCode) {
+        // ...
+    }
+
+    public static void throwException(final ErrorCode errorCode,
+                                      final String message,
+                                      final Serializable... args) {
+        // ...
+    }
+}
     ]]>
 </src>
 
