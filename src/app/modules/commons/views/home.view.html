@@ -23,6 +23,41 @@
     </header>
 
     <div class="content">
+        <annoncement title="Inugami 2.2.0" date="2023-03-19">
+            <ul>
+                <li class="feature">Upgrade dependencies version</a>
+                    <ul>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/37e0506cb8de7941f3196b158d17efa34c7e2302" target="_blank">Tomcat 8.5.84</a></li>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/d79341a1c1eb275f692c35757f9180728ede39cf" target="_blank">Spring beans 5.2.20.RELEASE</a></li>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/a72f21a661b26396d8aea230522e1bdcb80fe216" target="_blank">Guava 29.0-jre</a></li>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/b2bd32c6831b6db5d79aee9f29197bdf535e0543" target="_blank">JSoup 1.15.3</a></li>
+                    </ul>
+                </li>
+
+                <li class="feature">Add new features</a>
+                    <ul>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/53cae7dfe25be5a72abc447b88e89a1932415f83" target="_blank">Add JSON appender with MDC Serializable values</a></li>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/fd55fa87a4458da3709de0d3c93db1be661be44f" target="_blank">Add Spi convertors to manage MDC Serializable values</a></li>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/8a282dac559a0cb3a43835ce044d3af3484df484#diff-a0e9c0f6285af597352360747536397006c070a892f7d18e5bf659d98b9c817c"
+                               target="_blank">Add Regex assertions in Asserts class</a></li>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/85d8be494bb13da3b11455d78e150b38594ff09c" target="_blank">Allows to load Spring beans from SpiLoader service</a></li>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/b747a440a05861bf513aacefef3449890748928c" target="_blank">Refactoring SpiLoader to manage Spring Beans</a></li>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/36bf6f40fa04ec083a47ac8098f6fb73798aada6" target="_blank">Add field in ErrorCode interface</a></li>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/4d856c60e51f48e075ee4474b6a0aed7d3ed9433#diff-1dcbbd7bee16493b91a8c4da7e55cd819ddb376ae448a3b616cb546d3d709cdc"
+                            target="_blank">Add Warnings class to be able to push warning in warings context with the same approch than Asserts class for errors</a></li>
+                    </ul>
+                </li>
+
+                <li class="fix">
+                    <ul>
+                        <li><a href="https://github.com/inugamiio/inugami/commit/57cfc7f834ba61544fa71dd1dce7e27d99063263" target="_blank">fix stackoverflow on errorCode.addDetail()</a></li>
+                        
+                    </ul>
+                </li>
+            </ul>
+        </annoncement>
+
+
         <annoncement title="Inugami 2.1.1" date="2023-03-12">
             <ul>
                 <li class="feature"><a routerLink="inugami/inugami_api#errorCode">Improvement on Asserts class with more assets methods</a>
