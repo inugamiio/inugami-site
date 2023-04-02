@@ -22,6 +22,92 @@
         <h2>Annoncements</h2>
     </header>
 
+    <annoncement title="Inugami 2.2.2" date="2023-04-02">
+        <ul>
+            <li class="feature">New features
+                <ul>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/ec52dd53aa8dd206a3ae993f527848fea458066c" target="_blank">manage CORS</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/78109baa1e6d88d11e2e62e6987b5ead4a63b246" target="_blank">load request interceptor from SPI context</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/cd8e11ecfd9f64d5aab5a376fb1e2fe3c7d8c970" target="_blank">by pass h2 console in IOLOG</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/4f4148bd0d8610c40f459a71153543ad28f6ace4" target="_blank">add addHeader on IoInfoDTO build with key and value as String</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/99d7b7555bf5659259d34f159ba5edcb03673c2f" target="_blank">dd IoInfoDTO.IoInfoDTOBuilder method to add headers with Iterator Map.Entry</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/afa899d620a92ac1b9e09bb3178102ba234877fc" target="_blank">rename delais by duration , delais method is deprecated</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/a62b9b43c9597745c3f3fdce0e36b04ff116b81d" target="_blank">add urlPattern in MDC and refactoring MdcService</a></li>
+                </ul>
+            </li>
+
+            <li class="fix">Issues fixed:
+                <ul>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/5d66a7c0b0d1074fa851de11ef0ad56f844bc267" target="_blank">fix Jackson java 8 date encoding in UnitTestHelper</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/8d16e856a51600d57337bbf3f14e9aefffb461d5" target="_blank">fix windows \r in UnitTestHelper assertText</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/7f682d44cca59cc7004aa203435d0e1c614feefe" target="_blank">fix traceId initialization in Iolog interceptor</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/ab177c191d7430ffc4eb86f7c08cd66e6c89c939" target="_blank">fix duration in IoInfoDTO toString</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/8b04dd76eb1f0c11b30867133ab5e408d21f082a" target="_blank">fix file initialization in FileWriter</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/0c00d0eecf9bc6c211acda23cd5163a602e961ac" target="_blank">Fix filter intercepter NPE on errror resolver</a></li>
+                </ul>
+            </li>
+        </ul>
+    </annoncement>
+
+    <annoncement title="Inugami 2.2.1" date="2023-03-26">
+        <ul>
+            <li class="feature">New features
+                <ul>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/24f9a55fcea915e7e775b4f4eaacaf64902882a2" target="_blank">add url in error code</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/5576dd561ea83b11d480a0125d61b43f6eca4d7f" target="_blank">allow JsonAppender to write file</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/afbfd7d481f389f575f2cfefd9380a04ebcb49fa" target="_blank">add MDC initializer</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/c34b024ee175a464c6d1fd9f76ab26502778812e" target="_blank">add MDC information on IOLOG</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/f9d7ac9fd1104d08dd286edf135ceab5aae004bf" target="_blank">add tracking information</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/d52e3f0b25e4021e4c59cf092e229e752774e81a" target="_blank">add feign interceptor and Decoder</a></li>
+                </ul>
+            </li>
+
+            <li class="fix">Issues fixed:
+                <ul>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/db76d730e04e11080cdff6822645f1651774328f" target="_blank">fix IOLOG status</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/82fd891cb7d9eb4edbd56961d138073e57bc0223" target="_blank">fix static on assertModel</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/43f7f08843204cfa7fd820b9ba1691caaf72de93" target="_blank">fix toBuilder</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/856add0916f05b296b25d0ccbf89ad1531ef4a6f" target="_blank">reset warning context</a></li>
+                </ul>
+            </li>
+        </ul>
+    </annoncement>
+
+
+    <annoncement title="Inugami 2.2.0" date="2023-03-19">
+        <ul>
+            <li class="feature">Upgrade dependencies version
+                <ul>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/37e0506cb8de7941f3196b158d17efa34c7e2302" target="_blank">Tomcat 8.5.84</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/d79341a1c1eb275f692c35757f9180728ede39cf" target="_blank">Spring beans 5.2.20.RELEASE</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/a72f21a661b26396d8aea230522e1bdcb80fe216" target="_blank">Guava 29.0-jre</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/b2bd32c6831b6db5d79aee9f29197bdf535e0543" target="_blank">JSoup 1.15.3</a></li>
+                </ul>
+            </li>
+
+            <li class="feature">Add new features
+                <ul>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/53cae7dfe25be5a72abc447b88e89a1932415f83" target="_blank">Add JSON appender with MDC Serializable values</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/fd55fa87a4458da3709de0d3c93db1be661be44f" target="_blank">Add Spi convertors to manage MDC Serializable values</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/8a282dac559a0cb3a43835ce044d3af3484df484#diff-a0e9c0f6285af597352360747536397006c070a892f7d18e5bf659d98b9c817c"
+                           target="_blank">Add Regex assertions in Asserts class</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/85d8be494bb13da3b11455d78e150b38594ff09c" target="_blank">Allows to load Spring beans from SpiLoader service</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/b747a440a05861bf513aacefef3449890748928c" target="_blank">Refactoring SpiLoader to manage Spring Beans</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/36bf6f40fa04ec083a47ac8098f6fb73798aada6" target="_blank">Add field in ErrorCode interface</a></li>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/4d856c60e51f48e075ee4474b6a0aed7d3ed9433#diff-1dcbbd7bee16493b91a8c4da7e55cd819ddb376ae448a3b616cb546d3d709cdc"
+                           target="_blank">Add Warnings class to be able to push warning in warings context with the same approch than Asserts class for errors</a></li>
+                </ul>
+            </li>
+
+            <li class="fix">Issues fixed:
+                <ul>
+                    <li><a href="https://github.com/inugamiio/inugami/commit/57cfc7f834ba61544fa71dd1dce7e27d99063263" target="_blank">
+                        fix stackoverflow on errorCode.addDetail()</a></li>
+                </ul>
+            </li>
+        </ul>
+    </annoncement>
+
     <div class="content">
         <annoncement title="Inugami 2.2.0" date="2023-03-19">
             <ul>
