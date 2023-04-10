@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"io.inugami.commons.test"},{"l":"io.inugami.commons.test.helpers"},{"l":"io.inugami.commons.test.logs"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"io.inugami.commons.test"},{"l":"io.inugami.commons.test.api"},{"l":"io.inugami.commons.test.logs"}]

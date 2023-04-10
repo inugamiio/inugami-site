@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"io.inugami.monitoring.sensors.defaults.mbean"},{"l":"io.inugami.monitoring.sensors.defaults.system"}]

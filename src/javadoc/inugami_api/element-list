@@ -4,15 +4,19 @@ io.inugami.api.constants
 io.inugami.api.ctx
 io.inugami.api.dao
 io.inugami.api.dao.event
+io.inugami.api.documentation
 io.inugami.api.exceptions
 io.inugami.api.exceptions.asserts
 io.inugami.api.exceptions.services
 io.inugami.api.exceptions.services.exceptions
 io.inugami.api.exceptions.tools
+io.inugami.api.exceptions.warnings
 io.inugami.api.functionnals
 io.inugami.api.handlers
 io.inugami.api.listeners
 io.inugami.api.loggers
+io.inugami.api.loggers.mdc.initializer
+io.inugami.api.loggers.mdc.mapper
 io.inugami.api.mapping
 io.inugami.api.mapping.events
 io.inugami.api.metrics
@@ -25,6 +29,7 @@ io.inugami.api.models.events
 io.inugami.api.models.plugins
 io.inugami.api.models.tools
 io.inugami.api.monitoring
+io.inugami.api.monitoring.cors
 io.inugami.api.monitoring.data
 io.inugami.api.monitoring.exceptions
 io.inugami.api.monitoring.interceptors
@@ -38,5 +43,4 @@ io.inugami.api.providers
 io.inugami.api.providers.concurrent
 io.inugami.api.providers.task
 io.inugami.api.spi
-io.inugami.api.spi.test
 io.inugami.api.tools
