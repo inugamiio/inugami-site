@@ -790,6 +790,58 @@
                     </div>
                 </article>
                     
+                <!--****************************************************************************************
+                ** MdcService
+                ****************************************************************************************-->
+                <article>
+                    <header>
+                        <a href="inugami/inugami_api#mdcService" class="anchor" id="mdcService"><h2>MdcService</h2></a>
+                    </header>
+                    <div class="content">
+                        <p>
+                            MdcService is designed to manage the mapped diagnostic context. The MDC allows to attach information
+                            on each logs on same thread. The MDC context is attach on a ThreadLocal provide by SLF4J. 
+                        </p>
+                        
+                        <p>
+                            The MDC context is a powerful approach to track all required information for a production ready infrastructure.
+                            Inugami use this context on different features likes :
+                        </p>
+
+                        <ul>
+                            <li>IOLOG management (input/output on each application calls)</li>
+                            <li>Partnerlog (on each calls to another webservices)</li>
+                            <li>Exception management</li>
+                            <li>alerting mechanism</li>
+                            <li>...</li>
+                        </ul>
+                        
+                        <p>
+                            To make this context more usefull, the MdcService having been designed.
+                        </p>
+
+                        <pre>
+                            <code [languages]="['java']" [highlight]="sourceCode['mdcService_usage']"></code>
+                        </pre>
+                        
+
+                        <p>
+                            MdcService contains some pre-defined MDC keys :
+                        </p>
+                        <pre>
+                            <code [languages]="['java']" [highlight]="sourceCode['mdcService_key']"></code>
+                        </pre>
+                        
+
+                        <p>
+                            Each mdc keys have corresponding getters and setters
+                        </p>
+                        <pre>
+                            <code [languages]="['java']" [highlight]="sourceCode['mdcService_api']"></code>
+                        </pre>
+                        
+                    </div>
+                </article>
             
                 <!--****************************************************************************************
                 ** Exception management

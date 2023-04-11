@@ -9,7 +9,7 @@
 <dependency>
     <groupId>io.inugami</groupId>
     <artifactId>inugami_commons_test</artifactId>
-    <version>2.1.1</version>
+    <version>2.3.0</version>
 </dependency>
 ]]>
 </src>
