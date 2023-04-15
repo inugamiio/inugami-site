@@ -31,6 +31,20 @@
                             <a target="_blank" href="http://inugami.io/javadoc/inugami_commons_test">Link for JavaDoc</a>
                         </p>
                         
+                        <p>
+                            Unit tests are very important aspect in software development. 
+                            Java has a lot of tools to help with unit test creation, like <a href="https://assertj.github.io/doc/" target="_blank">AssertJ</a>,
+                            <a href="https://site.mockito.org/" target="_blank">Mockito</a> and others.
+                        </p>
+
+                        <p>
+                            A lot of people have only the code coverage in mind. But the most important metric is the mutation coverage.
+                            The mutation coverage can be computed by <a href="https://pitest.org/" target="_blank">PiTest</a> with specific maven plugin.
+                        </p>
+
+                        <p>
+                            <strong>inugami_commons_test</strong> is designed to help you to improve your mutation coverage.
+                        </p>
                     </div>
                 </article>
             
@@ -39,37 +53,131 @@
                 ****************************************************************************************-->
                 <article>
                     <header>
-                        UnitTestHelper
+                        <h2>UnitTestHelper</h2>
                     </header>
                     <div class="content">
+                        
 
                         <doc-item title="Load and read file" [level]="3" href="inugami/inugami_commons_test#" id="load_read">
-                            <doc-item title="loadJsonReference" [level]="4" href="inugami/inugami_commons_test#loadJsonReference" id="loadJsonReference">
-
+                            <doc-item title="readFileRelative" [level]="4" href="inugami/inugami_commons_test#readFileRelative" id="readFileRelative">
+                                <p>
+                                    Some time we need to load file in unit test. The method <strong>UnitTestHelper.readFileRelative</strong> is designed
+                                    to load file present in <strong>/src/test/resources</strong>
+                                </p>
+                                <tips title="Tips" type="info">
+                                    Intellij is pretty smart and can navigate to corresponding file by clicking on the file (CRTL+Click).
+                                </tips>
+                                <pre>
+                                    <legend>/src/test/resources/test/UnitTestHelperFile/readFileRelative.txt</legend>
+                                    <code [languages]="['java']" [highlight]="sourceCode['readFileRelativeFile']">                      
+                                    </code>
+                                </pre>
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['readFileRelative']">                      
+                                    </code>
+                                </pre>
                             </doc-item>
 
-                            <doc-item title="readFile" [level]="4" href="inugami/inugami_commons_test#readFile" id="readFile">
+                            <doc-item title="readFileIntegration" [level]="4" href="inugami/inugami_commons_test#readFileIntegration" id="readFileIntegration">
+                                <p>
+                                    The <strong>readFileIntegration</strong> method is the same as <strong>readFileRelative</strong>, but designed to load integration  
+                                    resources presents in <strong>/src/test_it/resources</strong>
+                                </p>
+                                <pre>
+                                    <legend>/src/test/resources/test/UnitTestHelperFile/readFileIntegration.txt</legend>
+                                    <code [languages]="['java']" [highlight]="sourceCode['readFileRelativeFile']">                      
+                                    </code>
+                                </pre>
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['readFileIntegration']">                      
+                                    </code>
+                                </pre>
+                            </doc-item>
 
+
+                            <doc-item title="readFile" [level]="4" href="inugami/inugami_commons_test#readFile" id="readFile">
+                                <p>
+                                    The <strong>readFile</strong> method is the root method to load file.  readFileRelative and readFileIntegration use the 
+                                    <strong>readFile</strong> to load file content after path resolution.
+                                </p>
+                                <p>
+                                    This method is design to load file by absolute file path. UnitTestHelper have couple of methods to load file, one 
+                                    with string, and the second with File object.
+                                </p>
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['readFile']">                      
+                                    </code>
+                                </pre>
                             </doc-item>
                         </doc-item>
 
 
-                        <doc-item title="Load stub" [level]="3" href="inugami/inugami_commons_test#" id="load_stub">
-                            <doc-item title="loadStub" [level]="4" href="inugami/inugami_commons_test#loadStub" id="loadStub">
 
-                            </doc-item>
+                        <doc-item title="build path" [level]="3" href="inugami/inugami_commons_test#buildpath" id="buildpath">
+                                The <strong>UnitTestHelper</strong> have three methods to build path :
+                                <ul>
+                                    <li><strong>buildTestFilePath:</strong> to build relative resource path from /src/test/resource</li>
+                                    <li><strong>buildIntegrationTestFilePath:</strong> to build relative resource path from /src/test_it/resource</li>
+                                    <li><strong>buildPath:</strong> for build absolute path</li>
+                                </ul>
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['buildpath']">                      
+                                    </code>
+                                </pre>
 
-                            <doc-item title="loadObjectStrubByUid" [level]="4" href="inugami/inugami_commons_test#loadObjectStrubByUid" id="loadObjectStrubByUid">
+                                <pre>
+                                    <legend>usage</legend>
+                                    <code [languages]="['java']" [highlight]="sourceCode['buildpathUsage']">                      
+                                    </code>
+                                </pre>
+                        </doc-item>
 
-                            </doc-item>
 
-                            <doc-item title="loadListObjectStrubByUid" [level]="4" href="inugami/inugami_commons_test#loadListObjectStrubByUid" id="loadListObjectStrubByUid">
+                        <doc-item title="Load stub" [level]="3" href="inugami/inugami_commons_test#loadRelativeStub" id="loadRelativeStub">
+                            <p>
+                                When you use Mockito to mock DAO, it can be useful to be able to load multiple stub files. 
+                            </p>
+                            <p>
+                                The <strong>UnitTestHelper</strong> has different methods to load and manage Mockito stubs.
+                            </p>
 
-                            </doc-item>
 
-                            <doc-item title="loadJsonFromResponse" [level]="4" href="inugami/inugami_commons_test#loadJsonFromResponse" id="loadJsonFromResponse">
+                            <pre>
+                                <legend>usage</legend>
+                                <code [languages]="['java']" [highlight]="sourceCode['loadRelativeStubFiles']">                      
+                                </code>
 
-                            </doc-item>
+                                <code [languages]="['java']" [highlight]="sourceCode['loadRelativeStub']">                      
+                                </code>
+                            </pre>
+
+                            <p>
+                                Loading stub can manage <strong>Json</strong> or <strong>Yaml</strong> files to defined your stubs:
+                            </p>
+
+                            <pre>
+                                <code [languages]="['javascript']" [highlight]="sourceCode['loadRelativeStubFilesJson']">                      
+                                </code>
+                                <code [languages]="['yaml']" [highlight]="sourceCode['loadRelativeStubFilesYaml']">                      
+                                </code>
+                            </pre>
+
+                            <pre>
+                                <legend>Availables methods</legend>
+                                <code [languages]="['java']" [highlight]="sourceCode['loadRelativeStubMethods']">                      
+                                </code>
+                            </pre>
+
+
+                            <p>
+                                When you mock search method, we need to resolve corresponding file id with given parameters.
+                                To do that you can implement an idResolver:
+                            </p>
+                            <pre>
+                                <code [languages]="['java']" [highlight]="sourceCode['loadRelativeStubIdResolver']">                      
+                                </code>
+                            </pre>
+
                         </doc-item>
 
 

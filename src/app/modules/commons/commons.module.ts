@@ -12,12 +12,13 @@ import { HttpServices } from './services/http.services';
 import { HomeView } from './views/home.view';
 import { Annoncement } from './components/annoncenement/annoncement';
 import { DocItem } from './components/doc-item/doc.item';
-
+import { Tips } from './components/tips/tips';
 @NgModule({
     declarations: [
         HomeView,
         Annoncement,
-        DocItem
+        DocItem,
+        Tips
     ],
     imports: [
         BrowserModule,
@@ -30,7 +31,8 @@ import { DocItem } from './components/doc-item/doc.item';
     exports: [
         HomeView,
         Annoncement,
-        DocItem
+        DocItem,
+        Tips
     ],
     providers: [
         HttpServices,

@@ -15,4 +15,213 @@
 </src>
 
 
+
+<!--*********************************************************************** 
+* readFileRelative    
+***********************************************************************-->
+<src name="readFileRelative">
+    <![CDATA[
+    final String value = UnitTestHelper.readFileRelative("test/UnitTestHelperFile/readFileRelative.txt");
+    assertThat(value).isEqualTo("hello");
+    ]]>
+    </src>
+    
+
+
+<src name="readFileRelativeFile">
+    <![CDATA[
+    hello
+    ]]>
+</src>
+    
+<src name="readFileIntegration">
+    <![CDATA[
+    final String value = UnitTestHelper.readFileIntegration("test/UnitTestHelperFile/readFileRelative.txt");
+    assertThat(value).isEqualTo("hello");
+    ]]>
+    </src>
+    
+    
+<src name="readFile">
+    <![CDATA[
+    public static String readFile(final File file) {
+        return UnitTestHelperFile.readFile(file);
+    }
+
+    public static String readFile(final String file) {
+        return UnitTestHelperFile.readFile(file);
+    }
+]]>
+</src>
+
+<!--*********************************************************************** 
+* buildpath    
+***********************************************************************-->
+<src name="buildpath">
+    <![CDATA[
+    public static File buildTestFilePath(final String... filePathParts) {
+        return UnitTestHelperPath.buildTestFilePath(filePathParts);
+    }
+
+    public static File buildIntegrationTestFilePath(final String... filePathParts) {
+        return UnitTestHelperPath.buildIntegrationTestFilePath(filePathParts);
+    }
+
+    public static File buildPath(final String... parts) {
+        return UnitTestHelperPath.buildPath(parts);
+    }
+
+]]>
+</src>
+
+<src name="buildpathUsage">
+    <![CDATA[
+    final File file = UnitTestHelper.buildTestFilePath("test", "UnitTestHelperFile", "readFileRelative.txt");
+    assertThat(UnitTestHelper.readFile(file)).isEqualTo("hello");
+]]>
+</src>
+
+
+<!--*********************************************************************** 
+* stub    
+***********************************************************************-->
+<src name="loadRelativeStubFiles">
+    <![CDATA[
+    .
+    └── test
+        └── unitTestHelperStubTest
+            ├── userDto.1.json
+            └── userDto.2.yaml
+]]>
+</src>
+<src name="loadRelativeStub">
+    <![CDATA[
+@Slf4j
+@ExtendWith(MockitoExtension.class)
+public class UnitTestHelperTest {
+
+    @Mock
+    private UnitTestHelperStubTestDAO dao;
+
+    @Test
+    public void loadRelativeStub_shouldLoadMocks() {
+        final List<UserDto> cache = new ArrayList<>();
+        when(dao.getUserById(anyLong())).thenAnswer(answer -> UnitTestHelper.loadRelativeStub(answer,
+                                                                                              "test/unitTestHelperStubTest",
+                                                                                              UserDto::getId,
+                                                                                              UserDto.class,
+                                                                                              cache
+        ));
+
+        assertThat(dao.getUserById(1L)).isNotNull();
+        assertThat(dao.getUserById(1L).getId()).isEqualTo(1L);
+        assertThat(cache.size()).isEqualTo(2);
+    }
+}
+]]>
+</src>
+
+<src name="loadRelativeStubFilesJson">
+    <![CDATA[
+    {
+        "id": 1,
+        "firstName": "John",
+        "lastName": "Smith",
+        "creationDate": "2023-04-07T14:04:00"
+    }
+]]>
+</src>
+
+<src name="loadRelativeStubFilesYaml">
+    <![CDATA[
+    id: 2
+    firstName: "Albertine"
+    lastName: "Chandonnet"
+    creationDate: "2023-04-08T09:04:00"
+]]>
+</src>
+
+<src name="loadRelativeStubMethods">
+    <![CDATA[
+public static <T, ID> T loadIntegrationTestStub(final InvocationOnMock answer,
+                                                final String folder,
+                                                final Function<T, ID> getId,
+                                                final Class<? extends T> userDtoClass) {}
+
+public static <T, ID> T loadIntegrationTestStub(final InvocationOnMock answer,
+                                                final String folder,
+                                                final Function<T, ID> getId,
+                                                final Function<Object[], ID> idResolver,
+                                                final Class<? extends T> userDtoClass) {}
+
+public static <T, ID> T loadIntegrationTestStub(final InvocationOnMock answer,
+                                                final String folder,
+                                                final Function<T, ID> getId,
+                                                final Class<? extends T> userDtoClass,
+                                                final List<T> cache) {}
+
+public static <T, ID> T loadIntegrationTestStub(final InvocationOnMock answer,
+                                                final String folder,
+                                                final Function<T, ID> getId,
+                                                final Function<Object[], ID> idResolver,
+                                                final Class<? extends T> userDtoClass,
+                                                final List<T> cache) {}
+
+
+public static <T, ID> T loadRelativeStub(final InvocationOnMock answer,
+                                        final String folder,
+                                        final Function<T, ID> getId,
+                                        final Class<? extends T> userDtoClass) {}
+
+public static <T, ID> T loadRelativeStub(final InvocationOnMock answer,
+                                         final String folder,
+                                         final Function<T, ID> getId,
+                                         final Function<Object[], ID> idResolver,
+                                         final Class<? extends T> userDtoClass) {}
+
+public static <T, ID> T loadRelativeStub(final InvocationOnMock answer,
+                                         final String folder,
+                                         final Function<T, ID> getId,
+                                         final Class<? extends T> userDtoClass,
+                                         final List<T> cache) {}
+
+public static <T, ID> T loadRelativeStub(final InvocationOnMock answer,
+                                         final String folder,
+                                         final Function<T, ID> getId,
+                                         final Function<Object[], ID> idResolver,
+                                         final Class<? extends T> userDtoClass,
+                                         final List<T> cache) {}
+]]>
+</src>
+
+
+<src name="loadRelativeStubIdResolver">
+    <![CDATA[
+    @Test
+    public void loadRelativeStub_withIdResolver_shouldLoadMocks() {
+        final List<UserDto> cache = new ArrayList<>();
+
+        when(dao.search(anyString())).thenAnswer(answer -> UnitTestHelper.loadRelativeStub(answer,
+                                                                                           "test/unitTestHelperStubTest",
+                                                                                           UserDto::getId,
+                                                                                           args -> {
+                                                                                               if ("John".equalsIgnoreCase(String.valueOf(args[0]))) {
+                                                                                                   return 1;
+                                                                                               } else {
+                                                                                                   return 2;
+                                                                                               }
+                                                                                           },
+                                                                                           UserDto.class,
+                                                                                           cache
+        ));
+
+
+        assertThat(dao.search("John").getFirstName()).isEqualTo("John");
+        assertThat(dao.search("Albertine").getFirstName()).isEqualTo("Albertine");
+    }
+]]>
+</src>
+
+<!--*********************************************************************** 
+***********************************************************************-->
 </xml>
