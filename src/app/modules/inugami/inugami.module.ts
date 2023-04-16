@@ -17,8 +17,21 @@ import { InugamiAsideMenu } from './components/inugami-aside-menu/inugami.aside.
 import { InugamiApiView } from '../inugami/views/inugami.api.view';
 import { InugamiApiToc } from './components/inugami-aside-menu/inugami.api.toc';
 
+import { InugamiCommonsView } from './views/inugami_commons/inugami_commons'; 
+import { InugamiCommonsToc } from './views/inugami_commons/inugami_commons_toc';
+
+
+import { InugamiCommonsSpringView} from './views/inugami_commons_spring/inugami_commons_spring'; 
+import { InugamiCommonsSpringToc } from './views/inugami_commons_spring/inugami_commons_spring_toc';
+
 import { InugamiCommonsTestView } from '../inugami/views/inugami_commons_test/inugami_commons_test';
 import { InugamiCommonsTestToc } from '../inugami/views/inugami_commons_test/inugami_commons_test_toc';
+
+import { InugamiLogsObfuscatorToc } from './views/inugami_logs_obfuscator/inugami_logs_obfuscator_toc';
+import { InugamiLogsObfuscatorView } from './views/inugami_logs_obfuscator/inugami_logs_obfuscator';
+
+
+
 
 @NgModule({
     declarations: [
@@ -26,8 +39,18 @@ import { InugamiCommonsTestToc } from '../inugami/views/inugami_commons_test/inu
         InugamiAsideMenu,
         InugamiApiView,
         InugamiApiToc,
+        
+        InugamiCommonsView,
+        InugamiCommonsToc,
+
+        InugamiCommonsSpringView,
+        InugamiCommonsSpringToc,
+        
         InugamiCommonsTestView,
-        InugamiCommonsTestToc
+        InugamiCommonsTestToc,
+
+        InugamiLogsObfuscatorToc,
+        InugamiLogsObfuscatorView
     ],
     imports: [
         BrowserModule,
@@ -43,6 +66,13 @@ import { InugamiCommonsTestToc } from '../inugami/views/inugami_commons_test/inu
         InugamiAsideMenu,
         InugamiApiView,
         InugamiApiToc,
+
+        InugamiCommonsView,
+        InugamiCommonsToc,
+        
+        InugamiCommonsSpringView,
+        InugamiCommonsSpringToc,
+
         InugamiCommonsTestView,
         InugamiCommonsTestToc
     ]
