@@ -24,6 +24,7 @@ export class InugamiApiView  implements  OnInit {
     }
     ngOnInit(): void {
         this.googleAnalytics.pageView("/inugami/inugami_api");
+        this.httpService.getSourceCode("data/inugami.xml").then(data=> this.initData(data));
         this.httpService.getSourceCode("data/inugami_api/source_code.xml").then(data=> this.initData(data));
     }
   

@@ -24,7 +24,9 @@ export class InugamiCommonsTestView  implements  OnInit {
     }
     ngOnInit(): void {
         this.googleAnalytics.pageView("/inugami/inugami_commons_test");
+        this.httpService.getSourceCode("data/inugami.xml").then(data=> this.initData(data));
         this.httpService.getSourceCode("data/inugami_commons_test/source_code.xml").then(data=> this.initData(data));
+        
     }
   
 
