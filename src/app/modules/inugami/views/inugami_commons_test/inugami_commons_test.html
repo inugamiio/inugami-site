@@ -181,54 +181,88 @@
                         </doc-item>
 
 
-                        <doc-item title="Convert to JSON" [level]="3" href="inugami/convertToJsonMain#" id="convertToJsonMain">
-                            <doc-item title="convertToJson" [level]="4" href="inugami/inugami_commons_test#convertToJson" id="convertToJson">
-
-                            </doc-item>
-
-                            <doc-item title="forceConvertToJson" [level]="4" href="inugami/inugami_commons_test#forceConvertToJson" id="forceConvertToJson">
-
-                            </doc-item>
-
-                            <doc-item title="convertToJsonWithoutIndent" [level]="4" href="inugami/inugami_commons_test#convertToJsonWithoutIndent" id="convertToJsonWithoutIndent">
-
-                            </doc-item>
-
-                            <doc-item title="loadJson" [level]="4" href="inugami/inugami_commons_test#loadJson" id="loadJson">
-
-                            </doc-item>
-
+                        <doc-item title="Convert to JSON" [level]="3" href="inugami/convertToJsonMain#convertToJsonMain" id="convertToJsonMain">
                             <doc-item title="convertFromJson" [level]="4" href="inugami/inugami_commons_test#convertFromJson" id="convertFromJson">
 
+                                <p>
+                                    The <strong>convertFromJson</strong> allows to transform String or byte array as Java Object.
+                                </p>
+                                <pre>
+                                    <code [languages]="['javascript']" [highlight]="sourceCode['convertFromJsonJson']">                      
+                                    </code>
+                                </pre>
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['convertFromJsonUsage']">                      
+                                    </code>
+                                </pre>
+
+                                <p>
+                                    The <strong>convertFromJson</strong> use Jackson to unmarshall value.
+                                </p>
+
+                                <p>
+                                    By default, convertFromJson will load resources from <strong>/src/test/resources</strong>. 
+                                    Excepted for <strong>loadIntegrationJson</strong> who will load from <strong>/src/test_it/resources</strong>. 
+                                </p>
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['convertFromJsonMethods']">                      
+                                    </code>
+                                </pre>
+
                             </doc-item>
-
-                        </doc-item>
-
-                        <doc-item title="Build path" [level]="3" href="inugami/inugami_commons_test#build_path" id="build_path">
-                            <doc-item title="buildTestFilePath" [level]="4" href="inugami/inugami_commons_test#buildTestFilePath" id="buildTestFilePath">
-
-                            </doc-item>
-
-                            <doc-item title="buildPath" [level]="4" href="inugami/inugami_commons_test#buildPath" id="buildPath">
-
-                            </doc-item>
-                        </doc-item>
-
-
-
-                        <doc-item title="checkMapper" [level]="3" href="inugami/inugami_commons_test#checkMapper" id="checkMapper">
-
                         </doc-item>
 
 
 
                         <doc-item title="Asserts" [level]="3" href="inugami/inugami_commons_test#asserts" id="asserts">
-                            <doc-item title="assertJson" [level]="4" href="inugami/inugami_commons_test#assertJson" id="assertJson">
-
-                            </doc-item>
+                          
 
                             <doc-item title="assertText" [level]="4" href="inugami/inugami_commons_test#assertText" id="assertText">
+                                <p>
+                                    <strong>assertText</strong> is the most important feature in <strong>UnitTestHelper</strong>
+                                </p>
+                                <p>
+                                    This method will convert the input objet to <strong>JSON</strong> and match this json with a reference. 
+                                </p>
 
+                                 <pre>
+                                    <legend>Reference JSON</legend>
+                                    <code [languages]="['javascript']" [highlight]="sourceCode['assertTextRef']">                      
+                                    </code>
+                                </pre>
+
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['assertTextUsage']">                      
+                                    </code>
+                                </pre>
+
+                                <div>
+                                    <img src="/assets/assertTextRelative.png" alt="assertTextRelative with error" class="img-30" />
+                                </div>
+
+                                <p></p>
+                                <p>
+                                    Some values can be dynamics. In this case we can ignore corresponding line or override the matching implementation.
+                                </p>
+
+                                <pre>
+                                    <legend>Skipping lines</legend>
+                                    <code [languages]="['java']" [highlight]="sourceCode['assertTextUsageSkipLine']">                      
+                                    </code>
+                                </pre>
+
+                                <pre>
+                                    <legend>Using regex to match specific lines</legend>
+                                    <code [languages]="['java']" [highlight]="sourceCode['assertTextUsageRegex']">                      
+                                    </code>
+                                </pre>
+
+
+
+                                <pre>
+                                    <code [languages]="['java']" [highlight]="sourceCode['assertTextMethods']">                      
+                                    </code>
+                                </pre>
                             </doc-item>
                         </doc-item>
 
@@ -236,13 +270,91 @@
 
                         <doc-item title="throwException" [level]="3" href="inugami/inugami_commons_test#throwException" id="throwException">
 
-                            <doc-item title="assertThrowsError" [level]="4" href="inugami/inugami_commons_test#assertThrowsError" id="assertThrowsError">
+                            <p>
+                                Testing non valid use cases in application is extremely important.
+                                To do that, the <strong>UnitTestHelper</strong> have different methods.
+                            </p>
+                            <tips title="Tips" type="info">
+                                <strong>assertThrows</strong> is also designed to verify <strong>ErrorCode</strong> produce by corresponding method.
+                                For more information about error code, you can read the documentation :  <a href="inugami/inugami_api#errorCode">ErrorCode</a>
+                            </tips>
 
-                            </doc-item>
+                            <pre>
+                                <code [languages]="['java']" [highlight]="sourceCode['assertThrowsUsage']">                      
+                                </code>
+                            </pre>
+
+                            <pre>
+                                <code [languages]="['java']" [highlight]="sourceCode['assertThrowsMethods']">                      
+                                </code>
+                            </pre>
 
                         </doc-item>
 
 
+                    </div>
+                </article>
+
+
+
+                <!--****************************************************************************************
+                ** 
+                ****************************************************************************************-->
+                <article>
+                    <header>
+                        <h2>LogTestAppender</h2>
+                    </header>
+                    <div class="content">
+                        <p>
+                            Application logs should contains all required information to resolve issues and known what's append on application process.
+                        </p>
+                        <p>
+                            It's important to be able to test logs production. To do that, the <strong>inugami_commons_test</strong> contains the 
+                            custom logback appender  <strong>LogTestAppender</strong>
+                        </p>
+
+                        <p>
+                            The first step is to add <strong>inugami_commons_test</strong> and <strong>logback-classic</strong> as test dependencies :
+                        </p>
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['logTestAppenderDependencies']">                      
+                            </code>
+                        </pre>
+
+                        <p>
+                           To enable the custom inugami appender, we need to configure logback :
+                        </p>
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="sourceCode['logTestAppenderLogback']">                      
+                            </code>
+                        </pre>
+
+                        <p>
+                            Now, we can create a listener to intercept log production:
+                        </p>
+                        <pre>
+                            <code [languages]="['java']" [highlight]="sourceCode['logTestAppenderUsage']">                      
+                            </code>
+                        </pre>
+
+                        <p>
+                            It's possible to check logs production with the <strong>assertTextRelative</strong> with a JSON reference file :
+                        </p>
+                        <pre>
+                            <code [languages]="['java']" [highlight]="sourceCode['logTestAppenderResult']">                      
+                            </code>
+                        </pre>
+
+                        <p>
+                            The logs list will contains all produced logs. Each logs will contains also the MDC context to improve these generation.
+                        </p>
+
+                        <tips title="Warning" type="warn">
+                            Be careful to remove listener from the logs context to reduce memory usage.  
+                        </tips>
+                        <br/>
+                        <br/>
+                        <br/>
                     </div>
                 </article>
             </section>  

@@ -222,6 +222,248 @@ public static <T, ID> T loadRelativeStub(final InvocationOnMock answer,
 ]]>
 </src>
 
+
+
+<!--*********************************************************************** 
+* convertFromJson    
+***********************************************************************-->
+
+
+<src name="convertFromJsonJson">
+    <![CDATA[
+    {
+        "firstName": "John",
+        "lastName": "Smith",
+        "creationDate": "2023-04-07T14:04:00"
+    }
+]]>
+</src>
+
+<src name="convertFromJsonUsage">
+    <![CDATA[
+    @Test
+    public void loadJson_withTypeReference_shouldLoad() {
+        final UserDto user = UnitTestHelper.loadJson("test/dto/user.1.json",  UserDto.class);
+        assertThat(user.getFirstName()).isEquals("John");
+    }
+]]>
+</src>
+
+<src name="convertFromJsonMethods">
+    <![CDATA[
+    public static <T> T convertFromJson(final byte[] data, final TypeReference<T> refObjectType)  {}
+
+    public static <T> T convertFromJson(final byte[] data, final Class<? extends T> objectType)  {}
+
+    public static <T> T loadIntegrationJson(final String path, final TypeReference<T> refObjectType)  {}
+
+    public static <T> T loadIntegrationJson(final String path, final Class<? extends T> objectType)  {}
+
+    public static <T> T loadJson(final String relativePath, final TypeReference<T> refObjectType)  {}
+
+    public static <T> T loadJson(final String relativePath, final Class<? extends T> objectType)  {}
+
+    public static String forceConvertToJson(final Object value)  {}
+
+    public static String convertToJson(final Object value)  {}
+
+    public static String convertToJsonWithoutIndent(final Object value) {}
+
+    public static <T> T convertFromJson(final String json, final TypeReference<T> refObjectType) {}
+
+    public static <T> T convertFromJson(final String json, final Class<? extends T> objectType) {}
+]]>
+</src>
+
+<!--*********************************************************************** 
+* convertFromJson    
+***********************************************************************-->
+<src name="assertTextRef">
+    <![CDATA[
+    {
+        "creationDate" : "2023-04-10T09:56:57",
+        "firstName" : "John",
+        "lastName" : "Foobar"
+    }
+]]>
+</src>
+
+<src name="assertTextUsage">
+    <![CDATA[
+    @Test
+    public void someTest() {
+        final UserDto user = UserDto.builder()
+                                    .firstName("Joe")
+                                    .lastName("Foobar")
+                                    .creationDate(LocalDateTime.now())
+                                    .build();
+
+        UnitTestHelper.assertTextRelative(user, "test/dto/user_1_ref.json");
+    }
+]]>
+</src>
+
+<src name="assertTextUsageSkipLine">
+    <![CDATA[
+    @Test
+    public void someTest() {
+        final UserDto user = UserDto.builder()
+                                    .firstName("John")
+                                    .lastName("Foobar")
+                                    .creationDate(LocalDateTime.now())
+                                    .build();
+
+        UnitTestHelper.assertTextRelative(user, "test/dto/user_1_ref.json", UnitTestHelper.buildSkipLines(1));
+    }
+]]>
+</src>
+
+<src name="assertTextUsageRegex">
+    <![CDATA[
+    @Test
+    public void someTest() {
+        final UserDto user = UserDto.builder()
+                                    .firstName("John")
+                                    .lastName("Foobar")
+                                    .creationDate(LocalDateTime.now())
+                                    .build();
+
+        UnitTestHelper.assertTextRelative(user, "test/dto/user_1_ref.json",
+                                          RegexLineMatcher.of("[0-9]{4}-[0-9]{2}-[0-9]{2}.*", 1));
+    }
+]]>
+</src>
+
+
+
+<src name="assertTextMethods">
+    <![CDATA[
+    public static void assertTextIntegration(final String value, final String path, final LineMatcher... lineMatchers) {}
+
+    public static void assertTextIntegration(final Object value, final String path, final LineMatcher... lineMatchers) {}
+
+    public static void assertTextRelative(final String value, final String path, final LineMatcher... lineMatchers)  {}
+
+    public static void assertTextRelative(final Object value, final String path, final LineMatcher... lineMatchers)  {}
+
+    public static void assertText(final Object value, final String jsonRef, final LineMatcher... lineMatchers)  {}
+
+    public static void assertText(final String value, final String jsonRef, final LineMatcher... lineMatchers)  {}
+
+    public static LineMatcher[] buildSkipLines(final int... skipLines)  {}
+]]>
+</src>
+
+<!--*********************************************************************** 
+* assertThrows    
+***********************************************************************-->
+<src name="assertThrowsUsage">
+    <![CDATA[
+    @Test
+    public void assertThrowsError_withException_shouldMatch() {
+        UnitTestHelper.assertThrows(NullPointerException.class, "some error", () -> {
+            throw new NullPointerException("some error");
+        });
+    }
+]]>
+</src>
+
+<src name="assertThrowsMethods">
+    <![CDATA[
+    public static void assertThrows(final ExecutableFunction handler) {}
+
+    public static void assertThrows(final String errorMessage,
+                                    final ExecutableFunction handler) {}
+
+    public static void assertThrows(final Class<? extends Exception> errorClass,
+                                    final ExecutableFunction handler) {}
+
+    public static void assertThrows(final Class<? extends Exception> errorClass,
+                                    final String errorMessage,
+                                    final ExecutableFunction handler) {}
+
+    public static void assertThrows(final ErrorCode errorCode, final ExecutableFunction handler) {}
+]]>
+</src>
+
+
+<!--*********************************************************************** 
+* LogTestAppender    
+***********************************************************************-->
+<src name="logTestAppenderUsage">
+    <![CDATA[
+    @Test
+    public void manageException_withNullValue_shouldProduceThrowableProblem() {
+        final List<BasicLogEvent> logs     = new ArrayList<>();
+        final LogListener         listener = new DefaultLogListener(".*", logs::add);
+        LogTestAppender.register(listener);
+
+        final ResponseEntity<ThrowableProblem> result = buildService().manageException(exception);
+
+        LogTestAppender.removeListener(listener);
+
+        UnitTestHelper.assertTextRelative(result, "exception/exceptionHandlerServiceTest/manageException_withNullValue_shouldProduceThrowableProblem.json");
+        UnitTestHelper.assertTextRelative(logs, "exception/exceptionHandlerServiceTest/manageException_withNullValue_shouldProduceThrowableProblem.log.json");
+    }
+]]>
+</src>
+
+<src name="logTestAppenderLogback">
+    <![CDATA[
+    <?xml version="1.0" encoding="UTF-8"?>
+    <configuration>
+    
+        <appender name="logTest" class="io.inugami.commons.test.logs.LogTestAppender"></appender>
+        
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{dd/MM HH:mm:ss} %5p [%c:%L] - %m%n</pattern>
+            </encoder>
+        </appender>
+        
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT"/>
+            <appender-ref ref="logTest"/>
+        </root>
+    </configuration>
+]]>
+</src>
+
+
+<src name="logTestAppenderDependencies">
+    <![CDATA[
+    <dependency>
+        <groupId>io.inugami</groupId>
+        <artifactId>inugami_commons_test</artifactId>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <scope>test</scope>
+    </dependency>
+]]>
+</src>
+
+<src name="logTestAppenderResult">
+    <![CDATA[
+    [ {
+        "level" : "ERROR",
+        "loggerName" : "io.inugami.monitoring.springboot.exception.DefaultExceptionHandlerService",
+        "mdc" : {
+          "errorType" : "technical",
+          "errorCode" : "err-undefine",
+          "errorStatus" : "500",
+          "errorRollback" : "false",
+          "errorExploitationError" : "false",
+          "errorRetryable" : "false"
+        },
+        "message" : "undefined error"
+      } ]
+]]>
+</src>
+
+
 <!--*********************************************************************** 
 ***********************************************************************-->
 </xml>
