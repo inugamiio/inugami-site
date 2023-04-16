@@ -464,6 +464,65 @@ public static <T, ID> T loadRelativeStub(final InvocationOnMock answer,
 </src>
 
 
+
+<!--*********************************************************************** 
+* mutation    
+***********************************************************************-->
+
+<src name="mutationPlugins">
+    <![CDATA[
+    <properties>
+        <io.inugami.maven.plugin.lifecycle.version>2.0.1</io.inugami.maven.plugin.lifecycle.version>
+        <org.pitest.version>1.12.0</org.pitest.version>
+        <org.pitest.pitest-junit5-plugin.version>1.1.2</org.pitest.pitest-junit5-plugin.version>
+    </properties>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.inugami.maven.plugin.lifecycle</groupId>
+                <artifactId>inugami-maven-lifecycle</artifactId>
+                <version>${io.inugami.maven.plugin.lifecycle.version}</version>
+                <extensions>true</extensions>
+            </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>${org.pitest.version}</version>
+                <executions>
+                    <execution>
+                        <phase>deep-test</phase>
+                        <goals>
+                            <goal>mutationCoverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <targetClasses>
+                        <param>io.inugami.*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>io.inugami.*</param>
+                    </targetTests>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-junit5-plugin</artifactId>
+                        <version>${org.pitest.pitest-junit5-plugin.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+]]>
+</src>
+
+<src name="mutationRun">
+<![CDATA[
+mvn deep-test
+]]>
+</src>
 <!--*********************************************************************** 
 ***********************************************************************-->
 </xml>
