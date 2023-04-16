@@ -11,6 +11,15 @@ import { InugamiCommonsTestView } from './modules/inugami/views/inugami_commons_
 import { InugamiLogsObfuscatorView } from './modules/inugami/views/inugami_logs_obfuscator/inugami_logs_obfuscator';
 
 
+import { InugamiMonitoringApiView } from './modules/inugami/views/inugami_monitoring_api/inugami_monitoring_api';
+
+import { InugamiMonitoringCoreView } from './modules/inugami/views/inugami_monitoring_core/inugami_monitoring_core';
+
+import { InugamiMonitoringProvidersView } from './modules/inugami/views/inugami_monitoring_providers/inugami_monitoring_providers';
+import { InugamiMonitoringSensorsView } from './modules/inugami/views/inugami_monitoring_sensors/inugami_monitoring_sensors';
+import { InugamiMonitoringSpingbootView } from './modules/inugami/views/inugami_monitoring_springboot/inugami_monitoring_springboot';
+import { InugamiMonitoringSpringbootActivemqView } from './modules/inugami/views/inugami_monitoring_springboot_activemq/inugami_monitoring_springboot_activemq';
+
 const routes: Routes = [
   { path: "", component: HomeView },
   { path: "inugami", component: InugamiView},
@@ -19,6 +28,14 @@ const routes: Routes = [
   { path: "inugami/inugami_commons_spring", component: InugamiCommonsSpringView},
   { path: "inugami/inugami_commons_test", component: InugamiCommonsTestView},
   { path: "inugami/inugami_logs_obfuscator", component: InugamiLogsObfuscatorView},
+
+
+  { path: "inugami/inugami_monitoring_api", component: InugamiMonitoringApiView},
+  { path: "inugami/inugami_monitoring_core", component: InugamiMonitoringCoreView},
+  { path: "inugami/inugami_monitoring_providers", component: InugamiMonitoringProvidersView},
+  { path: "inugami/inugami_monitoring_sensors", component: InugamiMonitoringSensorsView},
+  { path: "inugami/inugami_monitoring_springboot", component: InugamiMonitoringSpingbootView},
+  { path: "inugami/inugami_monitoring_springboot_activemq", component: InugamiMonitoringSpringbootActivemqView},
   { path: "inugami-project-analysis-maven-plugin", component: InugamiProjectAnalysisView },
 ];
 

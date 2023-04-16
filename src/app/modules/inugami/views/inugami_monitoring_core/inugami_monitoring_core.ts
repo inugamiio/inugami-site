@@ -6,9 +6,9 @@ import { cleanContent } from '../../../commons/services/string.tools';
 
 
 @Component({
-    templateUrl: './inugami_commons.html'
+    templateUrl: './inugami_monitoring_core.html'
 })
-export class InugamiCommonsView  implements  OnInit {
+export class InugamiMonitoringCoreView  implements  OnInit {
 
     /**************************************************************************
     * ATTRIBUTES
@@ -23,9 +23,9 @@ export class InugamiCommonsView  implements  OnInit {
         private googleAnalytics:GoogleAnalyticsService) {
     }
     ngOnInit(): void {
-        this.googleAnalytics.pageView("/inugami/inugami_commons");
+        this.googleAnalytics.pageView("/inugami/inugami_monitoring_core");
         this.httpService.getSourceCode("data/inugami.xml").then(data=> this.initData(data));
-        this.httpService.getSourceCode("data/inugami_commons/source_code.xml").then(data=> this.initData(data));
+        this.httpService.getSourceCode("data/inugami_monitoring_core/source_code.xml").then(data=> this.initData(data));
         
     }
   

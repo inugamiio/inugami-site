@@ -31,7 +31,24 @@ import { InugamiLogsObfuscatorToc } from './views/inugami_logs_obfuscator/inugam
 import { InugamiLogsObfuscatorView } from './views/inugami_logs_obfuscator/inugami_logs_obfuscator';
 
 
+import { InugamiMonitoringApiToc } from './views/inugami_monitoring_api/inugami_monitoring_api_toc';
+import { InugamiMonitoringApiView } from './views/inugami_monitoring_api/inugami_monitoring_api';
 
+import { InugamiMonitoringCoreToc } from './views/inugami_monitoring_core/inugami_monitoring_core_toc';
+import { InugamiMonitoringCoreView } from './views/inugami_monitoring_core/inugami_monitoring_core';
+
+import { InugamiMonitoringProvidersToc } from './views/inugami_monitoring_providers/inugami_monitoring_providers_toc';
+import { InugamiMonitoringProvidersView } from './views/inugami_monitoring_providers/inugami_monitoring_providers';
+
+
+import { InugamiMonitoringSensorsToc } from './views/inugami_monitoring_sensors/inugami_monitoring_sensors_toc';
+import { InugamiMonitoringSensorsView } from './views/inugami_monitoring_sensors/inugami_monitoring_sensors';
+
+import { InugamiMonitoringSpringbootToc } from './views/inugami_monitoring_springboot/inugami_monitoring_springboot_toc';
+import { InugamiMonitoringSpingbootView } from './views/inugami_monitoring_springboot/inugami_monitoring_springboot'; 
+
+import { InugamiMonitoringSpringbootActivemqToc } from './views/inugami_monitoring_springboot_activemq/inugami_monitoring_springboot_activemq_toc';
+import { InugamiMonitoringSpringbootActivemqView } from './views/inugami_monitoring_springboot_activemq/inugami_monitoring_springboot_activemq'; 
 
 @NgModule({
     declarations: [
@@ -50,7 +67,29 @@ import { InugamiLogsObfuscatorView } from './views/inugami_logs_obfuscator/inuga
         InugamiCommonsTestToc,
 
         InugamiLogsObfuscatorToc,
-        InugamiLogsObfuscatorView
+        InugamiLogsObfuscatorView,
+
+        InugamiMonitoringApiToc,
+        InugamiMonitoringApiView,
+
+
+        InugamiMonitoringCoreToc,
+        InugamiMonitoringCoreView,
+
+        InugamiMonitoringProvidersToc,
+        InugamiMonitoringProvidersView,
+
+        InugamiMonitoringSensorsToc,
+        InugamiMonitoringSensorsView,
+
+        InugamiMonitoringSpringbootToc,
+        InugamiMonitoringSpingbootView,
+
+        InugamiMonitoringSpringbootActivemqToc,
+        InugamiMonitoringSpringbootActivemqView
+
+
+
     ],
     imports: [
         BrowserModule,
