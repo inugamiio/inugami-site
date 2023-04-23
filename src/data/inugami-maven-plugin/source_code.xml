@@ -1,11 +1,11 @@
 <xml>
 
 
-<!--*********************************************************************** 
-* GAV    
-***********************************************************************-->
-<src name="gav">
-<![CDATA[
+    <!--***********************************************************************
+    * GAV
+    ***********************************************************************-->
+    <src name="gav">
+        <![CDATA[
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -30,25 +30,25 @@
     </executions>
 </plugin>
 ]]>
-</src>
+    </src>
 
 
-<!--*********************************************************************** 
-* gav_inugami-project-analysis-maven-plugin-annotations    
-***********************************************************************-->
-<src name="gav_inugami-project-analysis-maven-plugin-annotations">
-<![CDATA[
+    <!--***********************************************************************
+    * gav_inugami-project-analysis-maven-plugin-annotations
+    ***********************************************************************-->
+    <src name="gav_inugami-project-analysis-maven-plugin-annotations">
+        <![CDATA[
 <dependency>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin-annotations</artifactId>
     <version>1.6.3</version>
 </dependency>
 ]]>
-</src>
+    </src>
 
 
-<src name="gav_inugami-project-analysis-front-springboot">
-    <![CDATA[
+    <src name="gav_inugami-project-analysis-front-springboot">
+        <![CDATA[
     <dependency>
         <groupId>io.inugami.maven.plugin.analysis.front</groupId>
         <artifactId>inugami-project-analysis-front-springboot</artifactId>
@@ -56,28 +56,27 @@
     </dependency>
     ]]>
     </src>
-    
 
 
-<!--*********************************************************************** 
-* gav_inugami-project-analysis-maven-plugin-annotations    
-***********************************************************************-->
-<src name="gav_inugami_api">
-<![CDATA[
+    <!--***********************************************************************
+    * gav_inugami-project-analysis-maven-plugin-annotations
+    ***********************************************************************-->
+    <src name="gav_inugami_api">
+        <![CDATA[
 <dependencies>
     <groupId>io.inugami</groupId>
     <artifactId>inugami_api</artifactId>
     <version>2.1.0</version>
 </dependencies>
 ]]>
-</src>
+    </src>
 
 
-<!--*********************************************************************** 
-* docker_compose    
-***********************************************************************-->
-<src name="docker_compose">
-    <![CDATA[
+    <!--***********************************************************************
+    * docker_compose
+    ***********************************************************************-->
+    <src name="docker_compose">
+        <![CDATA[
     version: "3"
     services:
       neo4j:
@@ -113,11 +112,30 @@
     </src>
 
 
-<!--*********************************************************************** 
-* neo4j_indexes
-***********************************************************************-->
-<src name="neo4j_indexes">
-<![CDATA[
+    <!--***********************************************************************
+    * neo4j_indexes
+    ***********************************************************************-->
+    <src name="neo4j_indexes">
+        <![CDATA[
+# Neo4j 5.x :
+# ===================================================================================
+CREATE INDEX idx_Artifact FOR (n:Artifact) ON (n.name,n.groupId,n.artifactId,n.packaging,n.shortName,n.version);
+CREATE INDEX idx_Version FOR (n:Version) ON (n.name, n.uid,n.artifactId,n.groupId,n.major,n.minor,n.packaging,n.patch,n.tag,n.version);
+CREATE INDEX idx_ErrorCode FOR (n:ErrorCode) ON (n.exploitationError,n.name,n.errorCode,n.message,n.shortName,n.statusCode, n.category);
+CREATE INDEX idx_ErrorType FOR (n:ErrorType) ON (n.name,n.shortName);
+CREATE INDEX idx_Service FOR (n:Service) ON (n.accept,n.autoStartup,n.bindings,n.containerFactory,n.contentType,n.converterWinsContentType,n.destination,n.errorHandler,n.event,n.exclusive,n.identifier,n.listenerId,n.method,n.name,n.payload,n.queue,n.queuesToDeclare,n.requestPayload,n.responsePayload,n.uid,n.uri,n.verb);
+CREATE INDEX idx_ServiceType FOR (n:ServiServiceTypece) ON (n.name, n.uid);
+CREATE INDEX idx_Method FOR (n:Method) ON (n.name, n.uid,n.class,n.method,n.parameters,n.returnType);
+CREATE INDEX idx_Property FOR (n:Property) ON (n.name, n.uid,n.mandatory,n.propertyType );
+CREATE INDEX idx_INPUT_DTO FOR (n:INPUT_DTO) ON (n.name, n.uid);
+CREATE INDEX idx_OUTPUT_DTO FOR (n:OUTPUT_DTO) ON (n.name, n.uid);
+CREATE INDEX idx_LocalEntity FOR (n:LocalEntity) ON (n.name, n.uid,n.payload);
+CREATE INDEX idx_Entity FOR (n:Entity) ON (n.name, n.uid,n.payload);
+CREATE INDEX idx_Scm FOR (n:Scm) ON (n.name, n.uid,n.commit);
+CREATE INDEX idx_Author FOR (n:Author) ON (n.name, n.uid,n.email);
+
+# Neo4j 4.x :
+# ===================================================================================
 CREATE INDEX ON :Artifact(name,groupId,artifactId,packaging,shortName,version);
 CREATE INDEX ON :Version(name, uid,artifactId,groupId,major,minor,packaging,patch,tag,version );
 
@@ -142,83 +160,82 @@ CREATE INDEX ON :Entity(name, uid,payload);
 CREATE INDEX ON :Scm(name, uid,commit);
 CREATE INDEX ON :Author(name, uid,email);
 ]]>
-</src>
-    
+    </src>
 
-<!--*********************************************************************** 
-* neo4j_structure
-***********************************************************************-->
-<src name="neo4j_structure">
-<![CDATA[
+
+    <!--***********************************************************************
+    * neo4j_structure
+    ***********************************************************************-->
+    <src name="neo4j_structure">
+        <![CDATA[
 CALL db.schema.visualization
 ]]>
-</src>
-    
-<!--*********************************************************************** 
-* info_restServices
-***********************************************************************-->
-<src name="info_restServices">
-<![CDATA[
+    </src>
+
+    <!--***********************************************************************
+    * info_restServices
+    ***********************************************************************-->
+    <src name="info_restServices">
+        <![CDATA[
 mvn info -Daction=restServices
 ]]>
-</src>
-        
-<!--*********************************************************************** 
-* info_queryDisplay
-***********************************************************************-->
-<src name="info_queryDisplay">
-<![CDATA[
+    </src>
+
+    <!--***********************************************************************
+    * info_queryDisplay
+    ***********************************************************************-->
+    <src name="info_queryDisplay">
+        <![CDATA[
 mvn info -Daction=queryDisplay
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* info_search_services_rest
-***********************************************************************-->
-<src name="info_search_services_rest">
-<![CDATA[
+    <!--***********************************************************************
+    * info_search_services_rest
+    ***********************************************************************-->
+    <src name="info_search_services_rest">
+        <![CDATA[
 mvn info -Daction=queryDisplay -Dquery=search_services_rest
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* info_search_error_codes
-***********************************************************************-->
-<src name="info_search_error_codes">
-<![CDATA[
+    <!--***********************************************************************
+    * info_search_error_codes
+    ***********************************************************************-->
+    <src name="info_search_error_codes">
+        <![CDATA[
 mvn info -Daction=queryDisplay -Dquery=search_error_codes
 ]]>
-</src>
+    </src>
 
 
-
-<!--*********************************************************************** 
-* info_queueInfo
-***********************************************************************-->
-<src name="info_queueInfo">
-<![CDATA[
+    <!--***********************************************************************
+    * info_queueInfo
+    ***********************************************************************-->
+    <src name="info_queueInfo">
+        <![CDATA[
 mvn info -Daction=queueInfo
 ]]>
-</src>
-    
+    </src>
 
-<!--*********************************************************************** 
-* info_queue_jms_sender
-***********************************************************************-->
-<src name="info_queue_jms_sender">
-<![CDATA[
+
+    <!--***********************************************************************
+    * info_queue_jms_sender
+    ***********************************************************************-->
+    <src name="info_queue_jms_sender">
+        <![CDATA[
 @JmsSender(destination = "${my.activeMq.onUserCreated.queue}", id = "create.user.queue")
 public void sendCreateUser(final String someParameter, @JmsEvent final User user) {
     // process sending event
 }
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* info_queue_rabbit_sender
-***********************************************************************-->
-<src name="info_queue_rabbit_sender">
-<![CDATA[
+    <!--***********************************************************************
+    * info_queue_rabbit_sender
+    ***********************************************************************-->
+    <src name="info_queue_rabbit_sender">
+        <![CDATA[
 @RabbitMqSender(echangeName = "${events.exchangeName}",
                 queue = "${events.method.user.queueName}",
                 routingKey = "${events.user.method.created.routingKey}"
@@ -227,14 +244,14 @@ public void fireEvent(@RabbitMqEvent  final UserCreatedEvent event) {
     // process sending event
 }
 ]]>
-</src>
+    </src>
 
 
-<!--*********************************************************************** 
-* info_queue_rabbit_handler
-***********************************************************************-->
-<src name="info_queue_rabbit_handler">
-<![CDATA[
+    <!--***********************************************************************
+    * info_queue_rabbit_handler
+    ***********************************************************************-->
+    <src name="info_queue_rabbit_handler">
+        <![CDATA[
 @RabbitMqHandlerInfo(routingKey = "${events.user.authenticated.routingKey}",
 typeId = "${events.user.authenticated.typeId}")
 @RabbitHandler
@@ -242,21 +259,20 @@ public void onAuthenticated(final UserAuthenticatedEvent event) {
     // process listen
 }
 ]]>
-</src>
+    </src>
 
 
-
-<!--*********************************************************************** 
-* info_errorDisplay
-***********************************************************************-->
-<src name="info_errorDisplay">
-<![CDATA[
+    <!--***********************************************************************
+    * info_errorDisplay
+    ***********************************************************************-->
+    <src name="info_errorDisplay">
+        <![CDATA[
 mvn info -Daction=errorDisplay
 ]]>
-</src>
-    
-<src name="errorCode">
-    <![CDATA[
+    </src>
+
+    <src name="errorCode">
+        <![CDATA[
     package io.inugami.api.exceptions;
     public interface ErrorCode {
     
@@ -329,11 +345,11 @@ mvn info -Daction=errorDisplay
         }
     }
     ]]>
-</src>
-    
-    
-<src name="errorCodeEnum">
-<![CDATA[
+    </src>
+
+
+    <src name="errorCodeEnum">
+        <![CDATA[
 public enum IssuesError implements ErrorCode {
 
     ISSUES_1(newBuilder()
@@ -358,26 +374,25 @@ public enum IssuesError implements ErrorCode {
     }
 }
 ]]>
-</src>
+    </src>
 
 
-<src name="errorCode_override">
-<![CDATA[
+    <src name="errorCode_override">
+        <![CDATA[
 <properties>
     <inugami.maven.plugin.analysis.analyzer.errorCode.interface>
         you.project.ErrorCode
     </inugami.maven.plugin.analysis.analyzer.errorCode.interface>
 </properties>
 ]]>
-</src>
+    </src>
 
 
-
-<!--*********************************************************************** 
-* maven_pom_properties    
-***********************************************************************-->
-<src name="maven_pom_properties">
-    <![CDATA[
+    <!--***********************************************************************
+    * maven_pom_properties
+    ***********************************************************************-->
+    <src name="maven_pom_properties">
+        <![CDATA[
     <properties>
         <inugami.maven.plugin.analysis.project.base.name>your.base.package</inugami.maven.plugin.analysis.project.base.name>
         <inugami.maven.plugin.analysis.writer.neo4j.url>bolt://localhost:7687</inugami.maven.plugin.analysis.writer.neo4j.url>
@@ -385,13 +400,13 @@ public enum IssuesError implements ErrorCode {
         <inugami.maven.plugin.analysis.writer.neo4j.password>password</inugami.maven.plugin.analysis.writer.neo4j.password>
     </properties>
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* maven_settings    
-***********************************************************************-->
-<src name="maven_settings">
-    <![CDATA[
+    <!--***********************************************************************
+    * maven_settings
+    ***********************************************************************-->
+    <src name="maven_settings">
+        <![CDATA[
     <servers>
         <servers>
             <id>neo4j</id>
@@ -403,47 +418,47 @@ public enum IssuesError implements ErrorCode {
         </servers>
     </servers>
 ]]>
-</src>
+    </src>
 
 
-<!--*********************************************************************** 
-* mvn_analyze    
-***********************************************************************-->
-<src name="mvn_analyze">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_analyze
+    ***********************************************************************-->
+    <src name="mvn_analyze">
+        <![CDATA[
 mvn analyze
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* maven_settings    
-***********************************************************************-->
-<src name="mvn_info">
-    <![CDATA[
+    <!--***********************************************************************
+    * maven_settings
+    ***********************************************************************-->
+    <src name="mvn_info">
+        <![CDATA[
     mvn info
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* mvn_info_specificsQuery    
-***********************************************************************-->
-<src name="mvn_info_specificsQuery">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_specificsQuery
+    ***********************************************************************-->
+    <src name="mvn_info_specificsQuery">
+        <![CDATA[
 mvn info -Daction=specificsQuery -Dexport=true
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* mvn_info_specificsQuery    
-***********************************************************************-->
-<src name="mvn_info_importData">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_specificsQuery
+    ***********************************************************************-->
+    <src name="mvn_info_importData">
+        <![CDATA[
 mvn info -Daction=importData
 ]]>
-</src>
+    </src>
 
-<src name="mvn_info_importData_example">
-    <![CDATA[
+    <src name="mvn_info_importData_example">
+        <![CDATA[
 {
     "nodes": [
         {
@@ -481,105 +496,104 @@ mvn info -Daction=importData
     "deleteScripts": ["String(Cypher)"]
     }
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* mvn_info_publish    
-***********************************************************************-->
-<src name="mvn_info_publish">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_publish
+    ***********************************************************************-->
+    <src name="mvn_info_publish">
+        <![CDATA[
 mvn info -Daction=publish
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* mvn_info_unpublish    
-***********************************************************************-->
-<src name="mvn_info_unpublish">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_unpublish
+    ***********************************************************************-->
+    <src name="mvn_info_unpublish">
+        <![CDATA[
 mvn info -Daction=unpublish
 ]]>
-</src>
+    </src>
 
 
-<!--*********************************************************************** 
-* mvn_info_versionEnv    
-***********************************************************************-->
-<src name="mvn_info_versionEnv">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_versionEnv
+    ***********************************************************************-->
+    <src name="mvn_info_versionEnv">
+        <![CDATA[
 mvn info -Daction=versionEnv
 ]]>
-</src>
+    </src>
 
 
-<!--*********************************************************************** 
-* mvn_info_envInfo    
-***********************************************************************-->
-<src name="mvn_info_envInfo">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_envInfo
+    ***********************************************************************-->
+    <src name="mvn_info_envInfo">
+        <![CDATA[
 mvn info -Daction=envInfo
 ]]>
-</src>
+    </src>
 
 
-<!--*********************************************************************** 
-* mvn_info_encodePassword    
-***********************************************************************-->
-<src name="mvn_info_encodePassword">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_encodePassword
+    ***********************************************************************-->
+    <src name="mvn_info_encodePassword">
+        <![CDATA[
 mvn info -Daction=encodePassword
 ]]>
-</src>
+    </src>
 
 
-
-<!--*********************************************************************** 
-* mvn_info_releaseNote    
-***********************************************************************-->
-<src name="mvn_info_releaseNote">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_releaseNote
+    ***********************************************************************-->
+    <src name="mvn_info_releaseNote">
+        <![CDATA[
 mvn info -Daction=releaseNote -PpreviousVersion={previousVersion}
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* mvn_info_issue_gitlab    
-***********************************************************************-->
-<src name="mvn_info_issue_gitlab">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_issue_gitlab
+    ***********************************************************************-->
+    <src name="mvn_info_issue_gitlab">
+        <![CDATA[
 <issueManagement>
     <system>gitlab</system>
     <url>https://gitlab.com/api/v4/projects/123457890</url>
 </issueManagement>
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* mvn_info_issue_github    
-***********************************************************************-->
-<src name="mvn_info_issue_github">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_issue_github
+    ***********************************************************************-->
+    <src name="mvn_info_issue_github">
+        <![CDATA[
 <issueManagement>
     <system>github</system>
     <url>https://api.github.com/repos/inugamiio/inugami-project-analysis-maven-plugin-parent</url>
 </issueManagement>
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* mvn_info_issue_jira    
-***********************************************************************-->
-<src name="mvn_info_issue_jira">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_issue_jira
+    ***********************************************************************-->
+    <src name="mvn_info_issue_jira">
+        <![CDATA[
 <issueManagement>
     <system>jira</system>
     <url>https://jira.url</url>
 </issueManagement>
 ]]>
-</src>
+    </src>
 
-<src name="mvn_info_issue_jira_settings">
-    <![CDATA[
+    <src name="mvn_info_issue_jira_settings">
+        <![CDATA[
 <servers>
     <server>
         <id>gitlab</id>
@@ -598,11 +612,11 @@ mvn info -Daction=releaseNote -PpreviousVersion={previousVersion}
     </server>
 </servers>
 ]]>
-</src>
+    </src>
 
 
-<src name="mvn_info_issue_jira_custom_fields">
-    <![CDATA[
+    <src name="mvn_info_issue_jira_custom_fields">
+        <![CDATA[
 public interface JiraCustomFieldsAppender {
     void append(String issueId,
                 JsonNode json,
@@ -610,15 +624,15 @@ public interface JiraCustomFieldsAppender {
                 ScanNeo4jResult neo4jResult);
 }
 ]]>
-</src>
-<src name="mvn_info_issue_jira_custom_fields_spi">
-    <![CDATA[
+    </src>
+    <src name="mvn_info_issue_jira_custom_fields_spi">
+        <![CDATA[
 io.app.JiraCustomFieldExtractor
 ]]>
-</src>
+    </src>
 
-<src name="mvn_info_issue_jira_custom_fields_spi_impl">
-    <![CDATA[
+    <src name="mvn_info_issue_jira_custom_fields_spi_impl">
+        <![CDATA[
 package io.app;
 
 public class JiraCustomFieldExtractor implements JiraCustomFieldsAppender {
@@ -630,33 +644,31 @@ public class JiraCustomFieldExtractor implements JiraCustomFieldsAppender {
     }
 }
 ]]>
-</src>
+    </src>
 
 
-
-<!--*********************************************************************** 
-* mvn_info_releaseNote    
-***********************************************************************-->
-<src name="mvn_info_releaseNote">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_releaseNote
+    ***********************************************************************-->
+    <src name="mvn_info_releaseNote">
+        <![CDATA[
 mvn info -Daction=releaseNote -PpreviousVersion={previousVersion}
 ]]>
-</src>
+    </src>
 
 
-
-<!--*********************************************************************** 
-* mvn_info_releaseNote    
-***********************************************************************-->
-<src name="dependenciesCheckService">
-    <![CDATA[
+    <!--***********************************************************************
+    * mvn_info_releaseNote
+    ***********************************************************************-->
+    <src name="dependenciesCheckService">
+        <![CDATA[
 public interface DependenciesCheckService {
     DependenciesCheck getDependenciesCheckData();
 }
 ]]>
-</src>
-<src name="myProjectConfiguration">
-    <![CDATA[
+    </src>
+    <src name="myProjectConfiguration">
+        <![CDATA[
 @Configuration
 public class MyProjectConfiguration {
 
@@ -667,9 +679,9 @@ public class MyProjectConfiguration {
     }
 }
 ]]>
-</src>
-<src name="DependenciesCheck">
-    <![CDATA[
+    </src>
+    <src name="DependenciesCheck">
+        <![CDATA[
 @ToString
 @Builder(toBuilder = true)
 @Setter
@@ -680,9 +692,9 @@ public class DependenciesCheck {
     private List<DependencyRule> securityIssue;
 }
 ]]>
-</src>
-<src name="DependencyRule">
-    <![CDATA[
+    </src>
+    <src name="DependencyRule">
+        <![CDATA[
 @ToString
 @Builder(toBuilder = true)
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -700,15 +712,14 @@ public class DependencyRule {
     private Level        level;
 }
 ]]>
-</src>
+    </src>
 
 
-
-<!--*********************************************************************** 
-* goal_mkdirs    
-***********************************************************************-->
-<src name="goal_mkdirs">
-    <![CDATA[
+    <!--***********************************************************************
+    * goal_mkdirs
+    ***********************************************************************-->
+    <src name="goal_mkdirs">
+        <![CDATA[
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -730,14 +741,14 @@ public class DependencyRule {
     </executions>
 </plugin>
     ]]>
-</src>
+    </src>
 
 
-<!--*********************************************************************** 
-* goal_delete    
-***********************************************************************-->
-<src name="goal_delete">
-    <![CDATA[
+    <!--***********************************************************************
+    * goal_delete
+    ***********************************************************************-->
+    <src name="goal_delete">
+        <![CDATA[
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -759,14 +770,14 @@ public class DependencyRule {
     </executions>
 </plugin>
     ]]>
-</src>
+    </src>
 
 
-<!--*********************************************************************** 
-* goal_loadProperties  
-***********************************************************************-->
-<src name="goal_loadProperties">
-<![CDATA[
+    <!--***********************************************************************
+    * goal_loadProperties
+    ***********************************************************************-->
+    <src name="goal_loadProperties">
+        <![CDATA[
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -787,19 +798,19 @@ public class DependencyRule {
     </executions>
 </plugin>
 ]]>
-</src>
+    </src>
 
 
-<src name="goal_loadProperties_local_01">
-<![CDATA[
+    <src name="goal_loadProperties_local_01">
+        <![CDATA[
 application.name=demo-app
 application.title=My application
 ]]>
-</src>
+    </src>
 
 
-<src name="goal_loadProperties_local_02">
-<![CDATA[
+    <src name="goal_loadProperties_local_02">
+        <![CDATA[
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -830,10 +841,10 @@ application.title=My application
     </executions>
 </plugin>
 ]]>
-</src>
+    </src>
 
-<src name="goal_loadProperties_local_03">
-<![CDATA[
+    <src name="goal_loadProperties_local_03">
+        <![CDATA[
 {
     "version": "0.0.1-SNAPSHOT",
     "app": {
@@ -855,10 +866,10 @@ application.title=My application
     ]
 }
 ]]>
-</src>
+    </src>
 
-<src name="goal_loadProperties_local_04">
-<![CDATA[
+    <src name="goal_loadProperties_local_04">
+        <![CDATA[
 {
     "version" : "0.0.1-SNAPSHOT",
     "app.name" : "my application",
@@ -870,29 +881,28 @@ application.title=My application
     "authors.1" : "smith"
 }
 ]]>
-</src>
+    </src>
 
 
-
-<!--*********************************************************************** 
-* goal_loadProperties  
-***********************************************************************-->
-<src name="PropertiesConvertorSpi">
-<![CDATA[
+    <!--***********************************************************************
+    * goal_loadProperties
+    ***********************************************************************-->
+    <src name="PropertiesConvertorSpi">
+        <![CDATA[
 public interface PropertiesConvertorSpi {
     boolean accept(final String type);
 
     Map<String, String> convert(final String content);
 }
 ]]>
-</src>
-<src name="PropertiesConvertorSpi_spi">
-    <![CDATA[
+    </src>
+    <src name="PropertiesConvertorSpi_spi">
+        <![CDATA[
 io.inugami.maven.plugin.analysis.plugin.services.build.convertors.MyConverto
 ]]>
-</src>
-<src name="PropertiesConvertorSpi_impl">
-    <![CDATA[
+    </src>
+    <src name="PropertiesConvertorSpi_impl">
+        <![CDATA[
 @SpiPriority(10)
 public class MyConvertor implements PropertiesConvertorSpi {
 
@@ -910,14 +920,14 @@ public class MyConvertor implements PropertiesConvertorSpi {
     }
 }
 ]]>
-</src>
-    
+    </src>
 
-<!--*********************************************************************** 
-* goal_loadProperties  
-***********************************************************************-->
-<src name="loadProperties_external">
-<![CDATA[
+
+    <!--***********************************************************************
+    * goal_loadProperties
+    ***********************************************************************-->
+    <src name="loadProperties_external">
+        <![CDATA[
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -943,29 +953,29 @@ public class MyConvertor implements PropertiesConvertorSpi {
 ]]>
     </src>
 
-<src name="loadProperties_external_01">
-<![CDATA[
+    <src name="loadProperties_external_01">
+        <![CDATA[
 {
     "external": {
         "applicationName": "externalJson"
     }
 }
 ]]>
-</src>
+    </src>
 
-<src name="loadProperties_external_02">
-<![CDATA[
+    <src name="loadProperties_external_02">
+        <![CDATA[
 {
     "external.applicationName" : "externalJson"
 }
 ]]>
-</src>
+    </src>
 
-<!--*********************************************************************** 
-* goal_loadProperties  
-***********************************************************************-->
-<src name="writeFile">
-    <![CDATA[
+    <!--***********************************************************************
+    * goal_loadProperties
+    ***********************************************************************-->
+    <src name="writeFile">
+        <![CDATA[
     <plugin>
         <groupId>io.inugami.maven.plugin.analysis</groupId>
         <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -996,17 +1006,17 @@ public class MyConvertor implements PropertiesConvertorSpi {
     </executions>
 </plugin>
 ]]>
-</src>
+    </src>
 
-<src name="writeFile_01">
-    <![CDATA[
+    <src name="writeFile_01">
+        <![CDATA[
 <h1>demo</h1>
 <h2>Simple inner template rendering</h2>
 ]]>
-</src>
+    </src>
 
-<src name="writeFile_02">
-    <![CDATA[
+    <src name="writeFile_02">
+        <![CDATA[
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -1037,11 +1047,11 @@ public class MyConvertor implements PropertiesConvertorSpi {
     </executions>
 </plugin>
 ]]>
-</src>
+    </src>
 
 
-<src name="writeFile_03">
-    <![CDATA[
+    <src name="writeFile_03">
+        <![CDATA[
 <h1>demo</h1>
 <h2>Simple external template rendering</h2>
 
@@ -1050,11 +1060,11 @@ With external template, you can create more complex file without
                                 pollute your maven pom.xml
 </p>
 ]]>
-</src>
+    </src>
 
 
-<src name="writeFile_04">
-    <![CDATA[
+    <src name="writeFile_04">
+        <![CDATA[
 <h1>${project.artifactId}</h1>
 <h2>{{subtitle}}</h2>
 
@@ -1062,14 +1072,14 @@ With external template, you can create more complex file without
     {{description}}
 </p>
 ]]>
-</src>
+    </src>
 
 
-<!--*********************************************************************** 
-* copy_01  
-***********************************************************************-->
-<src name="copy_01">
-    <![CDATA[
+    <!--***********************************************************************
+    * copy_01
+    ***********************************************************************-->
+    <src name="copy_01">
+        <![CDATA[
 <h1>${project.artifactId}</h1>
 <h2>{{subtitle}}</h2>
 
@@ -1077,10 +1087,10 @@ With external template, you can create more complex file without
     {{description}}
 </p>
 ]]>
-</src>
+    </src>
 
-<src name="copy_02">
-    <![CDATA[
+    <src name="copy_02">
+        <![CDATA[
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -1109,10 +1119,10 @@ With external template, you can create more complex file without
     </executions>
     </plugin>
 ]]>
-</src>
+    </src>
 
-<src name="copy_03">
-    <![CDATA[
+    <src name="copy_03">
+        <![CDATA[
 <h1>demo</h1>
 <h2>Simple copy</h2>
 
@@ -1120,10 +1130,10 @@ With external template, you can create more complex file without
     Lorem ipsum
 </p>
 ]]>
-</src>
+    </src>
 
-<src name="copy_folers">
-    <![CDATA[
+    <src name="copy_folers">
+        <![CDATA[
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -1152,9 +1162,9 @@ With external template, you can create more complex file without
     </executions>
 </plugin>
 ]]>
-</src>
-<src name="copy_dependencies">
-    <![CDATA[
+    </src>
+    <src name="copy_dependencies">
+        <![CDATA[
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -1179,11 +1189,11 @@ With external template, you can create more complex file without
     </executions>
 </plugin>
 ]]>
-</src>
+    </src>
 
 
-<src name="unpack">
-    <![CDATA[
+    <src name="unpack">
+        <![CDATA[
     <plugin>
         <groupId>io.inugami.maven.plugin.analysis</groupId>
         <artifactId>inugami-project-analysis-maven-plugin</artifactId>
@@ -1210,5 +1220,5 @@ With external template, you can create more complex file without
         </executions>
     </plugin>
 ]]>
-</src>
+    </src>
 </xml>
