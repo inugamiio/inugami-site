@@ -9,7 +9,7 @@
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
-    <version>1.6.3</version>
+    <version>3.0.0</version>
 
     <extension>true</extension>
     <executions>
@@ -133,6 +133,7 @@ CREATE INDEX idx_LocalEntity FOR (n:LocalEntity) ON (n.name, n.uid,n.payload);
 CREATE INDEX idx_Entity FOR (n:Entity) ON (n.name, n.uid,n.payload);
 CREATE INDEX idx_Scm FOR (n:Scm) ON (n.name, n.uid,n.commit);
 CREATE INDEX idx_Author FOR (n:Author) ON (n.name, n.uid,n.email);
+CREATE INDEX idx_Glossary FOR (n:Glossary) ON (n.name, n.shortName,n.language,n.type);
 
 # Neo4j 4.x :
 # ===================================================================================
