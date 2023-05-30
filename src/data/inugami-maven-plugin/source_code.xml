@@ -9,7 +9,7 @@
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
-    <version>3.1.0</version>
+    <version>3.2.4</version>
 
     <extension>true</extension>
     <executions>
@@ -41,7 +41,7 @@
 <dependency>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin-annotations</artifactId>
-    <version>1.6.3</version>
+    <version>3.2.4</version>
 </dependency>
 ]]>
     </src>
@@ -52,7 +52,7 @@
     <dependency>
         <groupId>io.inugami.maven.plugin.analysis.front</groupId>
         <artifactId>inugami-project-analysis-front-springboot</artifactId>
-        <version>1.6.3</version>
+        <version>3.2.4</version>
     </dependency>
     ]]>
     </src>
@@ -66,7 +66,7 @@
 <dependencies>
     <groupId>io.inugami</groupId>
     <artifactId>inugami_api</artifactId>
-    <version>2.1.0</version>
+    <version>3.2.2</version>
 </dependencies>
 ]]>
     </src>
@@ -817,7 +817,7 @@ application.title=My application
 <plugin>
     <groupId>io.inugami.maven.plugin.analysis</groupId>
     <artifactId>inugami-project-analysis-maven-plugin</artifactId>
-    <version>1.6.3</version>
+    <version>3.2.4</version>
 
     <executions>
         <execution>
