@@ -4,7 +4,7 @@
     <dependency>
         <groupId>io.inugami</groupId>
         <artifactId>inugami_api</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
@@ -15,7 +15,7 @@
     <dependency>
         <groupId>io.inugami</groupId>
         <artifactId>inugami_commons</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
@@ -26,7 +26,7 @@
     <dependency>
         <groupId>io.inugami</groupId>
         <artifactId>inugami_commons_spring</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
@@ -37,7 +37,7 @@
     <dependency>
         <groupId>io.inugami</groupId>
         <artifactId>inugami_commons_test</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
@@ -48,7 +48,7 @@
     <dependency>
         <groupId>io.inugami</groupId>
         <artifactId>inugami_logs_obfuscator</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
@@ -59,7 +59,7 @@
     <dependency>
         <groupId>io.inugami.monitoring</groupId>
         <artifactId>inugami_monitoring_api</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
@@ -68,7 +68,7 @@
     <dependency>
         <groupId>io.inugami.monitoring</groupId>
         <artifactId>inugami_monitoring_core</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
@@ -79,19 +79,19 @@
     <dependency>
         <groupId>io.inugami.monitoring.providers</groupId>
         <artifactId>inugami_monitoring_providers_els</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
 
     <dependency>
         <groupId>io.inugami.monitoring.providers</groupId>
         <artifactId>inugami_monitoring_providers_graphite</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
 
     <dependency>
         <groupId>io.inugami.monitoring.providers</groupId>
         <artifactId>inugami_monitoring_providers_log</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
@@ -102,7 +102,7 @@
     <dependency>
         <groupId>io.inugami.monitoring.sensors</groupId>
         <artifactId>inugami_sensors_default</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
@@ -113,7 +113,7 @@
     <dependency>
         <groupId>io.inugami.monitoring</groupId>
         <artifactId>inugami_monitoring_spingboot</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
@@ -123,7 +123,7 @@
     <dependency>
         <groupId>io.inugami.monitoring</groupId>
         <artifactId>inugami_monitoring_springboot_activemq</artifactId>
-        <version>3.2.2</version>
+        <version>3.2.3</version>
     </dependency>
     ]]>
     </src>
