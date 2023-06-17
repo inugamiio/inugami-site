@@ -555,7 +555,7 @@ mvn info -Daction=encodePassword
     ***********************************************************************-->
     <src name="mvn_info_releaseNote">
         <![CDATA[
-mvn info -Daction=releaseNote -PpreviousVersion={previousVersion}
+mvn info -Daction=releaseNote -DpreviousVersion={previousVersion}
 ]]>
     </src>
 
