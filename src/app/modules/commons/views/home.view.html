@@ -9,6 +9,62 @@
         <h2>Annoncements</h2>
     </header>
 
+
+    <annoncement title="inugami-project-analysis-maven-plugin 3.2.6" date="2023-07-30">
+        <ul>
+            <li class="fix">Issues fixed:
+                <ul>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/100/commits/08de0d81d8c0cdb1ae81f2cbb3aea73ef93a9f00"
+                           target="_blank">[#97] FIX : fix linkage error</a></li>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/100/commits/8559110088830851c642e3baf71b28bc694c326e"
+                           target="_blank">[#98] FIX : fix NPE in ListFieldTransformer</a></li>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/100/commits/385e4534b61defbba383153c20b7f68784b4469c"
+                           target="_blank">[#99] FIX : Render parameter type when using ResponseEntity response</a></li>
+                </ul>
+            </li>
+        </ul>
+    </annoncement>
+
+
+    <annoncement title="Inugami 3.2.5" date="2023-07-30">
+        <ul>
+            <li class="feature">New features
+                <ul>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/pull/306/commits/ae72b77d771f84248721f0520f72f396d43e833b"
+                           target="_blank">[#303] FEAT : add applyIfNull</a></li>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/pull/306/commits/9875a9ed61c7825c70f843857f2ad685eb7607a3"
+                           target="_blank">[#309] FEAT : add constants in ObfuscatorUtils</a></li>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/pull/306/commits/99926dbfe2947838fea3721dac58f15c37f3d240"
+                           target="_blank">[#308] FEAT : add keep first chars in ObfuscatorUtils</a></li>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/pull/306/commits/cd7ea2d1e1a23a21a6628fa17dd066e954e98ab8"
+                           target="_blank">[#305] FEAT : register mapstruct mapper in spring context</a>
+                        <p>
+                            To activate MapStruct mappers registration in Spring context, you need to define the property <strong>io.inugami.spring.mapstruct.scanner.enabled</strong> as <strong>true</strong>
+                        </p>
+                        <p>MapStruct annotation doesn't have a Runtime retention, it's required to add inugami annotation <strong>@MapStructMapper</strong> on Mapper</p>
+                        <p>To optimize classes scanning you can specify the property <strong>io.inugami.spring.mapstruct.scanner.basePackage</strong> to defined base package to scan</p>
+                    </li>
+                </ul>
+            </li>
+            <li class="fix">Issues fixed:
+                <ul>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/pull/306/commits/bf6765b9050fccab8a764bf122de534d9df9d148"
+                           target="_blank">[#304] FIX : cleaning</a></li>
+                </ul>
+            </li>
+        </ul>
+    </annoncement>
+
+
+
     <annoncement title="inugami-project-analysis-maven-plugin 3.2.5" date="2023-07-09">
         <ul>
             <li class="fix">Issues fixed:
