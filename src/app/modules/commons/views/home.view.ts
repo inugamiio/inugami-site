@@ -14,6 +14,46 @@ export class HomeView  implements  OnInit {
     **************************************************************************/
     public code:string ="";
 
+    public jsonAppenderElasticSearch:string= `
+    <appender name="elasticsearch" class="io.inugami.logs.obfuscator.appender.JsonAppender">
+     <configuration>
+         <encodeAsJson>true</encodeAsJson>
+         <mode>elasticsearch</mode>
+         <host>http://localhost:9200/_bulk</host>
+         <index>application-index</index>
+         <additionalFields>
+             {
+             "additionalField":"test",
+             "groupId":"io.inugami",
+             "artifactId":"app",
+             "version":"1.0.0"
+             }
+         </additionalFields>
+     </configuration>
+    </appender>
+    `;
+
+    public jsonAppenderHeaders:string= `
+    <appender name="logstash" class="io.inugami.logs.obfuscator.appender.JsonAppender">
+        <configuration>
+            <encodeAsJson>true</encodeAsJson>
+            <mode>logstash</mode>
+            <host>http://localhost:5054</host>
+            <additionalFields>
+                {
+                "additionalField":"test"
+                }
+            </additionalFields>
+            <headers>
+                {
+                    "Authorization":"token 7a0364da-657c-4245-8ffc-b5ea896cc484"
+                }
+            </headers>
+        </configuration>
+    </appender>
+        `;
+
+
     
     /**************************************************************************
     * CONSTRUCTORS

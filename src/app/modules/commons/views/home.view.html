@@ -9,6 +9,80 @@
         <h2>Annoncements</h2>
     </header>
 
+    <annoncement title="inugami-project-analysis-maven-plugin 3.3.0" date="2023-08-27">
+        <ul>
+            <li class="fix">Issues fixed:
+                <ul>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/102/files"
+                           target="_blank">[#102] cleaning and upgrade to Inugami 3.3.0</a>
+                    </li>
+
+                </ul>
+            </li>
+        </ul>
+    </annoncement>
+
+
+    <annoncement title="Inugami 3.3.0" date="2023-07-30">
+        <ul>
+            <li class="feature">New features
+                <ul>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/commit/de4a551a07157950681385116fcedc4a5dd9fdcf#diff-6b9f5d745b9f139d8a8213bb3f5641cb3dbcd6ca3aff14f2e9316ebf44858a86"
+                           target="_blank">[#264] add elastic search bulk sender in logs appender</a>
+                        <p>
+                            This feature allow to push directly logs into ElasticSearch with bulk protocol.
+                            This protocol is more efficient than sending each logs by REST calls.
+                        </p>
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="jsonAppenderElasticSearch">
+                            </code>
+                        </pre>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="fix">Issues fixed:
+                <ul>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/commit/739dc06185aed781f882fb0dd73acbf99afa4dd9#diff-b29d816151a2a97c9504dc0dc9ecc28b620b87fd555f7f580c6a331cf32effa5"
+                           target="_blank">[#326] DefaultExceptionHandlerService should always trace an error code</a>
+                    </li>
+
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/commit/94f512ca4a8983548d084b84341d3a2a3cec32cc"
+                           target="_blank">[#310] fix windows path in ReflectionUtils processScan</a>
+                    </li>
+
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/commit/48ac223cd79f9bbc08398713f8a14a5718049559"
+                           target="_blank">[#314] cleaning</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/commit/f83225ece5a5d477e3014ff2124ff1efe6ffc9e9"
+                           target="_blank">[#314] add unit tests</a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/inugamiio/inugami/commit/da84b1e9f4d4dfc4522c5c98981eab5811013f00"
+                           target="_blank">[#324] json log append header as json</a>
+
+                        <p>
+                            HTTP Headers can have different values, and depends on your system.
+                            To be able to define headers, the easier way is to define these as JSON values in the
+                            logback
+                            configuration like :
+                        </p>
+                        <pre>
+                            <code [languages]="['xml']" [highlight]="jsonAppenderHeaders">
+                            </code>
+                        </pre>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </annoncement>
 
     <annoncement title="inugami-project-analysis-maven-plugin 3.2.6" date="2023-07-30">
         <ul>
@@ -46,10 +120,14 @@
                         <a href="https://github.com/inugamiio/inugami/pull/306/commits/cd7ea2d1e1a23a21a6628fa17dd066e954e98ab8"
                            target="_blank">[#305] FEAT : register mapstruct mapper in spring context</a>
                         <p>
-                            To activate MapStruct mappers registration in Spring context, you need to define the property <strong>io.inugami.spring.mapstruct.scanner.enabled</strong> as <strong>true</strong>
+                            To activate MapStruct mappers registration in Spring context, you need to define the
+                            property <strong>io.inugami.spring.mapstruct.scanner.enabled</strong> as
+                            <strong>true</strong>
                         </p>
-                        <p>MapStruct annotation doesn't have a Runtime retention, it's required to add inugami annotation <strong>@MapStructMapper</strong> on Mapper</p>
-                        <p>To optimize classes scanning you can specify the property <strong>io.inugami.spring.mapstruct.scanner.basePackage</strong> to defined base package to scan</p>
+                        <p>MapStruct annotation doesn't have a Runtime retention, it's required to add inugami
+                            annotation <strong>@MapStructMapper</strong> on Mapper</p>
+                        <p>To optimize classes scanning you can specify the property <strong>io.inugami.spring.mapstruct.scanner.basePackage</strong>
+                            to defined base package to scan</p>
                     </li>
                 </ul>
             </li>
@@ -62,7 +140,6 @@
             </li>
         </ul>
     </annoncement>
-
 
 
     <annoncement title="inugami-project-analysis-maven-plugin 3.2.5" date="2023-07-09">
