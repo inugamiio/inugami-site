@@ -54,6 +54,24 @@ export class HomeView  implements  OnInit {
         `;
 
 
+
+    public jsonAppenderAsJson:string= `
+    <appender name="metrics" class="io.inugami.logs.obfuscator.appender.JsonAppender">
+        <configuration>
+            <encodeAsJson>true</encodeAsJson>
+            <forceNewLine>true</forceNewLine>
+            <messageAsJson>true</messageAsJson>
+            <file>target/log.metrics.json</file>
+            <additionalFields>
+                {
+                "useCase":"test"
+                }
+            </additionalFields>
+        </configuration>
+    </appender>
+        `;
+
+
     
     /**************************************************************************
     * CONSTRUCTORS
