@@ -1,0 +1,995 @@
+<xml>
+
+    <annoncements>
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.3.5" date="2023-12-04">
+            <features>
+                <item title="[#376] FEAT : allows ObfuscatorEncoder to render JSON message"
+                      link="https://github.com/inugamiio/inugami/pull/378/commits/6fb2bac29088ba96b8a95f8cf294e33018e869bf">
+                    <example>
+                        <value>
+                            <![CDATA[ 
+<appender name="metrics" class="io.inugami.logs.obfuscator.appender.JsonAppender">
+    <configuration>
+        <encodeAsJson>true</encodeAsJson>
+        <forceNewLine>true</forceNewLine>
+        <messageAsJson>true</messageAsJson>
+        <file>target/log.metrics.json</file>
+        <additionalFields>
+            {
+            "useCase":"test"
+            }
+        </additionalFields>
+    </configuration>
+</appender>
+                            ]]>
+                        </value>
+                    </example>
+                </item>
+
+                <item title="[#372] FEAT : Create in ReflectionUtils method to search annotation on method
+                or class who search in parent interfaces"
+                      link="https://github.com/inugamiio/inugami/pull/369/commits/84320e3cf13614c6de308bbd5fece195eccb5139">
+                </item>
+
+            </features> 
+            <fix>
+                <item title="[#375] FIX : clean partner tracking information before and after feign calls"
+                      link="https://github.com/inugamiio/inugami/pull/378/commits/0f87c519b92a2627009c189bdc24900ec9f5efa4">
+                </item>
+
+                <item title="[#370] FIX : when Spring REST annotations are defined in Interface,
+                SpringRestMethodTracker should be able to retrieve theses"
+                      link="https://github.com/inugamiio/inugami/pull/378/commits/0989b44a38fe940e21597fe499fe303373b25362">
+                </item>
+
+                <item title="[#371] FIX : clean partner tracking information in
+                FeignPartnerResponseDecoder and FeignPartnerRequestInterceptor"
+                      link="https://github.com/inugamiio/inugami/pull/378/commits/b2533fb2bd15092ae7e6312ded94d7db719d39a0">
+                </item>
+            </fix>
+        </annoncement>
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.3.4" date="2023-11-27">
+            <features>
+                <item title="[#360] FEAT : expose close method in IHttpBasicConnector"
+                link="https://github.com/inugamiio/inugami/pull/369/commits/84320e3cf13614c6de308bbd5fece195eccb5139">
+                </item>
+
+                <item title="[#359] FEAT : allow to extract error code in HttpBasicConnector"
+                            link="https://github.com/inugamiio/inugami/pull/369/commits/f448d2f483854ea266caf5484bbc5631064828e2">
+                </item>
+
+                <item title="[#359] FEAT : allow to extract error code in HttpBasicConnector"
+                            link="https://github.com/inugamiio/inugami/pull/369/commits/747a4c69768f7be4e9adce1cb052344962d508ad">
+                </item>
+
+                <item title="[#364] FEAT : defined id in UserDataDTO as Long object"
+                            link="https://github.com/inugamiio/inugami/pull/369/commits/e545347d31c7bdc99d4daf5b73b79afb71955687">
+                </item>
+
+                <item title="[#367] FEAT : In assert text add function to replace some text"
+                            link="https://github.com/inugamiio/inugami/pull/369/commits/4581b746e796b0d5a3c08c5c62c3129a214aaf1b">
+                </item>
+            </features>
+            <fix>
+                <item title="[#358] FIX : fix NPE in basic connector"
+                            link="https://github.com/inugamiio/inugami/pull/369/commits/313d37294ad1865064fb65b6292f0897097f44f6">
+                </item>
+                <item title="[#368] FIX :inugami_commons_test dependency upgrade SnakeYaml version
+                2.2"
+                            link="https://github.com/inugamiio/inugami/pull/369/commits/541a531ad27ecd18da6a22e608857f21bfe30410">
+                </item>
+            </fix>
+        </annoncement>
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.3.3" date="2023-10-15">
+            <features>
+                <item title="[#355] FEAT : add class to attache name on VoidFunctionWithException"
+                    link="https://github.com/inugamiio/inugami/pull/357/commits/e1c05a9af12886751d380af26ac1bb45d6255494">
+                </item>
+
+                <item title="[#338] FEAT : io.inugami.commons.spring.mapstruct.MapStructScanner logs once with all mappers regirstred"
+                    link="https://github.com/inugamiio/inugami/pull/357/commits/05dc90013a4c794262154931655f4b7216f6242f">
+                </item>
+
+                <item title="[#338] FEAT : io.inugami.commons.spring.mapstruct.MapStructScanner logs once with all mappers regirstred"
+                    link="https://github.com/inugamiio/inugami/pull/357/commits/96c96843e97e1e6189244758241fb3af94ae47e6">
+                </item>
+
+                <item title="[#356] FEAT : add monitoredCallable"
+                    link="https://github.com/inugamiio/inugami/pull/357/commits/0ea65a4a3c8b04f03bfc47a1601caf993b65a529">
+                </item>
+               
+            </features>
+
+            <fix>
+                <item title="[#349] FIX : ObfuscatorEncoder force to add new line if missing"
+                    link="https://github.com/inugamiio/inugami/pull/357/commits/3b646a028a884d6dc8d9c36fb3d440ef40799c12">
+                </item>
+
+                <item title="[#352] FIX : force purge MDC on request initialization"
+                    link="https://github.com/inugamiio/inugami/pull/357/commits/7ec69e5e362a5140e4b11e080de9d1b3b9718598">
+                </item>
+
+                <item title="[#352] FIX : force purge MDC on request initialization"
+                    link="https://github.com/inugamiio/inugami/pull/357/commits/be48bc64d4497341a799bba2bcc77a177e216f7a">
+                </item>
+
+                <item title="[#353] FIX : fix autorization header obfuscation"
+                    link="https://github.com/inugamiio/inugami/pull/357/commits/ef5c47ec4824fc3a0c2c4aaee2a5049c826026f5">
+                </item>
+            </fix>
+        </annoncement>
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.3.2" date="2023-10-15">
+            <features>
+                <item title="[#107] when release note is generated, only issue id and label should be extract"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/109/commits/f27beb13f35b96ffb7a2142d4a35054661b38e37">
+                </item>
+                <item title="[#106] allows to change the release note page title with property"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/109/commits/1edd79caf6f3ad0059abe31cf642dc8a0422fd41">
+                </item>
+                <item title="[#108] order service by URI in release note"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/109/commits/238c7e17ccb3bfa37901dc92a77ba4f965fb343c">
+                </item>
+            </features>
+
+            <fix>
+                <item title="update to inugami 3.3.3"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/109/commits/ac3c5ea9b7ccc7fb2488d6993fcf5e3c98b2a950">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.3.1" date="2023-08-04">
+            <features>
+                <item title="[#329] update to inugami 3.3.1"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/277627f6a60a5fa18332a47a824208568cfce6ca">
+                </item>
+                <item title="[#329] update to inugami 3.3.2"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/a64d82398ef66560af9e7f984025f5b3b4967fb5">
+                </item>
+            </features>
+
+            <fix>
+                <item title="[#329] FIX : io.inugami.api.marshalling.ModuleRegisterSpi: Provider io.inugami.maven.plugin.analysis.api.models.serializers.InugamiMavenPluginAnalysisApiModule not found"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/5cdc6b54b4fbee718ba854b909ce605b36ecdd4b">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.3.2" date="2023-08-04">
+            <features>
+                <item title="[#347] FIX : secure ModuleRegisterSpi to never throws any exception"
+                    link="https://github.com/inugamiio/inugami/commit/0849b6e83b5d44ce3682c0324fa5c6ed9c42e465">
+                </item>
+            </features>
+        </annoncement>
+
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.3.1" date="2023-08-03">
+            <features>
+                <item title="[#335] FEAT : obfuscate cookies in IOLOG and PARTNERLOG"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/19f650decb6d8e6c90f6d0af24ea7065dc8fcf6d">
+                </item>
+
+                <item title="[#343] FEAT : add standard headers constants"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/98ca9ef9e57327a3188420febf3b80f369a70ce6">
+                </item>
+
+                <item title="[#328] FEAT : auto import io.inugami.commons.spring components"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/1897c7fdd92d0662b943faea086bf6280b9c9c19">
+                </item>
+
+                <item title="[#337] FEAT : ObfuscatorEncoder should use layout and encoder to form at string message"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/70783d299a5b3f9d41a42bce7282e575e1510bf9">
+                </item>
+
+                <item title="[#345] FEAT : add in DefaultWarning.builder default type builder"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/a48a006d2ba665ac6be934244ee18ec6684b589f">
+                </item>
+
+                <item title="[#344] FEAT : add processIdNull and processIfNotNull in FunctionalUtils"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/078b75971a6ee1cd207586a0d973729b7fd7f4f9">
+                </item>
+            </features>
+
+            <fix>
+                <item title="[#341] fix SpringSpiLoader"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/fb060f64f9b06af3495d77db78e2e90616ac9653">
+                </item>
+
+                <item title="[#329] fix : SPI loader trace error in debug log only in trace level"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/9c24ccb7872277d8d8070c2091004b4e239fa70b">
+                </item>
+
+                <item title="[#339] fix : FileWriter replace date regex"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/7d42ae7834d3e81d7bd82cb426e852a4408cbb75">
+                </item>
+
+                <item title="[#336] FIX : assertText shouldn't use DEBUGLOG"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/e1c8fcb93d6fe66c0cf25499dadec12c75bab891">
+                </item>
+
+                <item title="[#342] FIX : x-warnings shouldn't be generated when is empty"
+                    link="https://github.com/inugamiio/inugami/pull/346/commits/7d4f7407413c9372637ceb3937c4131720fdc40c">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.3.0" date="2023-08-27">
+            <features>
+                <item title="[#102] cleaning and upgrade to Inugami 3.3.0"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/102/files">
+                </item>
+            </features>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.3.0" date="2023-07-30">
+            <features>
+                <item title="[#264] add elastic search bulk sender in logs appender"
+                    link="https://github.com/inugamiio/inugami/commit/de4a551a07157950681385116fcedc4a5dd9fdcf#diff-6b9f5d745b9f139d8a8213bb3f5641cb3dbcd6ca3aff14f2e9316ebf44858a86">
+                    <example>
+                        <description>This feature allow to push directly logs into ElasticSearch with bulk protocol. This protocol is more efficient than sending each logs by REST calls.</description>
+                        <value>
+                            <![CDATA[ 
+<appender name="elasticsearch" class="io.inugami.logs.obfuscator.appender.JsonAppender">
+    <configuration>
+        <encodeAsJson>true</encodeAsJson>
+        <mode>elasticsearch</mode>
+        <host>http://localhost:9200/_bulk</host>
+        <index>application-index</index>
+        <additionalFields>
+            {
+            "additionalField":"test",
+            "groupId":"io.inugami",
+            "artifactId":"app",
+            "version":"1.0.0"
+            }
+        </additionalFields>
+    </configuration>
+</appender>
+                            ]]>
+                        </value>
+                    </example>
+                </item>
+            </features>
+            <fix>
+                <item title="[#326] DefaultExceptionHandlerService should always trace an error code"
+                    link="https://github.com/inugamiio/inugami/commit/739dc06185aed781f882fb0dd73acbf99afa4dd9#diff-b29d816151a2a97c9504dc0dc9ecc28b620b87fd555f7f580c6a331cf32effa5">
+                </item>
+
+                <item title="[#310] fix windows path in ReflectionUtils processScan"
+                    link="https://github.com/inugamiio/inugami/commit/94f512ca4a8983548d084b84341d3a2a3cec32cc">
+                </item>
+
+                <item title="[#314] cleaning"
+                    link="https://github.com/inugamiio/inugami/commit/48ac223cd79f9bbc08398713f8a14a5718049559">
+                </item>
+
+                <item title="[#314] add unit tests"
+                    link="https://github.com/inugamiio/inugami/commit/f83225ece5a5d477e3014ff2124ff1efe6ffc9e9">
+                </item>
+
+                <item title="[#324] json log append header as json"
+                    link="https://github.com/inugamiio/inugami/commit/da84b1e9f4d4dfc4522c5c98981eab5811013f00">
+                    <example>
+                        <description>
+                            HTTP Headers can have different values, and depends on your system.
+                            To be able to define headers, the easier way is to define these as JSON values in the
+                            logback
+                            configuration like :
+                        </description>
+                        <value>
+                            <![CDATA[ 
+<appender name="logstash" class="io.inugami.logs.obfuscator.appender.JsonAppender">
+    <configuration>
+        <encodeAsJson>true</encodeAsJson>
+        <mode>logstash</mode>
+        <host>http://localhost:5054</host>
+        <additionalFields>
+            {
+            "additionalField":"test"
+            }
+        </additionalFields>
+        <headers>
+            {
+                "Authorization":"token 7a0364da-657c-4245-8ffc-b5ea896cc484"
+            }
+        </headers>
+    </configuration>
+</appender>
+                            ]]>
+                        </value>
+                    </example>
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.2.6" date="2023-07-30">
+            <fix>
+                <item title="[#97] FIX : fix linkage error"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/100/commits/08de0d81d8c0cdb1ae81f2cbb3aea73ef93a9f00">
+                </item>
+
+                <item title="[#98] FIX : fix NPE in ListFieldTransformer"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/100/commits/8559110088830851c642e3baf71b28bc694c326e">
+                </item>
+
+                <item title="[#99] FIX : Render parameter type when using ResponseEntity response"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/100/commits/385e4534b61defbba383153c20b7f68784b4469c">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.2.5" date="2023-07-30">
+            <features>
+                <item title="[#303] FEAT : add applyIfNull"
+                    link="https://github.com/inugamiio/inugami/pull/306/commits/ae72b77d771f84248721f0520f72f396d43e833b">
+                </item>
+
+                <item title="[#309] FEAT : add constants in ObfuscatorUtils"
+                    link="https://github.com/inugamiio/inugami/pull/306/commits/9875a9ed61c7825c70f843857f2ad685eb7607a3">
+                </item>
+
+                <item title="[#308] FEAT : add keep first chars in ObfuscatorUtils"
+                    link="https://github.com/inugamiio/inugami/pull/306/commits/99926dbfe2947838fea3721dac58f15c37f3d240">
+                </item>
+
+                <item title="[#305] FEAT : register mapstruct mapper in spring context"
+                    link="https://github.com/inugamiio/inugami/pull/306/commits/cd7ea2d1e1a23a21a6628fa17dd066e954e98ab8">
+                    <example>
+                        <description>
+                            <![CDATA[ 
+                            <p>
+                                To activate MapStruct mappers registration in Spring context, you need to define the
+                                property <strong>io.inugami.spring.mapstruct.scanner.enabled</strong> as
+                                <strong>true</strong>
+                            </p>
+                            <p>MapStruct annotation doesn't have a Runtime retention, it's required to add inugami
+                                annotation <strong>@MapStructMapper</strong> on Mapper</p>
+                            <p>To optimize classes scanning you can specify the property <strong>io.inugami.spring.mapstruct.scanner.basePackage</strong>
+                                to defined base package to scan</p>
+                            ]]>
+                        </description>
+                    </example>
+                </item>
+            </features>
+            <fix>
+                <item title="[#304] FIX : cleaning"
+                    link="https://github.com/inugamiio/inugami/pull/306/commits/bf6765b9050fccab8a764bf122de534d9df9d148">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.2.5" date="2023-07-09">
+            <fix>
+                <item title="fix scan REST controller with Patch method"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/2fcd7ac7c32885f9e470d4b0873f129b156376be">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.2.4" date="2023-07-09">
+            <features>
+                <item title="UnitTestHelper add method to convert enum to Map"
+                    link="https://github.com/inugamiio/inugami/commit/2ef53aacb58631e9bfec52a16cdad5bd6ae35a65">
+                </item>
+
+                <item title="add functional method applyIfChange"
+                    link="https://github.com/inugamiio/inugami/commit/d38c3529a9d86f7f60cd793500937449851df2d4">
+                </item>
+
+                <item title="add assert log in UnitTestHelper"
+                    link="https://github.com/inugamiio/inugami/commit/4a3e971f916feb84ba3243eba6e524e3ab72bdcc">
+                </item>
+
+                <item title="modify ErrorCode addDetail to convert object as String"
+                    link="https://github.com/inugamiio/inugami/commit/728c310258fb1869b668b20a28ee9ab207929742">
+                </item>
+
+                <item title="expose DataGeneratorUtils in UnitTestHelper"
+                    link="https://github.com/inugamiio/inugami/commit/af29728f16dfe78fad4e50b1aa4cef2623b8b751">
+                </item>
+
+                <item title="intercept method annotated with @feature"
+                    link="https://github.com/inugamiio/inugami/commit/728c310258fb1869b668b20a28ee9ab207929742">
+                </item>
+
+                <item title="add annotation to track feature methods"
+                    link="https://github.com/inugamiio/inugami/commit/7c64d00f79781dac1a7167e3fbeae7b240419e56">
+                </item>
+
+                <item title="dd in UnitTestHelper method to assert utility class"
+                    link="https://github.com/inugamiio/inugami/commit/f24af567cadd5f4282c37a21db724fe02d550496">
+                </item>
+            </features>
+            <fix>
+                <item title="FIX : duplicate URI context in IOLOG"
+                    link="https://github.com/inugamiio/inugami/commit/5f7b1da50221d0e4efc8170a4899bc12f21aaec7">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.2.3" date="2023-06-05">
+            <features>
+                <item title="FIX : fix NPE on FeignCommon"
+                    link="https://github.com/inugamiio/inugami/pull/288/files">
+                </item>
+            </features>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.2.4" date="2023-05-29">
+            <fix>
+                <item title="FIX : manage spring context path as relative"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/90/files">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.2.2" date="2023-05-29">
+            <features>
+                <item title="add annotation to flag non spring bean"
+                    link="https://github.com/inugamiio/inugami/commit/40d13706bd22ef03f5880ae8ffd3f427458a4f77">
+                </item>
+
+                <item title="allow to specify ExecutorService in RunAndCloseService"
+                    link="https://github.com/inugamiio/inugami/commit/44cba4e8d6cbb0c79e9677c017ac3668ef46ab40">
+                </item>
+
+                <item title="add assertNullOrEmpty"
+                    link="https://github.com/inugamiio/inugami/commit/42be1059bb6b4182b6fc50c64b15e40d0a3f446e">
+                </item>
+
+                <item title="create interface IHttpBasicConnector to be allow to mock HttpBasicConnector"
+                    link="https://github.com/inugamiio/inugami/commit/2f006b830295636d9b665dc7b5cb0089823a3a2c">
+                </item>
+
+                <item title="Allow to manage FilterInterceptor cache purge"
+                    link="https://github.com/inugamiio/inugami/commit/10292174a0394ae93293dabad47c29f60d62081f">
+                </item>
+
+                <item title="RegexLineMatcher add method with pattern"
+                    link="https://github.com/inugamiio/inugami/commit/1e728b6aa2e66e105a9155cdf0f542120fcef78c">
+                </item>
+
+                <item title="add UUID line matcher"
+                    link="https://github.com/inugamiio/inugami/commit/886cc53b90b34bfe11c337800646948529eb2172">
+                </item>
+
+                <item title="add method to extract annotation"
+                    link="https://github.com/inugamiio/inugami/commit/26fac90b4b4ab96201d3bb4ce97340e4077a0243">
+                </item>
+
+                <item title="Add check on assert DTO to verify equality on same instance"
+                    link="https://github.com/inugamiio/inugami/commit/f02d11e661bb356007adc85721a5cb640ce32af3">
+                </item>
+            </features>
+            <fix>
+                <item title="update org.yaml to 2.0"
+                    link="https://github.com/inugamiio/inugami/commit/5bf0d5913bbb6ece2cefd7baf2d61440bacea0e8">
+                </item>
+                <item title="reduce log in SpringSpiLoaderServiceSPI"
+                    link="https://github.com/inugamiio/inugami/commit/547b0ac628f8b174f2aafc6b6cbd785df39de16c">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.2.3" date="2023-05-22">
+            <fix>
+                <item title="TEST : test programactly feign client detection"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/89/commits/b2bbea2bd7e941895b914ababb874db98ccde63e">
+                </item>
+
+                <item title="FIX : on REST endpoint scanning we should check in parent interface"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/89/commits/efa37c95012ac708896d2a7971a0535fa1d237e6">
+                </item>
+
+                <item title="FIX : on REST endpoint scanning we should check in parent interface"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/89/commits/22699a7f88a372284b7b6decfdf459587e7ed150">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.2.1" date="2023-05-21">
+            <fix>
+                <item title="cleaning"
+                    link="https://github.com/inugamiio/inugami/commit/976708f422f8a7554005c2b4464cef7af6b3cb8b">
+                </item>
+
+                <item title="java.lang.IncompatibleClassChangeError"
+                    link="https://github.com/inugamiio/inugami/commit/7875d39025b92e82ef1ddc33feb147453ae7747a">
+                </item>
+
+                <item title="fix feign partner response wrapping"
+                    link="https://github.com/inugamiio/inugami/commit/e8e772f3bd8171960097b032d8b34c51bde6061d">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.2.2" date="2023-05-15">
+            <fix>
+                <item title="test programactly feign client detection"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/b2bbea2bd7e941895b914ababb874db98ccde63e">
+                </item>
+
+                <item title="cleaning"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/380c6e4256e1896aba23da10bbc5c9b6558b3afb">
+                </item>
+
+                <item title="on REST endpoint scanning we should check in parent interface if Spring endpoints definition are presents"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/af943a3e6ba0b1fda0b5444b9d0ace617d5f4d85">
+                </item>
+                
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.2.0" date="2023-05-14">
+            <features>
+                <item title="Add style and icon on issues displayed in release note"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/7564ddc7ed90e888c5ad619731fdc263023bfa40">
+                </item>
+
+                <item title="order dependencies by alphabetical order in release note"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/de1c9e156b3d9bcbb75b2df4d97b5ce4dec3f5c8">
+                </item>
+
+                <item title="improve git commit display"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/24c72702c6648c58696cd93e674422aaca39b03a">
+                </item>
+
+                <item title="Add potential error code on rest endpoint definition"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/782cd02f89470c302c800c6f149d6b192d7123f8">
+                </item>
+
+                <item title="add link between nodes author and SCM"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/313a762a930e5fa24131c061f9a38e94b13fd891">
+                </item>
+
+                <item title="allow to detect programmatically feign client defined"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/1190e0ff3d50965fb6d1c0bb62402dd81863e747">
+                </item>
+
+                <item title="exclude maven-dependency-plugin from inugami-project-analysis-front-springboot"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/223dce85c4060ce7acd0aa7afdf37ad7f5e94779">
+                </item>
+                
+            </features>
+            <fix>
+                <item title="fix encoding on received JIRA ticket information"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/commit/c52959f2134aa46beb21eaa2894c34e172edd258">
+                </item>
+
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.2.0" date="2023-05-08">
+            <features>
+                <item title="retrieve reflection methods utls from inugami plugin into inugami"
+                    link="https://github.com/inugamiio/inugami/commit/83397590d7ced62232419f819f94af45c797d2e8">
+                </item>
+
+                <item title="Automatic rolling file in file appender"
+                    link="https://github.com/inugamiio/inugami/commit/53c8a035040ee48bbb1a9a94313c99ce465c1dae">
+                </item>
+
+                <item title="add equality test on instance in assertDto"
+                    link="https://github.com/inugamiio/inugami/commit/5794d16952a1a3b23598efb744ebf615ba18ff8c">
+                </item>
+
+                <item title="add method who can throw runtime exception to wrap function with error code"
+                    link="https://github.com/inugamiio/inugami/commit/cfc617a57c32963677b5cef44ac9f756d9923d24">
+                </item>
+                
+            </features>
+            <fix>
+                <item title="incompatible MDC field with logstash http input"
+                    link="https://github.com/inugamiio/inugami/commit/930874ace3685dcea00c5c490bc0284b0b63b4b0">
+                </item>
+
+                <item title="fix verb tracking"
+                    link="https://github.com/inugamiio/inugami/commit/aecd031e017ce8aeeaad295561192d7b2f48d3c9">
+                </item>
+
+                <item title="fix GenericMonitoringModel.java"
+                    link="https://github.com/inugamiio/inugami/commit/3e9720ab7f2d24a80137c1a9a335604a4fb4dfbc">
+                </item>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.1.0" date="2023-04-30">
+            <features>
+                <item title="add all error code information in release note"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/68/commits/443e2bbe029cc8a7e7bad9538af250044b656b1b">
+                </item>
+                <item title="manage Glossary annotation"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/68/commits/00ca0464e2285bd3f2ddd62c35251d82892b13ca">
+                </item>
+            </features>
+            <fix>
+                <item title="fix file indexation for release description"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/68/commits/f8c0d17a8f76463441331ba3273c7aa4aa24979b">
+                </item>
+                <item title="fix entity payload generation in release note"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/68/commits/2a6c8f990ea657537cdd45f64dc08299e793134b">
+                </item>
+               
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.1.0" date="2023-04-30">
+            <features>
+                <item title="Add toMap in Warning code"
+                    link="https://github.com/inugamiio/inugami/pull/259/commits/25f495c130e7eea60109f0c6997b06d76efb8e74">
+                </item>
+
+                <item title="Add toggle to disabled some chechs in assertDto"
+                    link="https://github.com/inugamiio/inugami/pull/259/commits/7b16cec3b9e6a957b3d4e76c78b58331b60a12d9">
+                </item>
+
+                <item title="Add method in UnitTestHelper to assert that error codes are unique"
+                    link="https://github.com/inugamiio/inugami/pull/259/commits/1644f9fbd415fc553815e1c53073bb4e0f99e069">
+                </item>
+
+                <item title="Add method to improve mutation coverage on throwing exception"
+                    link="https://github.com/inugamiio/inugami/pull/259/commits/2d721108e8b82133ca5699d54c78249ad6c3d1b8">
+                </item>
+
+                <item title="add line checker for local date and local date time"
+                    link="https://github.com/inugamiio/inugami/pull/259/commits/6f87aeeed3e7f89d8176bf0532bb6a0b4b78187e">
+                </item>
+
+                <item title="add method to wrap function with error code"
+                    link="https://github.com/inugamiio/inugami/pull/259/commits/da0a7d822cef3287b01f2aaeee171b37cf62175d">
+                </item>
+
+            </features>
+            <fix>
+                <item title="Rename spring boot monitoring module name"
+                    link="https://github.com/inugamiio/inugami/pull/259/commits/cf004fa15be65fd533d0cb772f3be800efbec1a9">
+                </item>
+                
+               
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami-project-analysis-maven-plugin" version="3.0.0" date="2023-04-23">
+            <features>
+                <item title="update inugami 3.0.0 in inugami-project-analysis-maven-plugin"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/64/commits/e8464e6c8fdf75b8725ab41953240374cf7e169d">
+                </item>
+                <item title="Exctract glossary information"
+                    link="https://github.com/inugamiio/inugami-project-analysis-maven-plugin-parent/pull/64/commits/f261b72e9b9154a1cf25eb106200ab65307e1ad2">
+                </item>
+
+            </features>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="3.0.0" date="2023-04-23">
+            <features>
+                <item title="add url writer for logstash in log obfuscator"
+                    link="https://github.com/inugamiio/inugami/pull/251/commits/6354f699d0207539b842f0244d07b73bfe00267c">
+                </item>
+
+                <item title="add assertDto in UnitTestHelper"
+                    link="https://github.com/inugamiio/inugami/pull/251/commits/bef00e6178a7d784a6f8cde122ef182227a107dd">
+                </item>
+
+                <item title="expose loadYaml in UnitTestHelper"
+                    link="https://github.com/inugamiio/inugami/pull/251/commits/456ce6b0a2ffdc07006c32a1330de3f58b223746">
+                </item>
+
+                <item title="FeignPartnerErrorDecoder add getter to retrieve Feign partner error resolvers"
+                    link="https://github.com/inugamiio/inugami/pull/251/commits/558c37b02893dd303d4d4702840d21eb9c465e2c">
+                </item>
+
+                <item title="FeignPartnerRequestInterceptor add getter to retrieve MonitoringContext"
+                    link="https://github.com/inugamiio/inugami/pull/251/commits/33d0656bf4532d77a9edfdf589ecfb88303984c5">
+                </item>
+
+                <item title="add file cache in UnitTestHelper"
+                    link="https://github.com/inugamiio/inugami/pull/251/commits/76e55ab1f70c5a0b2d44b7f3147abfbe5642eae3">
+                </item>
+
+                <item title="add toMap on error code"
+                    link="https://github.com/inugamiio/inugami/pull/251/commits/ddbb716c29717fd6090c870f6b16e5666f24469e">
+                </item>
+
+            </features>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="2.3.0" date="2023-04-10">
+            <description>
+                <![CDATA[ 
+                <strong>Demo application</strong>
+                <p>
+                    To demonstrate Inugami features, an application have been created.
+                    This application is build with hexagonal architecture and two microservices.
+                    <a href="https://github.com/inugamiio/inugami-springboot-demo"
+                    target="_blank">inugami-springboot-demo</a>
+                </p>
+                ]]>
+            </description>
+            <features>
+                <item title="add spring boot activeMQ support"
+                    link="https://github.com/inugamiio/inugami/commit/f09b361d2dab73035fdeec81cf833e6867d1d1e8" />
+                
+
+                <item link="https://github.com/inugamiio/inugami/commit/383ddbfe505ac6f86d22e6948d404b8ff0523c94"
+                      title="add request interceptor to extract application calling" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/fdaf65b536b80557a87f103b221c97297b261bc6"
+                title="Add actuator FailSafeStatusAggregator to prevent mass reboot on kubernetes infrastructure" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/12b2be553f7924ef7ad4606d1b372e0569bc89b1"
+                title="add Spring boot actuator version HealthIndicator" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/3cef55a4cf5547721d8b3631b707b93afd9bb175#diff-7f145dd77279a0298b5c0be651350bf5f54c3b3454ae5a804b7a532780a9dfa4"
+                title="add builder to build Feign Request" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/3cef55a4cf5547721d8b3631b707b93afd9bb175"
+                title="add Spring boot ControllerAdvice" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/c8eb4e5dab34beb8df6c0475f1086736a6938ff7"
+                title="add Glossary annoation" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/030d3123a5396fe2b7c7a8711d3bee1383565b0d"
+                title="add FieldError for ControllerAdvice" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/6f66db53ecacb5be3cd8acfba26c9f6d91711294"
+                title="add loggers name as string in Loggers" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/902a3780c5fddb0213b69af508226b5ebbc8b22f"
+                title="by pass IOLOG for image/x-icon mimetype" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/abde61f52b1ebc262defdb1c6919ee394025cb00"
+                title="allow to exclude line in assertText" />
+            </features>
+            <fix>
+                <item link="https://github.com/inugamiio/inugami/commit/1e4486162be1efad925910a9ba3175ebb189d57b"
+                title="fix assertThrowsError" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/a29d16443ae56a0d664aa0df2b936c7005b8ad5c"
+                title="merge request interceptor type" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/8b58cad841ef4b60c81012c97a84e199978d50b0"
+                title="MdcService.errorCode shouldn't add null or 'null' values" />
+
+                <item link="https://github.com/inugamiio/inugami/commit/62c1e39f55a49e5228f77c029a947a2ca62f4c75"
+                title="Add missing CORS headers" />
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="2.2.3" date="2023-04-02">
+            <features>
+                <item title="manage CORS"
+                    link="https://github.com/inugamiio/inugami/commit/ec52dd53aa8dd206a3ae993f527848fea458066c" />
+
+                <item title="load request interceptor from SPI context"
+                link="https://github.com/inugamiio/inugami/commit/78109baa1e6d88d11e2e62e6987b5ead4a63b246" />
+
+                <item title="by pass h2 console in IOLOG"
+                link="https://github.com/inugamiio/inugami/commit/cd8e11ecfd9f64d5aab5a376fb1e2fe3c7d8c970" />
+
+                <item title="add addHeader on IoInfoDTO build with key and value as String"
+                link="https://github.com/inugamiio/inugami/commit/4f4148bd0d8610c40f459a71153543ad28f6ace4" />
+
+                <item title="IoInfoDTO.IoInfoDTOBuilder method to add headers with Iterator Map.Entry"
+                link="https://github.com/inugamiio/inugami/commit/99d7b7555bf5659259d34f159ba5edcb03673c2f" />
+
+                <item title="rename delais by duration , delais method is deprecated"
+                link="https://github.com/inugamiio/inugami/commit/afa899d620a92ac1b9e09bb3178102ba234877fc" />
+
+                <item title="add urlPattern in MDC and refactoring MdcService"
+                link="https://github.com/inugamiio/inugami/commit/a62b9b43c9597745c3f3fdce0e36b04ff116b81d" />
+
+            </features>
+            <fix>
+                <item title="fix Jackson java 8 date encoding in UnitTestHelper"
+                link="https://github.com/inugamiio/inugami/commit/5d66a7c0b0d1074fa851de11ef0ad56f844bc267" />
+
+                <item title="fix windows \r in UnitTestHelper assertText"
+                link="https://github.com/inugamiio/inugami/commit/8d16e856a51600d57337bbf3f14e9aefffb461d5" />
+
+                <item title="fix traceId initialization in Iolog interceptor"
+                link="https://github.com/inugamiio/inugami/commit/7f682d44cca59cc7004aa203435d0e1c614feefe" />
+
+                <item title="fix duration in IoInfoDTO toString"
+                link="https://github.com/inugamiio/inugami/commit/ab177c191d7430ffc4eb86f7c08cd66e6c89c939" />
+
+                <item title="fix file initialization in FileWriter"
+                link="https://github.com/inugamiio/inugami/commit/8b04dd76eb1f0c11b30867133ab5e408d21f082a" />
+                
+                <item title="Fix filter intercepter NPE on errror resolver"
+                link="https://github.com/inugamiio/inugami/commit/0c00d0eecf9bc6c211acda23cd5163a602e961ac" />
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="2.2.1" date="2023-03-26">
+            <features>
+                <item title="add url in error code"
+                    link="https://github.com/inugamiio/inugami/commit/24f9a55fcea915e7e775b4f4eaacaf64902882a2"/>
+                
+                <item title="allow JsonAppender to write file"
+                    link="https://github.com/inugamiio/inugami/commit/5576dd561ea83b11d480a0125d61b43f6eca4d7f"/>
+
+                <item title="add MDC initializer"
+                    link="https://github.com/inugamiio/inugami/commit/afbfd7d481f389f575f2cfefd9380a04ebcb49fa"/>
+            
+                <item title="add MDC information on IOLOG"
+                    link="https://github.com/inugamiio/inugami/commit/c34b024ee175a464c6d1fd9f76ab26502778812e"/>
+            
+                <item title="add tracking information"
+                    link="https://github.com/inugamiio/inugami/commit/f9d7ac9fd1104d08dd286edf135ceab5aae004bf"/>
+        
+                <item title="add feign interceptor and Decoder"
+                    link="https://github.com/inugamiio/inugami/commit/d52e3f0b25e4021e4c59cf092e229e752774e81a"/>
+
+            </features>
+            <fix>
+                <item title="fix IOLOG status"
+                    link="https://github.com/inugamiio/inugami/commit/db76d730e04e11080cdff6822645f1651774328f"/>
+                <item title="fix static on assertModel"
+                    link="https://github.com/inugamiio/inugami/commit/82fd891cb7d9eb4edbd56961d138073e57bc0223"/>
+                <item title="fix toBuilder"
+                    link="https://github.com/inugamiio/inugami/commit/43f7f08843204cfa7fd820b9ba1691caaf72de93"/>
+                <item title="reset warning context"
+                    link="https://github.com/inugamiio/inugami/commit/856add0916f05b296b25d0ccbf89ad1531ef4a6f"/>
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="2.2.0" date="2023-03-19">
+            <features>
+                <item title="Tomcat 8.5.84"
+                    link="https://github.com/inugamiio/inugami/commit/37e0506cb8de7941f3196b158d17efa34c7e2302"/>
+                <item title="Spring beans 5.2.20.RELEASE"
+                    link="https://github.com/inugamiio/inugami/commit/d79341a1c1eb275f692c35757f9180728ede39cf"/>
+                <item title="Guava 29.0-jre"
+                    link="https://github.com/inugamiio/inugami/commit/a72f21a661b26396d8aea230522e1bdcb80fe216"/>
+                <item title="JSoup 1.15.3"
+                    link="https://github.com/inugamiio/inugami/commit/b2bd32c6831b6db5d79aee9f29197bdf535e0543"/>
+                <item title="Add JSON appender with MDC Serializable values"
+                    link="https://github.com/inugamiio/inugami/commit/53cae7dfe25be5a72abc447b88e89a1932415f83"/>
+                <item title="Add Spi convertors to manage MDC Serializable values"
+                    link="https://github.com/inugamiio/inugami/commit/fd55fa87a4458da3709de0d3c93db1be661be44f"/>
+                <item title="Add Regex assertions in Asserts class"
+                    link="https://github.com/inugamiio/inugami/commit/8a282dac559a0cb3a43835ce044d3af3484df484#diff-a0e9c0f6285af597352360747536397006c070a892f7d18e5bf659d98b9c817c"/>
+                <item title="Allows to load Spring beans from SpiLoader service"
+                    link="https://github.com/inugamiio/inugami/commit/85d8be494bb13da3b11455d78e150b38594ff09c"/>
+                <item title="Refactoring SpiLoader to manage Spring Beans"
+                    link="https://github.com/inugamiio/inugami/commit/b747a440a05861bf513aacefef3449890748928c"/>
+                <item title="Add field in ErrorCode interface"
+                    link="https://github.com/inugamiio/inugami/commit/36bf6f40fa04ec083a47ac8098f6fb73798aada6"/>
+                <item title="Add Warnings class to be able to push warning in warings context with the same approch than Asserts class for errors"
+                    link="https://github.com/inugamiio/inugami/commit/4d856c60e51f48e075ee4474b6a0aed7d3ed9433#diff-1dcbbd7bee16493b91a8c4da7e55cd819ddb376ae448a3b616cb546d3d709cdc"/>
+                
+              
+            </features>
+            <fix>
+                <item title="fix stackoverflow on errorCode.addDetail()"
+                    link="https://github.com/inugamiio/inugami/commit/57cfc7f834ba61544fa71dd1dce7e27d99063263"/>
+              
+            </fix>
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="2.1.1" date="2023-03-12">
+            <features>
+                <item title="Improvement on Asserts class with more assets methods"
+                    link="https://github.com/inugamiio/inugami/pull/184/files"/>
+            
+                <item title="Improvement on Asserts class with more assets methods"
+                    link="https://github.com/inugamiio/inugami/pull/184/files"/>
+
+                <item title="Improvement on UnitTestUtils class, with adding yaml file loading"
+                    link="https://github.com/inugamiio/inugami/pull/183/files"/>
+            </features>
+            
+        </annoncement>
+
+
+
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <annoncement application="inugami" version="2.1.0" date="2023-01-10">
+            <features>
+                <item title="HTTP connector refactoring with request as build pattern"/>
+                <item title="Add category on ErrorCode"/>
+                <item title="Add warning context"/>
+                <item title="Improvement Spring REST method interception"/>
+            </features>
+            
+        </annoncement>
+
+
+
+
+
+
+    </annoncements>
+
+
+</xml>

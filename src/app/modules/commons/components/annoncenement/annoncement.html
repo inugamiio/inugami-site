@@ -1,8 +1,8 @@
-<article class="annoncement">
+<article [class]="getClass()">
     <header>
-        <a href="#inugami-2.1.0" class="anchor">
-            <h3>{{title}}</h3>
-            <span class="date">{{date}}</span>
+        <a [href]="getAnchor()" class="anchor">
+            <h3 *ngIf="title">{{title}}</h3>
+            <span class="date" *ngIf="date">{{date}}</span>
         </a>
     </header>
     <div class="content">

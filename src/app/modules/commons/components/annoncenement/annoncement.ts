@@ -7,9 +7,11 @@ import { Component, Inject, OnInit ,Input } from '@angular/core';
 })
 export class Annoncement implements  OnInit {
   
-    @Input()  title : string="";
-    @Input()  date : string="";
-    @Input()  tag : string="";
+    @Input()  title : string|undefined|null="";
+    @Input()  application : string|undefined|null="";
+    @Input()  version : string|undefined|null="";
+    @Input()  date : string|undefined|null="";
+    @Input()  tag : string|undefined|null="";
 
     constructor() {
     }
@@ -19,5 +21,11 @@ export class Annoncement implements  OnInit {
     }
 
   
+    getAnchor():string{
+      return `#${this.application}-${this.version}`;
+    }
 
+    getClass(){
+      return `annoncement ${this.application}`;
+    }
 }
