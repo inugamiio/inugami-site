@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router ,ResolveEnd } from '@angular/router';
+import { Router ,ResolveEnd} from '@angular/router';
 import { TITLE } from './app.page.titles';
 @Component({
   selector: 'app-root',
@@ -12,8 +12,8 @@ export class AppComponent {
 
   constructor (private router: Router) {
     this.router.events.subscribe(val => {
-      if(val instanceof ResolveEnd ){
-        let event = val as ResolveEnd ;
+      if(val instanceof ResolveEnd){
+        let event = val as ResolveEnd;
         console.info(`${event.urlAfterRedirects}`);
 
         let title =TITLE[event.urlAfterRedirects];
